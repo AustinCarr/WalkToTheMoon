@@ -18,7 +18,8 @@
         android:layout_below="@+id/image_title"
         android:layout_marginTop="50dp"
         android:hint="@string/login"
-        android:inputType="textEmailSubject" />
+        android:inputType="textEmailSubject"
+        android:rotation="45"/>
     <EditText
         android:id="@+id/text_edit_password"
         android:layout_width="match_parent"

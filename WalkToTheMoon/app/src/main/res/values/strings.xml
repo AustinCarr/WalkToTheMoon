@@ -8,5 +8,31 @@
     <string name="password">Password</string>
     <string name="button_login">Login</string>
     <string name="button_create_accnt">Create an account</string>
+    <string name="title_activity_create_account">CreateAccount</string>
+    <string name="location">Location: </string>
+    <string name="name">Name</string>
+    <string name="dob">Date of Birth: </string>
+    <string name="button_next">Next</string>
+    <string name="button_launch">Launch!</string>
+    <string name="button_changePic">Change Pic</string>
+
+    <string-array name="spinner_states">
+        <item>Virginia</item>
+    </string-array>
+    <string-array name="spinner_day">
+        <item>01</item>
+    </string-array>
+    <string-array name="spinner_month">
+        <item>January</item>
+    </string-array>
+    <string-array name="spinner_year">
+        <item>2015</item>
+    </string-array>
+
+    <string name="title_activity_choose_profile_pic">ChooseProfilePic</string>
+    <string name="title_activity_launch_animation">LaunchAnimation</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_shop">Shop</string>
+    <string name="title_activity_profile">Profile</string>
 
 </resources>

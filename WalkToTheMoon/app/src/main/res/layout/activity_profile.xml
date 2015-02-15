@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.austin.walktothemoon.Profile">
+
+
+    <Button
+        android:id="@+id/button_changePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_changePic"
+        android:onClick="onChangePicture"
+        android:layout_alignParentTop="true">
+    </Button>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </ListView>
+    <TextView
+        android:id="@+id/text_profileName"
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/button_changePicture"/>
+    <TextView
+        android:text="00000"
+        android:id="@+id/text_view_steps_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp"
+        android:singleLine="false"
+        android:layout_below="@+id/text_profileName"/>
+    <TextView
+        android:text="real steps"
+        android:id="@+id/text_view_steps_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text_view_steps_count"
+        android:textSize="30dp"
+        android:singleLine="false" />
+
+
+</RelativeLayout>
