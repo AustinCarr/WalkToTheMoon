@@ -7,7 +7,8 @@ android:layout_height="match_parent">
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".CreateAccount">
+        android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".CreateAccount"
+        android:focusableInTouchMode="true">
         <ImageView
             android:id="@+id/image_title"
             android:layout_width="match_parent"
@@ -69,12 +70,6 @@ android:layout_height="match_parent">
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:entries="@array/spinner_day">
-            </Spinner>
-            <Spinner
-                android:id="@+id/spinner_year"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:entries="@array/spinner_year">
             </Spinner>
         </LinearLayout>
         <Button
