@@ -22,4 +22,14 @@
             android:onClick="onLaunchPressed"
             android:layout_alignParentBottom="true">
         </Button>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image_view_profile_pic"
+            android:layout_centerHorizontal="true"
+            android:onClick="onChangePicture"
+            android:layout_below="@+id/button_changePicture"
+            android:adjustViewBounds="false"
+            android:background="#ff787878" />
     </RelativeLayout>

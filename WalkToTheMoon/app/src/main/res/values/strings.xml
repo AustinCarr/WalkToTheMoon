@@ -32,4 +32,11 @@
     <string name="title_activity_shop">Shop</string>
     <string name="title_activity_profile">Profile</string>
 
+    <string-array name="camera_dialog_items">
+        <item>Take picture</item>
+        <item>Choose picture from gallery</item>
+    </string-array>
+
+    <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
+
 </resources>

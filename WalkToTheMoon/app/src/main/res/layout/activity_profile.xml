@@ -15,6 +15,17 @@
         android:onClick="onChangePicture"
         android:layout_alignParentTop="true">
     </Button>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/image_view_profile_pic2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onChangePicture"
+        android:background="#ff737373" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
