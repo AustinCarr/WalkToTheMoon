@@ -15,7 +15,9 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +68,17 @@ public class CreateAccount extends Activity {
 
         textview = (TextView) findViewById(R.id.value_Permissions);
         textview.setTypeface(tobiBlack);
+
+        textview = (TextView) findViewById(R.id.label_name);
+        textview.setTypeface(tobiBlack);
+
+        EditText editText = (EditText) findViewById(R.id.edit_text_name);
+        editText.setTypeface(tobiBlack);
+
+        textview = (TextView) findViewById(R.id.label_address);
+        textview.setTypeface(tobiBlack);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_state);
     }
 
     public void onNextClicked(View v) {

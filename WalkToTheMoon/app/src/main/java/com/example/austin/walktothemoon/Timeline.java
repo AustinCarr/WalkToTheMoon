@@ -61,6 +61,7 @@ public class Timeline extends SurfaceView {
     }
 
     protected void drawSomething(Canvas canvas) {
+        //canvas.drawColor(Color.rgb(0,0,0));
         canvas.drawColor(Color.rgb(56,63,96));
         canvas.drawBitmap(bmpIcon,
                 getWidth()/2, getHeight()/2, null);

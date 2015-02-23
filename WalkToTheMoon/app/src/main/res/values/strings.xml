@@ -7,19 +7,20 @@
     <string name="issueDate">Issue Date</string>
     <string name="permissions">Permissions</string>
     <string name="name">Name</string>
+    <string name="address">Address</string>
     <string name="dob">Date of Birth: </string>
     <string name="button_next">Next</string>
     <string name="button_launch">Launch!</string>
     <string name="button_changePic">Change Pic</string>
 
     <string-array name="spinner_states">
-        <item><font color="black">Virginia</font></item>
+        <item><font color="#000">Virginia</font></item>
     </string-array>
     <string-array name="spinner_day">
-        <item><font color="black">01</font></item>
+        <item><font color="#c6cce0">01</font></item>
     </string-array>
     <string-array name="spinner_month">
-        <item><font color="black">January</font></item>
+        <item><font color="#c6cce0">January</font></item>
     </string-array>
 
     <string name="title_activity_create_account">CreateAccount</string>
