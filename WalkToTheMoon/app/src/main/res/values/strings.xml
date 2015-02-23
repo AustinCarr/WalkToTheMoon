@@ -2,14 +2,10 @@
 <resources>
 
     <string name="app_name">WalkToTheMoon</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="login">Username</string>
-    <string name="password">Password</string>
-    <string name="button_login">Login</string>
-    <string name="button_create_accnt">Create an account</string>
-    <string name="title_activity_create_account">CreateAccount</string>
-    <string name="location">Location: </string>
+    <string name="idNumber">ID Number</string>
+    <string name="issueDate">Issue Date</string>
+    <string name="permissions">Permissions</string>
     <string name="name">Name</string>
     <string name="dob">Date of Birth: </string>
     <string name="button_next">Next</string>
@@ -17,15 +13,16 @@
     <string name="button_changePic">Change Pic</string>
 
     <string-array name="spinner_states">
-        <item>Virginia</item>
+        <item><font color="black">Virginia</font></item>
     </string-array>
     <string-array name="spinner_day">
-        <item>01</item>
+        <item><font color="black">01</font></item>
     </string-array>
     <string-array name="spinner_month">
-        <item>January</item>
+        <item><font color="black">January</font></item>
     </string-array>
 
+    <string name="title_activity_create_account">CreateAccount</string>
     <string name="title_activity_choose_profile_pic">ChooseProfilePic</string>
     <string name="title_activity_launch_animation">LaunchAnimation</string>
     <string name="title_activity_main">MainActivity</string>

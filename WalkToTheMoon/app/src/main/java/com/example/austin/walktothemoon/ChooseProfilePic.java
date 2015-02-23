@@ -42,7 +42,6 @@ public class ChooseProfilePic extends Activity {
 
     public void onChangePicture(View v) {
         displayDialog(CameraDialogFragment.DIALOG_FROM_CREATE_PROFILE);
-
     }
 
     public void displayDialog(int id) {
@@ -50,10 +49,10 @@ public class ChooseProfilePic extends Activity {
         fragment.show(getFragmentManager(),
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
+
     public void onLaunchPressed(View v) {
         Intent intent = new Intent(this, LaunchAnimation.class);
         startActivity(intent);
-
     }
 
 
