@@ -77,6 +77,9 @@ public class CreateAccount extends Activity {
 
         textview = (TextView) findViewById(R.id.label_address);
         textview.setTypeface(tobiBlack);
+
+        textview = (TextView) findViewById(R.id.text_view_dob);
+        textview.setTypeface(tobiBlack);
     }
 
     public void onNextClicked(View v) {

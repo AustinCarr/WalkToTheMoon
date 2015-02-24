@@ -8,6 +8,7 @@
     <string name="issueDate">Issue Date</string>
     <string name="permissions">Permissions</string>
     <string name="name">Name</string>
+    <string name="hint_name">Enter your name</string>
     <string name="address">Address</string>
     <string name="dob">Date of Birth: </string>
     <string name="button_next">Next</string>
@@ -68,9 +69,50 @@
     </string-array>
     <string-array name="spinner_day">
         <item><font color="black">01</font></item>
+        <item><font color="black">02</font></item>
+        <item><font color="black">03</font></item>
+        <item><font color="black">04</font></item>
+        <item><font color="black">05</font></item>
+        <item><font color="black">06</font></item>
+        <item><font color="black">07</font></item>
+        <item><font color="black">08</font></item>
+        <item><font color="black">09</font></item>
+        <item><font color="black">10</font></item>
+        <item><font color="black">11</font></item>
+        <item><font color="black">12</font></item>
+        <item><font color="black">13</font></item>
+        <item><font color="black">14</font></item>
+        <item><font color="black">15</font></item>
+        <item><font color="black">16</font></item>
+        <item><font color="black">17</font></item>
+        <item><font color="black">18</font></item>
+        <item><font color="black">19</font></item>
+        <item><font color="black">20</font></item>
+        <item><font color="black">21</font></item>
+        <item><font color="black">22</font></item>
+        <item><font color="black">23</font></item>
+        <item><font color="black">24</font></item>
+        <item><font color="black">25</font></item>
+        <item><font color="black">26</font></item>
+        <item><font color="black">27</font></item>
+        <item><font color="black">28</font></item>
+        <item><font color="black">29</font></item>
+        <item><font color="black">30</font></item>
+        <item><font color="black">31</font></item>
     </string-array>
     <string-array name="spinner_month">
         <item><font color="black">January</font></item>
+        <item><font color="black">February</font></item>
+        <item><font color="black">March</font></item>
+        <item><font color="black">April</font></item>
+        <item><font color="black">May</font></item>
+        <item><font color="black">June</font></item>
+        <item><font color="black">July</font></item>
+        <item><font color="black">August</font></item>
+        <item><font color="black">September</font></item>
+        <item><font color="black">October</font></item>
+        <item><font color="black">November</font></item>
+        <item><font color="black">December</font></item>
     </string-array>
 
     <string name="title_activity_create_account">CreateAccount</string>
