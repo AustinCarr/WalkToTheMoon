@@ -23,11 +23,13 @@
         android:layout_below="@+id/text_view_steps_count"
         android:textSize="30dp"
         android:singleLine="false" />
+
     <ExpandableListView
-        android:id="@+id/laptop_list"
+        android:id="@+id/items_list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/text_view_steps_text">
+        android:layout_below="@+id/text_view_steps_text"
+        android:layout_marginTop="20dp">
     </ExpandableListView>
 
 </RelativeLayout>
