@@ -77,8 +77,6 @@ public class CreateAccount extends Activity {
 
         textview = (TextView) findViewById(R.id.label_address);
         textview.setTypeface(tobiBlack);
-
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_state);
     }
 
     public void onNextClicked(View v) {

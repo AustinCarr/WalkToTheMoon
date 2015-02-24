@@ -126,6 +126,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="0dp"
                 android:textColor="#c6cce0"
+                android:textColorHint="#d9d9d9"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_design"/>
 
@@ -138,22 +139,15 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="0dp"
                 android:textColor="#c6cce0"/>
-
-            <LinearLayout
-                android:id="@+id/layout_location"
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
+            
+            <Spinner
+                android:id="@+id/spinner_location"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/label_address">
-                <Spinner
-                    android:id="@+id/spinner_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/spinner_states"
-                    android:background="@drawable/edit_text_design">
-                </Spinner>
-            </LinearLayout>
+                android:entries="@array/spinner_states"
+                android:layout_below="@+id/label_address"
+                android:spinnerMode="dialog">
+            </Spinner>
 
 
          <!--<EditText

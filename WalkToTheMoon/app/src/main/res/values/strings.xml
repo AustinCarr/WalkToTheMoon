@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+    
 <resources>
 
     <string name="app_name">WalkToTheMoon</string>
@@ -14,13 +15,62 @@
     <string name="button_changePic">Change Pic</string>
 
     <string-array name="spinner_states">
-        <item><font color="#000">Virginia</font></item>
+        <item><font color="black">Alabama</font></item>
+        <item><font color="black">Alaska</font></item>
+        <item><font color="black">Arizona</font></item>
+        <item><font color="black">Arkansas</font></item>
+        <item><font color="black">California</font></item>
+        <item><font color="black">Colorado</font></item>
+        <item><font color="black">Connecticut</font></item>
+        <item><font color="black">Delaware</font></item>
+        <item><font color="black">Florida</font></item>
+        <item><font color="black">Georgia</font></item>
+        <item><font color="black">Hawaii</font></item>
+        <item><font color="black">Idaho</font></item>
+        <item><font color="black">Illinois</font></item>
+        <item><font color="black">Indiana</font></item>
+        <item><font color="black">Iowa</font></item>
+        <item><font color="black">Kansas</font></item>
+        <item><font color="black">Kentucky</font></item>
+        <item><font color="black">Louisiana</font></item>
+        <item><font color="black">Maine</font></item>
+        <item><font color="black">Maryland</font></item>
+        <item><font color="black">Massachusetts</font></item>
+        <item><font color="black">Michigan</font></item>
+        <item><font color="black">Minnesota</font></item>
+        <item><font color="black">Mississippi</font></item>
+        <item><font color="black">Missouri</font></item>
+        <item><font color="black">Montana</font></item>
+        <item><font color="black">Nebraska</font></item>
+        <item><font color="black">Nevada</font></item>
+        <item><font color="black">New Hampshire</font></item>
+        <item><font color="black">New Jersey</font></item>
+        <item><font color="black">New Mexico</font></item>
+        <item><font color="black">New York</font></item>
+        <item><font color="black">North Carolina</font></item>
+        <item><font color="black">North Dakota</font></item>
+        <item><font color="black">Ohio</font></item>
+        <item><font color="black">Oklahoma</font></item>
+        <item><font color="black">Oregon</font></item>
+        <item><font color="black">Pennsylvania</font></item>
+        <item><font color="black">Rhode Island</font></item>
+        <item><font color="black">South Carolina</font></item>
+        <item><font color="black">South Dakota</font></item>
+        <item><font color="black">Tennessee</font></item>
+        <item><font color="black">Texas</font></item>
+        <item><font color="black">Utah</font></item>
+        <item><font color="black">Vermont</font></item>
+        <item><font color="black">Virginia</font></item>
+        <item><font color="black">Washington</font></item>
+        <item><font color="black">West Virginia</font></item>
+        <item><font color="black">Wisconsin</font></item>
+        <item><font color="black">Wyoming</font></item>
     </string-array>
     <string-array name="spinner_day">
-        <item><font color="#c6cce0">01</font></item>
+        <item><font color="black">01</font></item>
     </string-array>
     <string-array name="spinner_month">
-        <item><font color="#c6cce0">January</font></item>
+        <item><font color="black">January</font></item>
     </string-array>
 
     <string name="title_activity_create_account">CreateAccount</string>
@@ -31,8 +81,8 @@
     <string name="title_activity_profile">Profile</string>
 
     <string-array name="camera_dialog_items">
-        <item>Take picture</item>
-        <item>Choose picture from gallery</item>
+        <item><font color="black">Take picture</font></item>
+        <item><font color="black">Choose picture from gallery</font></item>
     </string-array>
 
     <string-array name="shop_dialog_items">
