@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -30,8 +32,21 @@ public class Profile extends Activity {
         setContentView(R.layout.activity_profile);
 
         /* variables for changing profile picture */
-        profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic2);
+        profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
         isTakenFromCamera = false;
+
+        Typeface tobiBlack;
+
+        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
+        TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
+        textview.setTypeface(tobiBlack);
+
+        textview = (TextView) findViewById(R.id.text_view_steps_text);
+        textview.setTypeface(tobiBlack);
+
+        textview = (TextView) findViewById(R.id.text_profileName);
+        textview.setTypeface(tobiBlack);
     }
 
 
