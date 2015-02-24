@@ -1,12 +1,8 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
@@ -117,6 +113,32 @@ public class Shop extends Activity {
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
+    }
+
+
+    /**
+     * Do something when one of the buttons in the dialog is clicked
+     * @param item - the button clicked
+     */
+    public void onCameraDialogItemSelected(int item) {
+
+        if (item == DialogFragment.ID_SHOP_PURCHASE)
+            Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
+        else if (item == DialogFragment.ID_SHOP_CANCEL_PURCHASE)
+            Toast.makeText(getBaseContext(), "CANCELLED", Toast.LENGTH_LONG).show();
+    }
+
+
+    /**
+     * When buy button is clicked, show the buy dialog
+     */
+    public void onBuyClicked(View view) {
+        displayDialog(DialogFragment.DIALOG_FROM_SHOP);
+    }
+    public void displayDialog(int id) {
+        android.app.DialogFragment fragment = DialogFragment.newInstance(id);
+        fragment.show(getFragmentManager(),
+                getString(R.string.dialog_fragment_tag_photo_picker));
     }
 
 

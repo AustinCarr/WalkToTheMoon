@@ -35,6 +35,11 @@
         <item>Choose picture from gallery</item>
     </string-array>
 
+    <string-array name="shop_dialog_items">
+        <item>Purchase</item>
+        <item>Cancel</item>
+    </string-array>
+
     <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
 
 </resources>

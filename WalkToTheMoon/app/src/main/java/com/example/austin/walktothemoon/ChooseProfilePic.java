@@ -1,20 +1,14 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.File;
@@ -41,11 +35,11 @@ public class ChooseProfilePic extends Activity {
     }
 
     public void onChangePicture(View v) {
-        displayDialog(CameraDialogFragment.DIALOG_FROM_CREATE_PROFILE);
+        displayDialog(DialogFragment.DIALOG_FROM_CREATE_PROFILE);
     }
 
     public void displayDialog(int id) {
-        DialogFragment fragment = CameraDialogFragment.newInstance(id);
+        android.app.DialogFragment fragment = DialogFragment.newInstance(id);
         fragment.show(getFragmentManager(),
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
@@ -61,9 +55,9 @@ public class ChooseProfilePic extends Activity {
     /* When a button is clicked in the camera dialog*/
     public void onCameraDialogItemSelected(int item) {
 
-        if (item == CameraDialogFragment.ID_PHOTO_PICKER_FROM_CAMERA)
+        if (item == DialogFragment.ID_PHOTO_PICKER_FROM_CAMERA)
             openCamera();
-        else if (item == CameraDialogFragment.ID_PHOTO_PICKER_FROM_PICTURES)
+        else if (item == DialogFragment.ID_PHOTO_PICKER_FROM_PICTURES)
             openGallery();
     }
 
