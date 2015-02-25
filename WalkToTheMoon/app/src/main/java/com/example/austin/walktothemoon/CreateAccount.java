@@ -10,21 +10,35 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringConfig;
+import com.facebook.rebound.SpringListener;
+import com.facebook.rebound.SpringSystem;
+
 import org.w3c.dom.Text;
 
 
-public class CreateAccount extends Activity {
+public class CreateAccount extends Activity implements View.OnTouchListener, SpringListener {
+
+    private static double TENSION = 800;
+    private static double DAMPER = 20; //friction
+
+    private ImageView mImageToAnimate;
+    private SpringSystem mSpringSystem;
+    private Spring mSpring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +94,70 @@ public class CreateAccount extends Activity {
 
         textview = (TextView) findViewById(R.id.text_view_dob);
         textview.setTypeface(tobiBlack);
+
+
+        // Creates Spring Animations
+
+        mImageToAnimate = (ImageView) findViewById(R.id.image_view_profile_pic);
+        mImageToAnimate.setOnTouchListener(this);
+
+        mSpringSystem = SpringSystem.create();
+
+        mSpring = mSpringSystem.createSpring();
+        mSpring.addListener(this);
+
+        SpringConfig config = new SpringConfig(TENSION, DAMPER);
+        mSpring.setSpringConfig(config);
     }
 
     public void onNextClicked(View v) {
         Intent intent = new Intent(this, ChooseProfilePic.class);
         startActivity(intent);
     }
+
+    public void onLaunchPressed(View v) {
+        Intent intent = new Intent(this, LaunchAnimation.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mSpring.setEndValue(0.75f);
+                return true;
+            case MotionEvent.ACTION_UP:
+                mSpring.setEndValue(0f);
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onSpringUpdate(Spring spring) {
+        float value = (float) spring.getCurrentValue();
+        float scale = 1f - (value * 0.5f);
+        mImageToAnimate.setScaleX(scale);
+        mImageToAnimate.setScaleY(scale);
+    }
+
+    @Override
+    public void onSpringAtRest(Spring spring) {
+        onNextClicked(findViewById(R.id.image_view_profile_pic));
+
+    }
+
+    @Override
+    public void onSpringActivate(Spring spring) {
+
+    }
+
+    @Override
+    public void onSpringEndStateChange(Spring spring) {
+
+
+
+    }
+
 }

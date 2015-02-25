@@ -14,6 +14,7 @@
     <string name="button_next">Next</string>
     <string name="button_launch">Launch!</string>
     <string name="button_changePic">Change Pic</string>
+    <string name="lookingGood">Lookin\' Good!</string>
 
     <string-array name="spinner_states">
         <item><font color="black">Alabama</font></item>
@@ -123,8 +124,8 @@
     <string name="title_activity_profile">Profile</string>
 
     <string-array name="camera_dialog_items">
-        <item><font color="black">Take picture</font></item>
-        <item><font color="black">Choose picture from gallery</font></item>
+        <item>Take picture</item>
+        <item>Choose picture from gallery</item>
     </string-array>
 
     <string-array name="shop_dialog_items">

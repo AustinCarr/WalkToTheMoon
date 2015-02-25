@@ -44,8 +44,8 @@ public class ChooseProfilePic extends Activity {
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
 
-    public void onLaunchPressed(View v) {
-        Intent intent = new Intent(this, LaunchAnimation.class);
+    public void onLookingGoodPressed(View v) {
+        Intent intent = new Intent(this, CreateAccount.class);
         startActivity(intent);
     }
 

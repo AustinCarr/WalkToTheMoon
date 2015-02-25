@@ -178,13 +178,16 @@
                     android:entries="@array/spinner_day"
                     android:layout_marginLeft="10dp">
                 </Spinner>
-
-
-
-
-
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/button_launch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/button_launch"
+                android:onClick="onLaunchPressed"
+                android:layout_alignParentBottom="true">
+            </Button>
 
 
             <!--<EditText

@@ -42,8 +42,8 @@
         android:id="@+id/button_launch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_launch"
-        android:onClick="onLaunchPressed"
+        android:text="@string/lookingGood"
+        android:onClick="onLookingGoodPressed"
         android:layout_alignParentBottom="true">
     </Button>
 </RelativeLayout>
