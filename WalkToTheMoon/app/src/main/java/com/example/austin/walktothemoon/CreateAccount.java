@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -39,6 +40,8 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private ImageView mImageToAnimate;
     private SpringSystem mSpringSystem;
     private Spring mSpring;
+
+    private boolean resumingActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +114,58 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     }
 
     public void onNextClicked(View v) {
-        Intent intent = new Intent(this, ChooseProfilePic.class);
-        startActivity(intent);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+
+        TranslateAnimation animation = new TranslateAnimation(0, (0-width), 0, 0) ;
+        animation.setInterpolator((new
+                AccelerateDecelerateInterpolator()));
+        animation.setFillAfter(true);
+        animation.setDuration(600);
+        animation.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                Intent intent = new Intent(CreateAccount.this, ChooseProfilePic.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                resumingActivity = true;
+                startActivity(intent);
+            }
+        });
+        layout.startAnimation(animation);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(resumingActivity) {
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+
+            TranslateAnimation animation = new TranslateAnimation((0 - width), 0, 0, 0);
+            animation.setInterpolator((new
+                    AccelerateDecelerateInterpolator()));
+            animation.setFillAfter(true);
+            animation.setDuration(600);
+            layout.startAnimation(animation);
+        }
     }
 
     public void onLaunchPressed(View v) {
@@ -145,7 +198,6 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     @Override
     public void onSpringAtRest(Spring spring) {
         onNextClicked(findViewById(R.id.image_view_profile_pic));
-
     }
 
     @Override

@@ -4,12 +4,19 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.io.File;
 
@@ -24,10 +31,36 @@ public class ChooseProfilePic extends Activity {
     private boolean isTakenFromCamera;
     private ImageView profilePicture;
 
+    int width, height, imageWidth;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_profile_pic);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        width = size.x;
+        height = size.y;
+
+
+        ImageView profilePicBG = (ImageView) findViewById(R.id.image_view_profile_bg);
+        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_fg);
+        BitmapDrawable bd=(BitmapDrawable) this.getResources().getDrawable(R.drawable.astronaut);
+        imageWidth = bd.getBitmap().getWidth();
+        System.out.println(imageWidth);
+        //layout.setY(-30f);
+        //float screenHeight = layout.getHeight();
+        TranslateAnimation animation = new TranslateAnimation(imageWidth, 0, 0, 0) ;
+        animation.setInterpolator((new
+                AccelerateDecelerateInterpolator()));
+        animation.setFillAfter(true);
+        animation.setDuration(600);
+        profilePicBG.startAnimation(animation);
+        //profilePicFG.startAnimation(animation);
 
         /* variables for changing profile picture */
         profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
@@ -45,8 +78,36 @@ public class ChooseProfilePic extends Activity {
     }
 
     public void onLookingGoodPressed(View v) {
-        Intent intent = new Intent(this, CreateAccount.class);
-        startActivity(intent);
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed(){
+        ImageView profilePicBG = (ImageView) findViewById(R.id.image_view_profile_bg);
+        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_fg);
+        //layout.setY(-30f);
+        //float screenHeight = layout.getHeight();
+        TranslateAnimation animation = new TranslateAnimation(0, imageWidth, 0, 0) ;
+        animation.setInterpolator((new
+                AccelerateDecelerateInterpolator()));
+        animation.setFillAfter(true);
+        animation.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                ChooseProfilePic.super.onBackPressed();
+                overridePendingTransition(0,0);
+            }
+        });
+        animation.setDuration(600);
+        profilePicBG.startAnimation(animation);
+        //profilePicFG.startAnimation(animation);
+
     }
 
 

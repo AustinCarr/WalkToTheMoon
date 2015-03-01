@@ -1,20 +1,20 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChooseProfilePic"
     android:background="#6ab29e">
 
-    <ImageView
-        android:layout_width="fill_parent"
+    <com.example.austin.walktothemoon.AspectRatioImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/image_view_profile_bg"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
-        android:background="@drawable/profile_pic_bg"/>
+        android:src="@drawable/astronaut"/>
 
     <ImageView
         android:layout_width="200dp"
@@ -23,20 +23,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="onChangePicture"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
         android:layout_marginTop="90dp"
         android:background="#00000000"/>
 
-    <ImageView
-        android:layout_width="fill_parent"
+    <!-- <com.example.austin.walktothemoon.AspectRatioImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/image_view_profile_fg"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
-        android:background="@drawable/profile_pic_fg"/>
-
-
+        android:src="@drawable/profile_pic_fg"/> -->
 
     <Button
         android:id="@+id/button_launch"
@@ -46,4 +42,5 @@
         android:onClick="onLookingGoodPressed"
         android:layout_alignParentBottom="true">
     </Button>
+
 </RelativeLayout>
