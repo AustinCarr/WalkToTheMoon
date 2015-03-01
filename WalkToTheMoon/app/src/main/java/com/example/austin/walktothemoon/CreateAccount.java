@@ -1,7 +1,9 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -31,6 +34,9 @@ import com.facebook.rebound.SpringSystem;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class CreateAccount extends Activity implements View.OnTouchListener, SpringListener {
 
@@ -42,6 +48,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private Spring mSpring;
 
     private boolean resumingActivity = false;
+
+    private Typeface tobiBlack;
+    private String list[]={"Alabama","Arkansas‹"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +107,52 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         textview = (TextView) findViewById(R.id.text_view_dob);
         textview.setTypeface(tobiBlack);
 
+        //Customized Spinner
+
+        String[] states = getResources().getStringArray(R.array.spinner_states);
+        String[] days = getResources().getStringArray(R.array.spinner_day);
+        String[] months = getResources().getStringArray(R.array.spinner_month);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_design, states) {
+
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+
+                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+                ((TextView) v).setTypeface(externalFont);
+
+                return v;
+            }
+
+
+            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+                View v =super.getDropDownView(position, convertView, parent);
+
+                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+                ((TextView) v).setTypeface(externalFont);
+
+                return v;
+            }
+        };
+
+        MySpinnerAdapter<String> dayAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, days);
+        MySpinnerAdapter<String> monthAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, months);
+
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day);
+        daySpinner.setAdapter(dayAdapter);
+
+        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner monthSpinner = (Spinner) findViewById(R.id.spinner_month);
+        monthSpinner.setAdapter(monthAdapter);
+
+
+
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
+        spinner.setAdapter(adapter);
 
         // Creates Spring Animations
 
@@ -111,6 +166,32 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
         SpringConfig config = new SpringConfig(TENSION, DAMPER);
         mSpring.setSpringConfig(config);
+    }
+
+    private class MySpinnerAdapter<String> extends ArrayAdapter<String> {
+
+        public MySpinnerAdapter(Context context, int resource, String[] objects) {
+            super(context, resource, objects);
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v = super.getView(position, convertView, parent);
+
+            Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+            ((TextView) v).setTypeface(externalFont);
+
+            return v;
+        }
+
+
+        public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
+            View v =super.getDropDownView(position, convertView, parent);
+
+            Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+            ((TextView) v).setTypeface(externalFont);
+
+            return v;
+        }
     }
 
     public void onNextClicked(View v) {

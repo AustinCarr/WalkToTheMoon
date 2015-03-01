@@ -126,7 +126,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="0dp"
                 android:textColor="#c6cce0"
-                android:textColorHint="#d9d9d9"
+                android:textColorHint="#c6cce0"
                 android:inputType="textPersonName"
                 android:background="@drawable/edit_text_design"/>
 

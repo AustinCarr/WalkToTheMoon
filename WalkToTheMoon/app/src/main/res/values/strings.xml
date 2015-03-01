@@ -17,11 +17,11 @@
     <string name="lookingGood">Lookin\' Good!</string>
 
     <string-array name="spinner_states">
-        <item><font color="black">Alabama</font></item>
-        <item><font color="black">Alaska</font></item>
-        <item><font color="black">Arizona</font></item>
-        <item><font color="black">Arkansas</font></item>
-        <item><font color="black">California</font></item>
+        <item>Alabama</item>
+        <item>Alaska</item>
+        <item>Arizona</item>
+        <item>Arkansas</item>
+        <item>California</item>
         <item><font color="black">Colorado</font></item>
         <item><font color="black">Connecticut</font></item>
         <item><font color="black">Delaware</font></item>
