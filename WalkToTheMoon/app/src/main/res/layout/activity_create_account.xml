@@ -145,7 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/spinner_states"
-                android:layout_below="@+id/label_address">
+                android:layout_below="@+id/label_address"
+                android:background="#00000000">
             </Spinner>
 
             <TextView
@@ -169,14 +170,16 @@
                     android:id="@+id/spinner_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:entries="@array/spinner_month">
+                    android:entries="@array/spinner_month"
+                    android:background="#00000000">
                 </Spinner>
                 <Spinner
                     android:id="@+id/spinner_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_day"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginLeft="10dp"
+                    android:background="#00000000">
                 </Spinner>
             </LinearLayout>
 

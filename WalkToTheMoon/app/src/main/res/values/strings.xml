@@ -10,7 +10,7 @@
     <string name="name">Name</string>
     <string name="hint_name">Enter your name</string>
     <string name="address">Address</string>
-    <string name="dob">Date of Birth: </string>
+    <string name="dob">Date of Birth </string>
     <string name="button_next">Next</string>
     <string name="button_launch">Launch!</string>
     <string name="button_changePic">Change Pic</string>
