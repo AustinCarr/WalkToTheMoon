@@ -63,7 +63,7 @@ public class Shop extends Activity {
     private void createCollection() {
 
         /* A list of power ups */
-        String[] item1 = { "DESCRIPTION" };
+        String[] item1 = { "This is a really long description for item 1.  It will expire in 45 days.  Please buy now.  Huge sale.  This is a test. To make the description really long.  Bye now.  GOOOOOD" };
         String[] item2 = { "DESCRIPTION" };
         String[] item3 = { "DESCRIPTION" };
         String[] item4 = { "DESCRIPTION" };
