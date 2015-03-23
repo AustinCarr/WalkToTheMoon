@@ -120,7 +120,7 @@ public class Shop extends Activity {
      * Do something when one of the buttons in the dialog is clicked
      * @param item - the button clicked
      */
-    public void onCameraDialogItemSelected(int item) {
+    public void onDialogItemSelected(int item) {
 
         if (item == DialogFragment.ID_SHOP_PURCHASE)
             Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
