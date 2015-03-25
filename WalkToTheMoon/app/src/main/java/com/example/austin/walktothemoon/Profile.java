@@ -26,6 +26,7 @@ public class Profile extends Activity {
     private Uri imageUri;
     private boolean isTakenFromCamera;
     private ImageView profilePicture;
+    private android.app.DialogFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class Profile extends Activity {
     }
 
     public void displayDialog(int id) {
-        android.app.DialogFragment fragment = DialogFragment.newInstance(id);
+        fragment = DialogFragment.newInstance(id);
         fragment.show(getFragmentManager(),
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
@@ -169,7 +170,16 @@ public class Profile extends Activity {
     public void onSaveClicked(View view) {
 
         // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        Toast.makeText(view.getContext(), "SAVED", Toast.LENGTH_LONG).show();
+        //Toast.makeText(view.getContext(), "SAVED", Toast.LENGTH_LONG).show();
+        fragment.dismiss();
+
+    }
+
+    public void onCancelClicked(View view) {
+
+        // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Toast.makeText(view.getContext(), "CANCELLED", Toast.LENGTH_LONG).show();
+        fragment.dismiss();
     }
 
     /* If we don't want to crop the chosen image, we will need this method

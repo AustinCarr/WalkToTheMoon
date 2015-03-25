@@ -35,7 +35,8 @@
             android:id="@+id/button2"
             android:layout_toRightOf="@id/button"
             android:layout_marginTop="10dp"
-            android:background="#00000000" />
+            android:background="#00000000"
+            android:onClick="onCancelClicked"/>
 
     </LinearLayout>
 
