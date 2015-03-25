@@ -1,10 +1,12 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -48,6 +50,16 @@ public class Shop extends Activity {
                 return true;
             }
         });
+
+        Typeface tobiBlack;
+        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
+        TextView steps = (TextView) findViewById(R.id.text_view_steps_count);
+        steps.setTypeface(tobiBlack);
+
+        TextView stepsText = (TextView) findViewById(R.id.text_view_steps_text);
+        stepsText.setTypeface(tobiBlack);
+
     }
 
     private void createGroupList() {

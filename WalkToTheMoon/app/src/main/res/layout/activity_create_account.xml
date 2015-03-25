@@ -194,7 +194,7 @@
                 android:text="@string/button_launch"
                 android:onClick="onLaunchPressed"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_below="@id/linear_layout_dob">
             </Button>
 
