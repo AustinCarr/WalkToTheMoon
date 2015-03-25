@@ -49,7 +49,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.child_item, null);
         }
 
+        Typeface tobiBlack;
+        tobiBlack = Typeface.createFromAsset(context.getAssets(), "fonts/TobiBlack.otf");
+
         TextView item = (TextView) convertView.findViewById(R.id.text_view_description);
+        item.setTypeface(tobiBlack);
 
 
         item.setText(laptop);
@@ -83,13 +87,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     null);
         }
 
+        Typeface tobiBlack;
+        tobiBlack = Typeface.createFromAsset(context.getAssets(), "fonts/TobiBlack.otf");
+
         TextView item = (TextView) convertView.findViewById(R.id.text_view_item_name);
-        item.setTypeface(null, Typeface.BOLD);
+        item.setTypeface(tobiBlack);
         item.setText(itemName);
 
         /* THIS IS WHERE YOU SET THE PRICE OF EACH ONE */
         TextView price = (TextView) convertView.findViewById(R.id.text_view_item_price);
-        price.setTypeface(null, Typeface.BOLD);
+        price.setTypeface(tobiBlack);
         price.setText("4000 steps");
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.image_view_item_pic);
