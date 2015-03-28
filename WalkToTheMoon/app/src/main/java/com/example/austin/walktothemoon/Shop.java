@@ -64,7 +64,7 @@ public class Shop extends Activity {
 
     private void createGroupList() {
         groupList = new ArrayList<>();
-        groupList.add("Item1");
+        groupList.add("Energy Bar");
         groupList.add("Item2");
         groupList.add("Item3");
         groupList.add("Item4");
@@ -76,17 +76,17 @@ public class Shop extends Activity {
 
         /* A list of power ups */
         String[] item1 = { "This is a really long description for item 1.  It will expire in 45 days.  Please buy now.  Huge sale.  This is a test. To make the description really long.  Bye now.  GOOOOOD" };
-        String[] item2 = { "DESCRIPTION" };
-        String[] item3 = { "DESCRIPTION" };
-        String[] item4 = { "DESCRIPTION" };
-        String[] item5 = { "DESCRIPTION" };
-        String[] item6 = { "DESCRIPTION" };
+        String[] item2 = { "DESCRIPTION2" };
+        String[] item3 = { "DESCRIPTION3" };
+        String[] item4 = { "DESCRIPTION4" };
+        String[] item5 = { "DESCRIPTION5" };
+        String[] item6 = { "DESCRIPTION6" };
 
         powerUpCollection = new LinkedHashMap<>();
 
         /* Add power ups into collection */
         for (String powerUp : groupList) {
-            if (powerUp.equals("Item1")) {
+            if (powerUp.equals("Energy Bar")) {
                 loadChild(item1);
             } else if (powerUp.equals("Item2"))
                 loadChild(item2);

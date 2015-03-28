@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.view.SurfaceView;
 public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
     private SurfaceHolder surfaceHolder;
     private Bitmap bmpIcon;
+    private BitmapDrawable bgImage;
 
     private ScaleGestureDetector mScaleDetector;
     private InteractionMode mode;
@@ -57,6 +60,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         surfaceHolder = this.getHolder();
         bmpIcon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
+        bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
+                R.drawable.spacebgtest));
+        bgImage.setBounds(-5000, -5000, 4000, 4000);
+        bgImage.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         surfaceHolder.addCallback(this);
 
         // for zooming (scaling) the view with two fingers
@@ -130,7 +137,9 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.save();
         canvas.concat(mMatrix);
 
-        canvas.drawColor(Color.rgb(56,63,96));
+        //bgImage.draw(canvas);
+
+        //canvas.drawColor(Color.rgb(56,63,96));
         canvas.drawBitmap(bmpIcon,
                 getWidth()/2 + (bmpIcon.getWidth()/2), getHeight()/2 - (bmpIcon.getHeight()/2), null);
 

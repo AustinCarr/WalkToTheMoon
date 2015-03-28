@@ -15,7 +15,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="15dp"
-        android:layout_toLeftOf="@+id/button_buy"/>
+        android:layout_toLeftOf="@+id/button_buy"
+        android:textColor="#b8e0d4"
+        android:textSize="17dp"/>
 
     <Button
         android:id="@+id/button_buy"
