@@ -4,11 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
@@ -18,11 +23,15 @@ import android.view.SurfaceView;
  * Created by Austin on 2/18/15.
  */
 public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
+
+    private final float STEPS_TO_MOON = 478000000f;
     private final int IMAGE_PADDING = 15;
 
     private SurfaceHolder surfaceHolder;
-    private Bitmap bmpMoon, bmpEarth, bmpDash, bmpUser;
+    private Bitmap bmpMoon, bmpEarth, bmpUser;
     private BitmapDrawable bgImage;
+    private Paint paint;
+    private Path dashedLine;
 
     private ScaleGestureDetector mScaleDetector;
     private InteractionMode mode;
@@ -36,6 +45,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
     private float mTouchDownY;
 
     private float screenX;
+
+    private float xPos, yPos;
+    private int stepsTaken;
+
 
     public Timeline(Context context) {
         super(context);
@@ -58,9 +71,8 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         surfaceHolder = this.getHolder();
         bmpMoon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
-        bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.temp_earth);
-        bmpDash = BitmapFactory.decodeResource(getResources(), R.drawable.temp_dashes);
-        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.temp_user);
+        bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_icon);
+        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.user_icon);
         bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
                 R.drawable.spacebgtest));
         bgImage.setBounds(-5000, -5000, 4000, 4000);
@@ -79,6 +91,15 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         mTouchY = metrics.heightPixels / 2;
 
         screenX = metrics.widthPixels;
+
+        paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setAlpha(175);
+        paint.setStrokeWidth(20f);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setPathEffect(new DashPathEffect(new float[] { 50, 35 }, 9));
+
+        dashedLine = new Path();
 
     }
 
@@ -141,13 +162,30 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         //bgImage.draw(canvas);
 
         //canvas.drawColor(Color.rgb(56,63,96));
+
+        dashedLine.moveTo((IMAGE_PADDING * 2) + bmpEarth.getWidth(), getHeight()/2);
+        dashedLine.lineTo(getWidth() - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
+
+        canvas.drawPath(dashedLine, paint);
         canvas.drawBitmap(bmpMoon, getWidth() - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
         canvas.drawBitmap(bmpEarth, IMAGE_PADDING, getHeight()/2 - (bmpEarth.getHeight()/2), null);
-        canvas.drawBitmap(bmpDash, IMAGE_PADDING + bmpEarth.getHeight(), getHeight()/2 - (bmpEarth.getHeight()/4), null);
-        canvas.drawBitmap(bmpUser, IMAGE_PADDING + bmpEarth.getWidth(), getHeight()/2 - (bmpEarth.getHeight()/4), null);
 
+        // Get number of steps from database!!
+        stepsTaken = 0;
+
+        float progress = stepsTaken / STEPS_TO_MOON;
+        float progressBarWidth = (getWidth() - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
+        float progressBarValue = progressBarWidth * progress;
+        float offset = bmpEarth.getWidth();
+
+
+        xPos = progressBarValue + offset;
+        yPos = (getHeight()/2) - (bmpUser.getHeight()/2);
+
+        canvas.drawBitmap(bmpUser, xPos, yPos, null);
         canvas.restoreToCount(saveCount);
     }
+
 
     @Override
     public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
