@@ -46,17 +46,16 @@
         android:layout_alignParentBottom="true">
         <ImageView
             android:id="@+id/button_shop"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:onClick="onShopPressed"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/coin_icon"
-            android:shadowRadius="0"
-            android:layout_margin="5dp"/>
+            android:background="@drawable/shop_icon"
+            android:shadowRadius="0"/>
         <Button
             android:id="@+id/button_profile"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:onClick="onProfilePressed"
             android:layout_alignParentRight="true"
             android:background="@drawable/profile_icon"
