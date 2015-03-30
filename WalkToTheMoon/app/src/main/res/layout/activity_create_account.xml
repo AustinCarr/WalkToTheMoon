@@ -41,6 +41,17 @@
                 android:background="#c6cce0"
                 android:src="@drawable/camera_icon"/>
 
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:id="@+id/image_view_profile_pic_helmet"
+                android:layout_centerHorizontal="true"
+                android:onClick="onNextClicked"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/licensetitle"
+                android:layout_marginTop="20dp"
+                android:background="#00000000"/>
+
             <TextView
                 android:id="@+id/label_ID"
                 android:layout_width="wrap_content"
@@ -167,7 +178,6 @@
                 android:layout_below="@id/text_view_dob"
                 android:orientation="horizontal"
                 android:id="@+id/linear_layout_dob">
-
                 <Spinner
                     android:id="@+id/spinner_month"
                     android:layout_width="wrap_content"

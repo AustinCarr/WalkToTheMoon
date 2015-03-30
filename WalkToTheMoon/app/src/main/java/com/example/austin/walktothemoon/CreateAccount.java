@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -27,6 +30,8 @@ import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -58,17 +63,8 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        /*SharedPreferences prefs = getSharedPreferences("WalkToTheMoonPref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        String restoredText = prefs.getString("license_id", null);
 
-        if (restoredText != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
 
-        else
-        {*/
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -272,6 +268,20 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         super.onResume();
 
         if(resumingActivity) {
+            ImageView profilePictureView = (ImageView) findViewById(R.id.image_view_profile_pic);
+            ImageView profilePictureHelmetView = (ImageView) findViewById(R.id.image_view_profile_pic_helmet);
+
+            try
+            {
+                profilePictureHelmetView.setImageResource(R.drawable.licensehelmet);
+                FileInputStream fis = openFileInput("ProfilePic");
+                Bitmap bmap = BitmapFactory.decodeStream(fis);
+                profilePictureView.setImageBitmap(bmap);
+                fis.close();
+            } catch (IOException e) {
+                //profilePictureView.setImageResource(R.drawable.camera_icon);
+            }
+
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);
