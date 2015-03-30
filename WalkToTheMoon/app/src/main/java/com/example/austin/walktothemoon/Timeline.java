@@ -4,15 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
@@ -22,8 +18,10 @@ import android.view.SurfaceView;
  * Created by Austin on 2/18/15.
  */
 public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
+    private final int IMAGE_PADDING = 15;
+
     private SurfaceHolder surfaceHolder;
-    private Bitmap bmpIcon;
+    private Bitmap bmpMoon, bmpEarth, bmpDash, bmpUser;
     private BitmapDrawable bgImage;
 
     private ScaleGestureDetector mScaleDetector;
@@ -58,8 +56,11 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
 
     private void init(Context context){
         surfaceHolder = this.getHolder();
-        bmpIcon = BitmapFactory.decodeResource(getResources(),
+        bmpMoon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
+        bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.temp_earth);
+        bmpDash = BitmapFactory.decodeResource(getResources(), R.drawable.temp_dashes);
+        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.temp_user);
         bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
                 R.drawable.spacebgtest));
         bgImage.setBounds(-5000, -5000, 4000, 4000);
@@ -140,8 +141,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         //bgImage.draw(canvas);
 
         //canvas.drawColor(Color.rgb(56,63,96));
-        canvas.drawBitmap(bmpIcon,
-                getWidth()/2 + (bmpIcon.getWidth()/2), getHeight()/2 - (bmpIcon.getHeight()/2), null);
+        canvas.drawBitmap(bmpMoon, getWidth() - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
+        canvas.drawBitmap(bmpEarth, IMAGE_PADDING, getHeight()/2 - (bmpEarth.getHeight()/2), null);
+        canvas.drawBitmap(bmpDash, IMAGE_PADDING + bmpEarth.getHeight(), getHeight()/2 - (bmpEarth.getHeight()/4), null);
+        canvas.drawBitmap(bmpUser, IMAGE_PADDING + bmpEarth.getWidth(), getHeight()/2 - (bmpEarth.getHeight()/4), null);
 
         canvas.restoreToCount(saveCount);
     }
