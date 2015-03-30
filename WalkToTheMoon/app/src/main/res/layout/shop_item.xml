@@ -35,11 +35,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
             android:textSize="17dp"
             android:textColor="#efc01a"
-            android:layout_toLeftOf="@id/text_view_item_name"/>
+            android:layout_toLeftOf="@id/text_view_item_name"
+            android:textAlignment="gravity"
+            android:gravity="right" />
 
 
     </RelativeLayout>

@@ -6,13 +6,25 @@
     android:background="#5fb19d">
 
     <TextView
+        android:text="Shop"
+        android:id="@+id/text_view_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="75dp"
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#FFF"/>
+
+    <TextView
         android:text="00000"
         android:id="@+id/text_view_steps_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:textSize="50dp"
-        android:singleLine="false" />
+        android:textSize="30dp"
+        android:singleLine="false"
+        android:layout_below="@id/text_view_shop"/>
     <TextView
         android:text="steps"
         android:id="@+id/text_view_steps_text"
@@ -20,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/text_view_steps_count"
-        android:textSize="30dp"
+        android:textSize="15dp"
         android:singleLine="false" />
 
     <ExpandableListView
@@ -28,7 +40,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/text_view_steps_text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:groupIndicator="@null"
         android:childDivider="#00000000"
         android:divider="#00000000">

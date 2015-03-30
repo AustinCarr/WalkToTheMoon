@@ -77,6 +77,9 @@ public class Shop extends Activity {
         Typeface tobiBlack;
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
 
+        TextView shop = (TextView) findViewById(R.id.text_view_shop);
+        shop.setTypeface(tobiBlack);
+
         TextView steps = (TextView) findViewById(R.id.text_view_steps_count);
         steps.setTypeface(tobiBlack);
 

@@ -149,7 +149,7 @@
         <item>Get an extra bonus step every 5 steps</item>
         <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
         <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
-        <item>Double tour steps on the weekends</item>
+        <item>Double your steps on the weekends</item>
         <item>Aliens will pick you up and drop you off somewhere else</item>
     </string-array>
 
@@ -159,16 +159,16 @@
         <item>2500</item>
         <item>3000</item>
         <item>6000</item>
-        <item>1000000</item>
+        <item>1 billion</item>
     </string-array>
 
     <array name="power_up_icons">
         <item>@drawable/item_energy</item>
-        <item>@drawable/shop_icon</item>
-        <item>@drawable/shop_icon</item>
-        <item>@drawable/shop_icon</item>
-        <item>@drawable/shop_icon</item>
-        <item>@drawable/shop_icon</item>
+        <item>@drawable/item_sneakers</item>
+        <item>@drawable/item_rad_sneakers</item>
+        <item>@drawable/item_ultra_rad_sneakers</item>
+        <item>@drawable/item_ww</item>
+        <item>@drawable/item_walkietalkie</item>
     </array>
 
 </resources>

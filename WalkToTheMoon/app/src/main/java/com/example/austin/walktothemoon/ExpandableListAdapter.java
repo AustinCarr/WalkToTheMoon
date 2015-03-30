@@ -105,7 +105,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         /* THIS IS WHERE YOU SET THE PRICE OF EACH ONE */
         TextView price = (TextView) convertView.findViewById(R.id.text_view_item_price);
         price.setTypeface(tobiBlack);
-        price.setText(itemPrice + " steps");
+        price.setText(itemPrice + "\nsteps");
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.image_view_item_pic);
         icon.setImageResource(icons.getResourceId(groupPosition, -1));
