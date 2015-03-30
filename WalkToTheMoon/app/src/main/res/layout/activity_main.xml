@@ -51,7 +51,8 @@
             android:onClick="onShopPressed"
             android:layout_alignParentLeft="true"
             android:background="@drawable/coin_icon"
-            android:shadowRadius="0"/>
+            android:shadowRadius="0"
+            android:layout_margin="5dp"/>
         <Button
             android:id="@+id/button_profile"
             android:layout_width="70dp"

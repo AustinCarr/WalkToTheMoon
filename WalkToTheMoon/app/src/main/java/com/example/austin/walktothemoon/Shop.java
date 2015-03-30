@@ -1,9 +1,11 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -35,6 +37,14 @@ public class Shop extends Activity {
         final ExpandableListAdapter expListAdapter = new ExpandableListAdapter(
                 this, groupList, powerUpCollection);
         expListView.setAdapter(expListAdapter);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        expListView.setMinimumWidth(width);
 
         //setGroupIndicatorToRight();
 
