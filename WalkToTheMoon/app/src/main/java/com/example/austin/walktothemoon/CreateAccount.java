@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +21,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -273,10 +275,16 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
             try
             {
-                profilePictureHelmetView.setImageResource(R.drawable.licensehelmet);
+                profilePictureView.setImageResource(R.drawable.licensehelmet);
+                profilePictureView.setBackgroundColor(Color.TRANSPARENT);
+                int dpValue = 100; // margin in dips
+                float d = getResources().getDisplayMetrics().density;
+                int margin = (int)(dpValue * d); // margin in pixels
+                profilePictureHelmetView.getLayoutParams().height = margin;
+
                 FileInputStream fis = openFileInput("ProfilePic");
                 Bitmap bmap = BitmapFactory.decodeStream(fis);
-                profilePictureView.setImageBitmap(bmap);
+                profilePictureHelmetView.setImageBitmap(bmap);
                 fis.close();
             } catch (IOException e) {
                 //profilePictureView.setImageResource(R.drawable.camera_icon);

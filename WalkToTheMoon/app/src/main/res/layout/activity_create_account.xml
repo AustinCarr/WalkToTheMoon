@@ -29,6 +29,18 @@
                 android:src="@drawable/licensetitle"
                 android:layout_marginTop="29dp"/>
 
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:id="@+id/image_view_profile_pic_helmet"
+                android:layout_centerHorizontal="true"
+                android:onClick="onNextClicked"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/licensetitle"
+                android:layout_marginTop="60dp"
+                android:background="#00000000"/>
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="170dp"
@@ -41,16 +53,7 @@
                 android:background="#c6cce0"
                 android:src="@drawable/camera_icon"/>
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="170dp"
-                android:id="@+id/image_view_profile_pic_helmet"
-                android:layout_centerHorizontal="true"
-                android:onClick="onNextClicked"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/licensetitle"
-                android:layout_marginTop="20dp"
-                android:background="#00000000"/>
+
 
             <TextView
                 android:id="@+id/label_ID"
