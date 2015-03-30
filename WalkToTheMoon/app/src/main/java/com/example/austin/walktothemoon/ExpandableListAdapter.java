@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     public View getChildView(final int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final String laptop = (String) getChild(groupPosition, childPosition);
+        final String child = (String) getChild(groupPosition, childPosition);
         LayoutInflater inflater = context.getLayoutInflater();
 
         if (convertView == null) {
@@ -56,7 +57,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         item.setTypeface(tobiBlack);
 
 
-        item.setText(laptop);
+        item.setText(child);
         return convertView;
     }
 
@@ -79,7 +80,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
 
+
+        String[] powerUpPrices = context.getResources().getStringArray(R.array.power_up_prices);
+        String[] powerUpIcons = context.getResources().getStringArray(R.array.power_up_icons);
+        TypedArray icons = context.getResources().obtainTypedArray(R.array.power_up_icons);
+
         String itemName = (String) getGroup(groupPosition);
+        String itemPrice = powerUpPrices[groupPosition];
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -97,9 +105,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         /* THIS IS WHERE YOU SET THE PRICE OF EACH ONE */
         TextView price = (TextView) convertView.findViewById(R.id.text_view_item_price);
         price.setTypeface(tobiBlack);
-        price.setText("4000 steps");
+        price.setText(itemPrice + " steps");
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.image_view_item_pic);
+        icon.setImageResource(icons.getResourceId(groupPosition, -1));
         /* SET THE IMAGE SOMEHOW */
 
         return convertView;

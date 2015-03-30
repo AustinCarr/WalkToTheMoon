@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,43 +86,28 @@ public class Shop extends Activity {
     }
 
     private void createGroupList() {
+
+        String[] items = getResources().getStringArray(R.array.power_up_names);
+
         groupList = new ArrayList<>();
-        groupList.add("Energy Bar");
-        groupList.add("Item2");
-        groupList.add("Item3");
-        groupList.add("Item4");
-        groupList.add("Item5");
-        groupList.add("Item6");
+
+        for (int i = 0; i < items.length; i++) {
+            groupList.add(items[i]);
+        }
     }
 
     private void createCollection() {
 
-        /* A list of power ups */
-        String[] item1 = { "This is a really long description for item 1.  It will expire in 45 days.  Please buy now.  Huge sale.  This is a test. To make the description really long.  Bye now.  GOOOOOD" };
-        String[] item2 = { "DESCRIPTION2" };
-        String[] item3 = { "DESCRIPTION3" };
-        String[] item4 = { "DESCRIPTION4" };
-        String[] item5 = { "DESCRIPTION5" };
-        String[] item6 = { "DESCRIPTION6" };
+        String[] descriptions = getResources().getStringArray(R.array.power_up_descriptions);
 
         powerUpCollection = new LinkedHashMap<>();
 
-        /* Add power ups into collection */
-        for (String powerUp : groupList) {
-            if (powerUp.equals("Energy Bar")) {
-                loadChild(item1);
-            } else if (powerUp.equals("Item2"))
-                loadChild(item2);
-            else if (powerUp.equals("Item3"))
-                loadChild(item3);
-            else if (powerUp.equals("Item4"))
-                loadChild(item4);
-            else if (powerUp.equals("Item5"))
-                loadChild(item5);
-            else
-                loadChild(item6);
+        String[] temp = {"DESCRIPTION"};
+        for (int i = 0; i < groupList.size(); i++) {
+            temp[0] = descriptions[i];
+            loadChild(temp);
 
-            powerUpCollection.put(powerUp, childList);
+            powerUpCollection.put(groupList.get(i), childList);
         }
     }
 

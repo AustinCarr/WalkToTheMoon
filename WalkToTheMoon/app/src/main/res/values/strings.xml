@@ -135,4 +135,40 @@
 
     <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
 
+    <string-array name="power_up_names">
+        <item>Energy Bar</item>
+        <item>Sneakers</item>
+        <item>Rad Sneakers</item>
+        <item>Ultra Rad Sneakers</item>
+        <item>Weekend Walker</item>
+        <item>Walkie Talkie</item>
+    </string-array>
+
+    <string-array name="power_up_descriptions">
+        <item>Double your steps for 1 hour</item>
+        <item>Get an extra bonus step every 5 steps</item>
+        <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
+        <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
+        <item>Double tour steps on the weekends</item>
+        <item>Aliens will pick you up and drop you off somewhere else</item>
+    </string-array>
+
+    <string-array name="power_up_prices">
+        <item>4000</item>
+        <item>1000</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>6000</item>
+        <item>1000000</item>
+    </string-array>
+
+    <array name="power_up_icons">
+        <item>@drawable/item_energy</item>
+        <item>@drawable/shop_icon</item>
+        <item>@drawable/shop_icon</item>
+        <item>@drawable/shop_icon</item>
+        <item>@drawable/shop_icon</item>
+        <item>@drawable/shop_icon</item>
+    </array>
+
 </resources>
