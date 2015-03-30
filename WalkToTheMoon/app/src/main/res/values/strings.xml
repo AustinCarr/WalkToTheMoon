@@ -116,7 +116,7 @@
         <item><font color="black">December</font></item>
     </string-array>
 
-    <string name="title_activity_create_account">CreateAccount</string>
+    <string name="title_activity_create_account">Walk to the Moon</string>
     <string name="title_activity_choose_profile_pic">ChooseProfilePic</string>
     <string name="title_activity_launch_animation">LaunchAnimation</string>
     <string name="title_activity_main">MainActivity</string>

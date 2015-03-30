@@ -7,25 +7,7 @@
     tools:context=".ChooseProfilePic"
     android:background="#6ab29e">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_view_profile_bg"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
-        android:background="@drawable/profile_pic_bg"/>
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="180dp"
-        android:id="@+id/image_view_profile_pic"
-        android:layout_centerHorizontal="true"
-        android:onClick="onChangePicture"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
-        android:layout_marginTop="90dp"
-        android:background="#00000000"/>
 
     <ImageView
         android:layout_width="fill_parent"
@@ -33,12 +15,24 @@
         android:id="@+id/image_view_profile_fg"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"
-        android:background="@drawable/profile_pic_fg"/>
+        android:adjustViewBounds="false"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp">
+        android:layout_margin="20dp">
+
+
+        <TextView
+            android:id="@+id/text_profileName"
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="30dp"
+            android:onClick="onNameClicked"
+            android:clickable="true"
+            android:layout_centerHorizontal="true" />
+
         <TextView
             android:text="00000"
             android:id="@+id/text_view_steps_count"
@@ -47,7 +41,9 @@
             android:textSize="30dp"
             android:singleLine="false"
             android:textColor="#000"
-            android:layout_marginLeft="65dp"/>
+            android:layout_below="@id/text_profileName"
+            android:layout_marginTop="25dp"
+            android:layout_centerHorizontal="true" />
         <TextView
             android:text="real steps"
             android:id="@+id/text_view_steps_text"
@@ -57,16 +53,8 @@
             android:textSize="20dp"
             android:singleLine="false"
             android:textColor="#000"
-            android:layout_marginLeft="65dp"/>
-        <TextView
-            android:id="@+id/text_profileName"
-            android:text="Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:layout_toRightOf="@+id/text_view_steps_count"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="20dp"
-            android:textSize="30dp"/>
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
+
 </RelativeLayout>

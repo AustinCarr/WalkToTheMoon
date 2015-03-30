@@ -2,24 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp" >
+    >
 
     <TextView
         android:id="@+id/text_view_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:paddingLeft="25dp" />
+        android:layout_alignParentTop="true"
+        android:textStyle="italic"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@+id/button_buy"
+        android:textColor="#b8e0d4"
+        android:textSize="17dp"/>
 
     <Button
         android:id="@+id/button_buy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:text="BUY"
-        android:onClick="onBuyClicked"/>
-
+        android:onClick="onBuyClicked"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"/>
 
 
 </RelativeLayout>

@@ -1,10 +1,14 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
+import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -36,6 +40,14 @@ public class Shop extends Activity {
                 this, groupList, powerUpCollection);
         expListView.setAdapter(expListAdapter);
 
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        expListView.setMinimumWidth(width);
+
         //setGroupIndicatorToRight();
 
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -60,11 +72,21 @@ public class Shop extends Activity {
             powerup = datasource.getPowerup(powerupNames[i]);
             //set fields accordingly for that powerup
         }
+
+        Typeface tobiBlack;
+        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
+        TextView steps = (TextView) findViewById(R.id.text_view_steps_count);
+        steps.setTypeface(tobiBlack);
+
+        TextView stepsText = (TextView) findViewById(R.id.text_view_steps_text);
+        stepsText.setTypeface(tobiBlack);
+
     }
 
     private void createGroupList() {
         groupList = new ArrayList<>();
-        groupList.add("Item1");
+        groupList.add("Energy Bar");
         groupList.add("Item2");
         groupList.add("Item3");
         groupList.add("Item4");
@@ -75,18 +97,18 @@ public class Shop extends Activity {
     private void createCollection() {
 
         /* A list of power ups */
-        String[] item1 = { "DESCRIPTION" };
-        String[] item2 = { "DESCRIPTION" };
-        String[] item3 = { "DESCRIPTION" };
-        String[] item4 = { "DESCRIPTION" };
-        String[] item5 = { "DESCRIPTION" };
-        String[] item6 = { "DESCRIPTION" };
+        String[] item1 = { "This is a really long description for item 1.  It will expire in 45 days.  Please buy now.  Huge sale.  This is a test. To make the description really long.  Bye now.  GOOOOOD" };
+        String[] item2 = { "DESCRIPTION2" };
+        String[] item3 = { "DESCRIPTION3" };
+        String[] item4 = { "DESCRIPTION4" };
+        String[] item5 = { "DESCRIPTION5" };
+        String[] item6 = { "DESCRIPTION6" };
 
         powerUpCollection = new LinkedHashMap<>();
 
         /* Add power ups into collection */
         for (String powerUp : groupList) {
-            if (powerUp.equals("Item1")) {
+            if (powerUp.equals("Energy Bar")) {
                 loadChild(item1);
             } else if (powerUp.equals("Item2"))
                 loadChild(item2);
@@ -132,7 +154,7 @@ public class Shop extends Activity {
      * Do something when one of the buttons in the dialog is clicked
      * @param item - the button clicked
      */
-    public void onCameraDialogItemSelected(int item) {
+    public void onDialogItemSelected(int item) {
 
         if (item == DialogFragment.ID_SHOP_PURCHASE)
             Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();

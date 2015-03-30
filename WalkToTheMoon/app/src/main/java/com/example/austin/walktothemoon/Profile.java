@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -25,6 +26,7 @@ public class Profile extends Activity {
     private Uri imageUri;
     private boolean isTakenFromCamera;
     private ImageView profilePicture;
+    private android.app.DialogFragment fragment;
 
     private UserDataSource datasource;
 
@@ -75,7 +77,7 @@ public class Profile extends Activity {
     }
 
     public void displayDialog(int id) {
-        android.app.DialogFragment fragment = DialogFragment.newInstance(id);
+        fragment = DialogFragment.newInstance(id);
         fragment.show(getFragmentManager(),
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
@@ -83,12 +85,16 @@ public class Profile extends Activity {
         /* Dialog helper methods */
 
     /* When a button is clicked in the camera dialog*/
-    public void onCameraDialogItemSelected(int item) {
+    public void onDialogItemSelected(int item) {
 
         if (item == DialogFragment.ID_PHOTO_PICKER_FROM_CAMERA)
             openCamera();
         else if (item == DialogFragment.ID_PHOTO_PICKER_FROM_PICTURES)
             openGallery();
+        else if (item == DialogFragment.ID_SAVE_NAME)
+            Toast.makeText(getBaseContext(), "SAVED", Toast.LENGTH_LONG).show();
+        else if (item == DialogFragment.ID_CANCEL)
+            Toast.makeText(getBaseContext(), "CANCELLED", Toast.LENGTH_LONG).show();
     }
 
     private void openCamera() {
@@ -174,6 +180,25 @@ public class Profile extends Activity {
 
                 break;
         }
+    }
+
+    public void onNameClicked(View view) {
+        displayDialog(DialogFragment.DIALOG_FROM_EDIT_PROFILE_NAME);
+    }
+
+    public void onSaveClicked(View view) {
+
+        // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Toast.makeText(view.getContext(), "SAVED", Toast.LENGTH_LONG).show();
+        fragment.dismiss();
+
+    }
+
+    public void onCancelClicked(View view) {
+
+        // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //Toast.makeText(view.getContext(), "CANCELLED", Toast.LENGTH_LONG).show();
+        fragment.dismiss();
     }
 
     /* If we don't want to crop the chosen image, we will need this method
