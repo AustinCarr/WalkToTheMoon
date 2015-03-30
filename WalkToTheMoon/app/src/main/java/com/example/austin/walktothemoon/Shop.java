@@ -20,6 +20,8 @@ public class Shop extends Activity {
     Map<String, List<String>> powerUpCollection;
     ExpandableListView expListView;
 
+    private PowerupsDataSource datasource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,16 @@ public class Shop extends Activity {
                 return true;
             }
         });
+
+        //db stuff
+        datasource = new PowerupsDataSource(this);
+        datasource.open();
+        String[] powerupNames = {"powerup1", "powerup2"};
+        Powerups powerup;
+        for (int i = 0; i < powerupNames.length; i++) {
+            powerup = datasource.getPowerup(powerupNames[i]);
+            //set fields accordingly for that powerup
+        }
     }
 
     private void createGroupList() {

@@ -3,20 +3,15 @@ package com.example.austin.walktothemoon;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
@@ -25,18 +20,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
 
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
-import java.util.List;
-
+import java.io.File;
+import java.security.SecureRandom;
+import java.util.Random;
 
 public class CreateAccount extends Activity implements View.OnTouchListener, SpringListener {
 
@@ -52,11 +44,31 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private Typeface tobiBlack;
     private String list[]={"Alabama","Arkansas‹"};
 
+    //db stuff
+    private TextView licenseIdView;
+    private EditText nameBox;
+    private Spinner stateSpinner;
+    private String stateValue;
+    //public static User user;
+
+    private UserDataSource datasource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+        /*SharedPreferences prefs = getSharedPreferences("WalkToTheMoonPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String restoredText = prefs.getString("license_id", null);
+
+        if (restoredText != null) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        else
+        {*/
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -147,9 +159,6 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         Spinner monthSpinner = (Spinner) findViewById(R.id.spinner_month);
         monthSpinner.setAdapter(monthAdapter);
 
-
-
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
         spinner.setAdapter(adapter);
@@ -166,6 +175,38 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
         SpringConfig config = new SpringConfig(TENSION, DAMPER);
         mSpring.setSpringConfig(config);
+
+        //db stuff
+        licenseIdView = (TextView) findViewById(R.id.value_ID);
+        nameBox = (EditText) findViewById(R.id.edit_text_name);
+        stateSpinner = (Spinner) findViewById(R.id.spinner_location);
+        stateValue = stateSpinner.getSelectedItem().toString();
+
+        String randomLicenseId = generateRandomLicenseId();
+        licenseIdView.setText(randomLicenseId);
+        /*editor.putString("license_id", randomLicenseId);
+        editor.commit();
+        }*/
+
+        datasource = new UserDataSource(this);
+        datasource.open();
+    }
+
+    public static String generateRandomLicenseId() {
+        Random random = new SecureRandom();
+        char[] characterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+        int length = 9;
+        char[] randomLicenseId = new char[length+2];     //add 2 for dashes
+        for (int i = 0; i < randomLicenseId.length; i++) {
+            if (i == 1 || i == 6)
+                randomLicenseId[i] = '-';
+            else {
+                // picks a random index out of character set > random character
+                int randomCharIndex = random.nextInt(characterSet.length);
+                randomLicenseId[i] = characterSet[randomCharIndex];
+            }
+        }
+        return new String(randomLicenseId);
     }
 
     private class MySpinnerAdapter<String> extends ArrayAdapter<String> {
@@ -182,7 +223,6 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
             return v;
         }
-
 
         public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
             View v =super.getDropDownView(position, convertView, parent);
@@ -250,9 +290,33 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     }
 
     public void onLaunchPressed(View v) {
+        newUser(v);
+        //populatePowerups(v);
+
         Intent intent = new Intent(this, LaunchAnimation.class);
         startActivity(intent);
     }
+
+    //add user info to db
+    public void newUser(View v) {
+        //MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
+
+        User user = new User(licenseIdView.getText().toString(), nameBox.getText().toString(),
+                        stateValue, 0, 0);
+
+        datasource.addUser(user);
+        datasource.close();
+    }
+
+    /*public void populatePowerups(View v) {
+        MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
+
+        Powerups powerup1 = new Powerups();
+        ...
+
+        dbHandler.addPowerup(powerup1);
+        ...
+    }*/
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

@@ -56,7 +56,6 @@
                 android:id="@+id/value_ID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2-K650-9006"
                 android:layout_toRightOf="@id/image_view_profile_pic"
                 android:layout_below="@+id/label_ID"
                 android:layout_marginTop="5dp"

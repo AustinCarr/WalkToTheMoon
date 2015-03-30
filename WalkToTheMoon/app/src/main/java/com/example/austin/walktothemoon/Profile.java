@@ -3,6 +3,7 @@ package com.example.austin.walktothemoon;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 
 import java.io.File;
 
-
 public class Profile extends Activity {
 
     private final int REQUEST_CODE_FOR_CAMERA = 0;
@@ -26,6 +26,8 @@ public class Profile extends Activity {
     private boolean isTakenFromCamera;
     private ImageView profilePicture;
 
+    private UserDataSource datasource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +37,41 @@ public class Profile extends Activity {
         profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
         isTakenFromCamera = false;
 
+        //db stuff
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        //User user = dbHandler.getUser(CreateAccount.user.getLicenseId());
+        /*SharedPreferences prefs = getSharedPreferences("WalkToTheMoonPref", MODE_PRIVATE);
+        String restoredText = prefs.getString("license_id", null);
+        User user = dbHandler.getUser(restoredText);*/
+
         Typeface tobiBlack;
 
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
 
         TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
         textview.setTypeface(tobiBlack);
+        textview.setText(String.valueOf(user.getRealSteps()));
 
         textview = (TextView) findViewById(R.id.text_view_steps_text);
         textview.setTypeface(tobiBlack);
 
         textview = (TextView) findViewById(R.id.text_profileName);
         textview.setTypeface(tobiBlack);
+        textview.setText(String.valueOf(user.getName()));
     }
 
+    /*public User lookupUser (View view) {
+        MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
+
+        User user = dbHandler.getUser("2-K650-9006");
+
+        return user;
+    }*/
 
     public void onChangePicture(View view) {
         displayDialog(DialogFragment.DIALOG_FROM_EDIT_PROFILE);
-
     }
 
     public void displayDialog(int id) {
