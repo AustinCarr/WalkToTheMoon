@@ -48,7 +48,8 @@ public class ChooseProfilePic extends Activity {
 
 
         ImageView profilePicBG = (ImageView) findViewById(R.id.image_view_profile_bg);
-        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_fg);
+        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_pic);
+        ImageView speechBubble = (ImageView) findViewById(R.id.button_confirm);
         BitmapDrawable bd=(BitmapDrawable) this.getResources().getDrawable(R.drawable.astronaut);
         imageWidth = bd.getBitmap().getWidth();
         System.out.println(imageWidth);
@@ -60,7 +61,8 @@ public class ChooseProfilePic extends Activity {
         animation.setFillAfter(true);
         animation.setDuration(600);
         profilePicBG.startAnimation(animation);
-        //profilePicFG.startAnimation(animation);
+        profilePicFG.startAnimation(animation);
+        speechBubble.startAnimation(animation);
 
         /* variables for changing profile picture */
         profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
@@ -84,7 +86,8 @@ public class ChooseProfilePic extends Activity {
     @Override
     public void onBackPressed(){
         ImageView profilePicBG = (ImageView) findViewById(R.id.image_view_profile_bg);
-        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_fg);
+        ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_pic);
+        ImageView speechBubble = (ImageView) findViewById(R.id.button_confirm);
         //layout.setY(-30f);
         //float screenHeight = layout.getHeight();
         TranslateAnimation animation = new TranslateAnimation(0, imageWidth, 0, 0) ;
@@ -106,7 +109,8 @@ public class ChooseProfilePic extends Activity {
         });
         animation.setDuration(600);
         profilePicBG.startAnimation(animation);
-        //profilePicFG.startAnimation(animation);
+        profilePicFG.startAnimation(animation);
+        speechBubble.startAnimation(animation);
 
     }
 
