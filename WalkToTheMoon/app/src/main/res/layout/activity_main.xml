@@ -43,7 +43,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relativeLayout2">
         <ImageView
             android:id="@+id/button_shop"
             android:layout_width="90dp"
@@ -62,6 +63,4 @@
             android:shadowRadius="0"/>
 
     </RelativeLayout>
-
-
 </RelativeLayout>

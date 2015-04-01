@@ -1,6 +1,7 @@
 package com.example.austin.walktothemoon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 /**
  * Created by Austin on 2/18/15.
@@ -100,7 +102,6 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         paint.setPathEffect(new DashPathEffect(new float[] { 50, 35 }, 9));
 
         dashedLine = new Path();
-
     }
 
     @Override
@@ -163,6 +164,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
 
         //canvas.drawColor(Color.rgb(56,63,96));
 
+
         dashedLine.moveTo((IMAGE_PADDING * 2) + bmpEarth.getWidth(), getHeight()/2);
         dashedLine.lineTo(getWidth() - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
 
@@ -178,12 +180,21 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         float progressBarValue = progressBarWidth * progress;
         float offset = bmpEarth.getWidth();
 
+        //Check if user reached the moon
+        if (stepsTaken >= STEPS_TO_MOON)
+            userWon();
+
 
         xPos = progressBarValue + offset;
         yPos = (getHeight()/2) - (bmpUser.getHeight()/2);
 
         canvas.drawBitmap(bmpUser, xPos, yPos, null);
         canvas.restoreToCount(saveCount);
+    }
+
+    private void userWon() {
+        Intent intent = new Intent(getContext(), WinningActivity.class);
+        getContext().startActivity(intent);
     }
 
 
