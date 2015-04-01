@@ -27,6 +27,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@drawable/moon_flag" />
+        android:src="@drawable/flag" />
 
 </RelativeLayout>

@@ -76,6 +76,7 @@ public class Profile extends Activity {
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
 
+
         /* Dialog helper methods */
 
     /* When a button is clicked in the camera dialog*/
@@ -85,10 +86,13 @@ public class Profile extends Activity {
             openCamera();
         else if (item == DialogFragment.ID_PHOTO_PICKER_FROM_PICTURES)
             openGallery();
+
+        /* code to edit name in profile
         else if (item == DialogFragment.ID_SAVE_NAME)
             Toast.makeText(getBaseContext(), "SAVED", Toast.LENGTH_LONG).show();
         else if (item == DialogFragment.ID_CANCEL)
             Toast.makeText(getBaseContext(), "CANCELLED", Toast.LENGTH_LONG).show();
+            */
     }
 
     private void openCamera() {
@@ -176,9 +180,11 @@ public class Profile extends Activity {
         }
     }
 
+    /* code to edit name in profile
     public void onNameClicked(View view) {
         displayDialog(DialogFragment.DIALOG_FROM_EDIT_PROFILE_NAME);
     }
+
 
     public void onSaveClicked(View view) {
         EditText newName = (EditText) findViewById(R.id.new_name);
@@ -190,17 +196,14 @@ public class Profile extends Activity {
 
         datasource.close();
 
-        // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //Toast.makeText(view.getContext(), "SAVED", Toast.LENGTH_LONG).show();
         fragment.dismiss();
     }
 
     public void onCancelClicked(View view) {
 
-        // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //Toast.makeText(view.getContext(), "CANCELLED", Toast.LENGTH_LONG).show();
         fragment.dismiss();
     }
+    */
 
     /* If we don't want to crop the chosen image, we will need this method
     private String getRealPathFromURI(Uri contentUri) {

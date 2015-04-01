@@ -16,12 +16,6 @@ public class WinningActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winning);
-
-        message = (TextView) findViewById(R.id.text_view_congrats);
-
-        Typeface tobiBlack;
-        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
-        message.setTypeface(tobiBlack);
     }
 
 

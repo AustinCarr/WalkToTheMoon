@@ -29,7 +29,6 @@
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:textSize="30dp"
-            android:onClick="onNameClicked"
             android:clickable="true"
             android:layout_centerHorizontal="true" />
 
