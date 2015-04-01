@@ -5,55 +5,64 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChooseProfilePic"
-    android:background="#6ab29e">
+    android:background="@drawable/backgroundtile">
+
+
+    <TextView
+        android:id="@+id/text_profileName"
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:textSize="40dp"
+        android:clickable="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:text="00000"
+        android:id="@+id/text_view_steps_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:singleLine="false"
+        android:textColor="#FFF"
+        android:layout_below="@id/text_profileName"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="real steps"
+        android:id="@+id/text_view_steps_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_steps_count"
+        android:textSize="30dp"
+        android:singleLine="false"
+        android:textColor="#FFF"
+        android:layout_centerHorizontal="true" />
 
 
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_view_profile_fg"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="false"/>
-    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/image_view_profile"
+        android:src="@drawable/user"
+        android:layout_above="@+id/text_view_steps_fact"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:text="*There are 478,000,000 steps to the moon"
+        android:textColor="#FFF"
+        android:id="@+id/text_view_steps_fact"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:textSize="15dp"/>
 
 
-        <TextView
-            android:id="@+id/text_profileName"
-            android:text="Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="30dp"
-            android:clickable="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:text="00000"
-            android:id="@+id/text_view_steps_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:singleLine="false"
-            android:textColor="#000"
-            android:layout_below="@id/text_profileName"
-            android:layout_marginTop="25dp"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:text="real steps"
-            android:id="@+id/text_view_steps_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_steps_count"
-            android:textSize="20dp"
-            android:singleLine="false"
-            android:textColor="#000"
-            android:layout_centerHorizontal="true" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

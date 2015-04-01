@@ -17,7 +17,7 @@
             android:paddingRight="20dp"
             android:paddingTop="0dp"
             android:paddingBottom="15dp"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="50dp"
             tools:context=".CreateAccount"
             android:focusableInTouchMode="true"
             android:background="@drawable/astronautlicense">
@@ -205,9 +205,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/button_launch"
                 android:onClick="onLaunchPressed"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="50dp"
-                android:layout_below="@id/linear_layout_dob">
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true">
             </Button>
 
 

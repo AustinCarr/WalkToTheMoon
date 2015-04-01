@@ -64,6 +64,9 @@ public class Profile extends Activity {
         textview = (TextView) findViewById(R.id.text_profileName);
         textview.setTypeface(tobiBlack);
         textview.setText(String.valueOf(user.getName()));
+
+        textview = (TextView) findViewById(R.id.text_view_steps_fact);
+        textview.setTypeface(tobiBlack);
     }
 
     public void onChangePicture(View view) {
