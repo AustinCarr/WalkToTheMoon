@@ -1,11 +1,15 @@
-package com.example.austin.walktothemoon;
+﻿package com.example.austin.walktothemoon;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -17,6 +21,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +31,9 @@ import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -78,6 +86,25 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             display.getSize(size);
             int width = size.x;
             int height = size.y;
+
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        //layout.setY(-30f);
+        //float screenHeight = layout.getHeight();
+        TranslateAnimation animation = new TranslateAnimation(0, 0, (height * -1), 0) ;
+        animation.setInterpolator((new
+                AccelerateDecelerateInterpolator()));
+        animation.setFillAfter(true);
+        animation.setDuration(600);
+        layout.startAnimation(animation);
+
+        Typeface tobiBlack;
 
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
             //layout.setY(-30f);
@@ -267,6 +294,26 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         super.onResume();
 
         if(resumingActivity) {
+            ImageView profilePictureView = (ImageView) findViewById(R.id.image_view_profile_pic);
+            ImageView profilePictureHelmetView = (ImageView) findViewById(R.id.image_view_profile_pic_helmet);
+
+            try
+            {
+                profilePictureView.setImageResource(R.drawable.licensehelmet);
+                profilePictureView.setBackgroundColor(Color.TRANSPARENT);
+                int dpValue = 100; // margin in dips
+                float d = getResources().getDisplayMetrics().density;
+                int margin = (int)(dpValue * d); // margin in pixels
+                profilePictureHelmetView.getLayoutParams().height = margin;
+
+                FileInputStream fis = openFileInput("ProfilePic");
+                Bitmap bmap = BitmapFactory.decodeStream(fis);
+                profilePictureHelmetView.setImageBitmap(bmap);
+                fis.close();
+            } catch (IOException e) {
+                //profilePictureView.setImageResource(R.drawable.camera_icon);
+            }
+
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);

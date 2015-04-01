@@ -3,15 +3,17 @@
     package="com.example.austin.walktothemoon" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    
+
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="true">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".CreateAccount"
             android:label="@string/title_activity_create_account" >
@@ -28,7 +30,7 @@
         <activity
             android:name=".LaunchAnimation"
             android:label="@string/title_activity_launch_animation"
-            android:noHistory="true">
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".MainActivity"
@@ -41,6 +43,10 @@
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name=".WinningActivity"
+            android:label="@string/title_activity_winning" >
         </activity>
     </application>
 

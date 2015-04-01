@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class ChooseProfilePic extends Activity {
@@ -85,6 +87,21 @@ public class ChooseProfilePic extends Activity {
 
     @Override
     public void onBackPressed(){
+        ImageView mImageView;
+        mImageView = (ImageView) findViewById(R.id.image_view_profile_pic);
+        mImageView.buildDrawingCache();
+        Bitmap bmap = mImageView.getDrawingCache();
+        try {
+            FileOutputStream fos = openFileOutput(
+                    "ProfilePic", MODE_PRIVATE);
+            bmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
         ImageView profilePicBG = (ImageView) findViewById(R.id.image_view_profile_bg);
         ImageView profilePicFG = (ImageView) findViewById(R.id.image_view_profile_pic);
         ImageView speechBubble = (ImageView) findViewById(R.id.button_confirm);
