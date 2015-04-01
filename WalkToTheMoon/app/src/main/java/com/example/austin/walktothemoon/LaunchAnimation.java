@@ -29,10 +29,10 @@ public class LaunchAnimation extends Activity {
 
             public void run() {
 
-                //Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                // startActivity(intent);
-                //finish();
+                /*Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();*/
 
             }
 
@@ -55,7 +55,6 @@ public class LaunchAnimation extends Activity {
 
         messageView = (TextView) findViewById(R.id.message);
         messageView.setTypeface(tobiBlack);
-        messageView.setText("Launching from: ");
 
 
 
