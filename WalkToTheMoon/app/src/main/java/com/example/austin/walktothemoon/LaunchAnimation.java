@@ -2,6 +2,7 @@ package com.example.austin.walktothemoon;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import java.util.TimerTask;
 public class LaunchAnimation extends Activity {
 
     private UserDataSource datasource;
-    TextView stateView;
+    private TextView stateView, messageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +29,37 @@ public class LaunchAnimation extends Activity {
 
             public void run() {
 
-                Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                // startActivity(intent);
+                //finish();
 
             }
 
-        }, 1000);
+        }, 8000);
+
+
+        Typeface tobiBlack;
+
+        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
 
         datasource = new UserDataSource(this);
         datasource.open();
-
         User user = datasource.getUser();
 
         stateView = (TextView) findViewById(R.id.text_view_user_location);
+        stateView.setTypeface(tobiBlack);
         stateView.setText(String.valueOf(user.getAddressState()));
-
         datasource.close();
+
+        messageView = (TextView) findViewById(R.id.message);
+        messageView.setTypeface(tobiBlack);
+        messageView.setText("Launching from: ");
+
+
+
+
     }
 
     @Override
