@@ -1,17 +1,11 @@
 package com.example.austin.walktothemoon;
 
-/**
- * Created by Julianne on 3/23/2015.
- */
-
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLiteHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "walkToTheMoonDB.db";
 
     public static final String TABLE_USER = "user";
@@ -23,21 +17,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
     public static final String TABLE_POWERUPS = "powerups";
     public static final String COLUMN_PNAME = "name";
-    public static final String COLUMN_COST = "cost";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_IS_UNLOCKED = "is_unlocked";
     public static final String COLUMN_IN_USE = "in_use";
-    public static final String COLUMN_EXPIRATION_DATE = "expiration_date";
+    public static final String COLUMN_EXPIRATION = "expiration";
 
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
-    /*public MySQLiteHelper(Context context, String name,
-                          SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
-    }*/
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -48,11 +34,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 + " INTEGER NOT NULL," + COLUMN_BOOSTED_STEPS + " INTEGER NOT NULL" + ")";
         String CREATE_POWERUPS_TABLE = "CREATE TABLE " +
                 TABLE_POWERUPS + "("
-                + COLUMN_PNAME + " TEXT PRIMARY KEY NOT NULL," + COLUMN_COST + " INTEGER NOT NULL,"
-                + COLUMN_DESCRIPTION + " TEXT NOT NULL," + COLUMN_IS_UNLOCKED
-                + " INTEGER NOT NULL CHECK (in_use IN (0,1))," + COLUMN_IN_USE
-                + " INTEGER NOT NULL CHECK (in_use IN (0,1))," + COLUMN_EXPIRATION_DATE
-                + " TEXT" + ")";
+                + COLUMN_PNAME + " TEXT PRIMARY KEY NOT NULL," + COLUMN_IN_USE
+                + " INTEGER NOT NULL CHECK (in_use IN (0,1))," + COLUMN_EXPIRATION + " TEXT" + ")";
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_POWERUPS_TABLE);
     }

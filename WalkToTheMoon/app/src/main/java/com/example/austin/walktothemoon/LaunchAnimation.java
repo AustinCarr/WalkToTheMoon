@@ -7,12 +7,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class LaunchAnimation extends Activity {
+
+    private UserDataSource datasource;
+    TextView stateView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,32 @@ public class LaunchAnimation extends Activity {
             }
 
         }, 1000);
+
+        datasource = new UserDataSource(this);
+        datasource.open();
+
+        User user = datasource.getUser();
+
+        stateView = (TextView) findViewById(R.id.text_view_user_location);
+        stateView.setText(String.valueOf(user.getAddressState()));
+
+        datasource.close();
     }
 
     @Override
     public void onBackPressed() {
         //Do nothing
+    }
+
+    @Override
+    protected void onResume() {
+        datasource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        datasource.close();
+        super.onPause();
     }
 }

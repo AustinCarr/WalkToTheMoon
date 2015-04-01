@@ -6,7 +6,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/new_name"
         android:hint="Enter new name"
         android:layout_marginTop="5dp"
         android:singleLine="true" />
@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/editText"
+        android:layout_below="@id/new_name"
         android:layout_centerHorizontal="true">
 
         <Button

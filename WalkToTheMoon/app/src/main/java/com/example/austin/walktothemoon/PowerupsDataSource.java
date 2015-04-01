@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-/**
- * Created by Julianne on 3/30/2015.
- */
 public class PowerupsDataSource {
     private SQLiteDatabase db;
     private MySQLiteHelper dbHelper;
@@ -28,11 +25,8 @@ public class PowerupsDataSource {
     public void addPowerup(Powerups powerup) {
         ContentValues values = new ContentValues();
         values.put(MySQLiteHelper.COLUMN_PNAME, powerup.getName());
-        values.put(MySQLiteHelper.COLUMN_COST, powerup.getCost());
-        values.put(MySQLiteHelper.COLUMN_DESCRIPTION, powerup.getDescription());
-        values.put(MySQLiteHelper.COLUMN_IS_UNLOCKED, powerup.getIsUnlocked());
         values.put(MySQLiteHelper.COLUMN_IN_USE, powerup.getInUse());
-        values.put(MySQLiteHelper.COLUMN_EXPIRATION_DATE, powerup.getExpirationDate());
+        values.put(MySQLiteHelper.COLUMN_EXPIRATION, powerup.getExpirationDate());
 
         db.insert(MySQLiteHelper.TABLE_POWERUPS, null, values);
     }
@@ -48,11 +42,8 @@ public class PowerupsDataSource {
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
             powerup.setName(cursor.getString(0));
-            powerup.setCost(Integer.parseInt(cursor.getString(1)));
-            powerup.setDescription(cursor.getString(2));
-            powerup.setIsUnlocked(Integer.parseInt(cursor.getString(3)));
-            powerup.setInUse(Integer.parseInt(cursor.getString(4)));
-            powerup.setExpirationDate(cursor.getString(5));
+            powerup.setInUse(Integer.parseInt(cursor.getString(1)));
+            powerup.setExpirationDate(cursor.getString(2));
             cursor.close();
         }
         else {

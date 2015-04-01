@@ -72,6 +72,7 @@ public class Shop extends Activity {
             powerup = datasource.getPowerup(powerupNames[i]);
             //set fields accordingly for that powerup
         }
+        datasource.close();
 
         Typeface tobiBlack;
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
@@ -175,5 +176,15 @@ public class Shop extends Activity {
                 getString(R.string.dialog_fragment_tag_photo_picker));
     }
 
+    @Override
+    protected void onResume() {
+        datasource.open();
+        super.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        datasource.close();
+        super.onPause();
+    }
 }

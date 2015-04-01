@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class Profile extends Activity {
     private android.app.DialogFragment fragment;
 
     private UserDataSource datasource;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class Profile extends Activity {
         //db stuff
         datasource = new UserDataSource(this);
         datasource.open();
-        User user = datasource.getUser();
+        user = datasource.getUser();
         //User user = dbHandler.getUser(CreateAccount.user.getLicenseId());
         /*SharedPreferences prefs = getSharedPreferences("WalkToTheMoonPref", MODE_PRIVATE);
         String restoredText = prefs.getString("license_id", null);
@@ -63,14 +65,6 @@ public class Profile extends Activity {
         textview.setTypeface(tobiBlack);
         textview.setText(String.valueOf(user.getName()));
     }
-
-    /*public User lookupUser (View view) {
-        MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
-
-        User user = dbHandler.getUser("2-K650-9006");
-
-        return user;
-    }*/
 
     public void onChangePicture(View view) {
         displayDialog(DialogFragment.DIALOG_FROM_EDIT_PROFILE);
@@ -187,11 +181,18 @@ public class Profile extends Activity {
     }
 
     public void onSaveClicked(View view) {
+        EditText newName = (EditText) findViewById(R.id.new_name);
+        user.setName(newName.getText().toString());
+        datasource.updateUser(user);
+
+        TextView nameView = (TextView) findViewById(R.id.text_profileName);
+        nameView.setText(user.getName());
+
+        datasource.close();
 
         // SAVE NAME IN DATABASE AND DISPLAY NEW NAME IN TAG !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //Toast.makeText(view.getContext(), "SAVED", Toast.LENGTH_LONG).show();
         fragment.dismiss();
-
     }
 
     public void onCancelClicked(View view) {
@@ -214,5 +215,17 @@ public class Profile extends Activity {
         return filename;
     }
     */
+
+    @Override
+    protected void onResume() {
+        datasource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        datasource.close();
+        super.onPause();
+    }
 
 }

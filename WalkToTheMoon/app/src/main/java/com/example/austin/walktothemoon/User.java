@@ -1,8 +1,5 @@
 package com.example.austin.walktothemoon;
 
-/**
- * Created by Julianne on 3/23/2015.
- */
 public class User {
     private String license_id;
     private String name;

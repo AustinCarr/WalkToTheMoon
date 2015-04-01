@@ -32,14 +32,21 @@ public class UserDataSource {
 
         //if (getUser(user.getLicenseId()) != null) {
         if (getUser() != null) {
-            updateUser(user, values);
+            updateUser(user);
         }
         else {
             db.insert(MySQLiteHelper.TABLE_USER, null, values);
         }
     }
 
-    public void updateUser(User user, ContentValues values) {
+    public void updateUser(User user) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_LICENSE_ID, user.getLicenseId());
+        values.put(MySQLiteHelper.COLUMN_UNAME, user.getName());
+        values.put(MySQLiteHelper.COLUMN_ADDRESS_STATE, user.getAddressState());
+        values.put(MySQLiteHelper.COLUMN_REAL_STEPS, user.getRealSteps());
+        values.put(MySQLiteHelper.COLUMN_BOOSTED_STEPS, user.getBoostedSteps());
+
         db.update(MySQLiteHelper.TABLE_USER, values, MySQLiteHelper.COLUMN_LICENSE_ID + "=?",
                 new String[]{String.valueOf(user.getLicenseId())});
     }
