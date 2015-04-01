@@ -56,138 +56,142 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private EditText nameBox;
     private Spinner stateSpinner;
     private String stateValue;
-    //public static User user;
 
     private UserDataSource datasource;
+
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-
-
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        //layout.setY(-30f);
-        //float screenHeight = layout.getHeight();
-        TranslateAnimation animation = new TranslateAnimation(0, 0, (height * -1), 0) ;
-        animation.setInterpolator((new
-                AccelerateDecelerateInterpolator()));
-        animation.setFillAfter(true);
-        animation.setDuration(600);
-        layout.startAnimation(animation);
-
-        Typeface tobiBlack;
-
-        tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
-
-        TextView textview = (TextView) findViewById(R.id.label_ID);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.value_ID);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.label_IssueDate);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.value_IssueDate);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.label_Permissions);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.value_Permissions);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.label_name);
-        textview.setTypeface(tobiBlack);
-
-        EditText editText = (EditText) findViewById(R.id.edit_text_name);
-        editText.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.label_address);
-        textview.setTypeface(tobiBlack);
-
-        textview = (TextView) findViewById(R.id.text_view_dob);
-        textview.setTypeface(tobiBlack);
-
-        //Customized Spinner
-
-        String[] states = getResources().getStringArray(R.array.spinner_states);
-        String[] days = getResources().getStringArray(R.array.spinner_day);
-        String[] months = getResources().getStringArray(R.array.spinner_month);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.spinner_design, states) {
-
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
-
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
-                ((TextView) v).setTypeface(externalFont);
-
-                return v;
-            }
-
-
-            public View getDropDownView(int position,  View convertView,  ViewGroup parent) {
-                View v =super.getDropDownView(position, convertView, parent);
-
-                Typeface externalFont=Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
-                ((TextView) v).setTypeface(externalFont);
-
-                return v;
-            }
-        };
-
-        MySpinnerAdapter<String> dayAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, days);
-        MySpinnerAdapter<String> monthAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, months);
-
-        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day);
-        daySpinner.setAdapter(dayAdapter);
-
-        monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner monthSpinner = (Spinner) findViewById(R.id.spinner_month);
-        monthSpinner.setAdapter(monthAdapter);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
-        spinner.setAdapter(adapter);
-
-        // Creates Spring Animations
-
-        mImageToAnimate = (ImageView) findViewById(R.id.image_view_profile_pic);
-        mImageToAnimate.setOnTouchListener(this);
-
-        mSpringSystem = SpringSystem.create();
-
-        mSpring = mSpringSystem.createSpring();
-        mSpring.addListener(this);
-
-        SpringConfig config = new SpringConfig(TENSION, DAMPER);
-        mSpring.setSpringConfig(config);
-
-        //db stuff
-        licenseIdView = (TextView) findViewById(R.id.value_ID);
-        nameBox = (EditText) findViewById(R.id.edit_text_name);
-        stateSpinner = (Spinner) findViewById(R.id.spinner_location);
-        stateValue = stateSpinner.getSelectedItem().toString();
-
-        String randomLicenseId = generateRandomLicenseId();
-        licenseIdView.setText(randomLicenseId);
-        /*editor.putString("license_id", randomLicenseId);
-        editor.commit();
-        }*/
-
         datasource = new UserDataSource(this);
-        datasource.open();
+
+        prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile", 0);
+        Boolean restoredText = prefs.getBoolean("created_user", false);
+
+        //if (restoredText) {
+        if (false) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
+        else {
+            datasource.open();
+
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+            //layout.setY(-30f);
+            //float screenHeight = layout.getHeight();
+            TranslateAnimation animation = new TranslateAnimation(0, 0, (height * -1), 0);
+            animation.setInterpolator((new
+                    AccelerateDecelerateInterpolator()));
+            animation.setFillAfter(true);
+            animation.setDuration(600);
+            layout.startAnimation(animation);
+
+            Typeface tobiBlack;
+
+            tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
+            TextView textview = (TextView) findViewById(R.id.label_ID);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.value_ID);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.label_IssueDate);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.value_IssueDate);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.label_Permissions);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.value_Permissions);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.label_name);
+            textview.setTypeface(tobiBlack);
+
+            EditText editText = (EditText) findViewById(R.id.edit_text_name);
+            editText.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.label_address);
+            textview.setTypeface(tobiBlack);
+
+            textview = (TextView) findViewById(R.id.text_view_dob);
+            textview.setTypeface(tobiBlack);
+
+            //Customized Spinner
+
+            String[] states = getResources().getStringArray(R.array.spinner_states);
+            String[] days = getResources().getStringArray(R.array.spinner_day);
+            String[] months = getResources().getStringArray(R.array.spinner_month);
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                    R.layout.spinner_design, states) {
+
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+
+                    Typeface externalFont = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+                    ((TextView) v).setTypeface(externalFont);
+
+                    return v;
+                }
+
+
+                public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getDropDownView(position, convertView, parent);
+
+                    Typeface externalFont = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+                    ((TextView) v).setTypeface(externalFont);
+
+                    return v;
+                }
+            };
+
+            MySpinnerAdapter<String> dayAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, days);
+            MySpinnerAdapter<String> monthAdapter = new MySpinnerAdapter<String>(this, R.layout.spinner_design, months);
+
+            dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Spinner daySpinner = (Spinner) findViewById(R.id.spinner_day);
+            daySpinner.setAdapter(dayAdapter);
+
+            monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Spinner monthSpinner = (Spinner) findViewById(R.id.spinner_month);
+            monthSpinner.setAdapter(monthAdapter);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Spinner spinner = (Spinner) findViewById(R.id.spinner_location);
+            spinner.setAdapter(adapter);
+
+            // Creates Spring Animations
+
+            mImageToAnimate = (ImageView) findViewById(R.id.image_view_profile_pic);
+            mImageToAnimate.setOnTouchListener(this);
+
+            mSpringSystem = SpringSystem.create();
+
+            mSpring = mSpringSystem.createSpring();
+            mSpring.addListener(this);
+
+            SpringConfig config = new SpringConfig(TENSION, DAMPER);
+            mSpring.setSpringConfig(config);
+
+            licenseIdView = (TextView) findViewById(R.id.value_ID);
+            String randomLicenseId = generateRandomLicenseId();
+            licenseIdView.setText(randomLicenseId);
+        }
     }
 
     public static String generateRandomLicenseId() {
@@ -309,6 +313,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
     public void onLaunchPressed(View v) {
         newUser(v);
+        editor = prefs.edit();
+        editor.putBoolean("created_user", true);
+        editor.commit();
         //populatePowerups(v);
 
         Intent intent = new Intent(this, LaunchAnimation.class);
@@ -317,7 +324,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
     //add user info to db
     public void newUser(View v) {
-        //MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
+        nameBox = (EditText) findViewById(R.id.edit_text_name);
+        stateSpinner = (Spinner) findViewById(R.id.spinner_location);
+        stateValue = stateSpinner.getSelectedItem().toString();
 
         User user = new User(licenseIdView.getText().toString(), nameBox.getText().toString(),
                         stateValue, 0, 0);
