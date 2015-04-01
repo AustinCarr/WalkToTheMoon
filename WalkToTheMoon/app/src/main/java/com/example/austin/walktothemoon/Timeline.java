@@ -51,6 +51,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
     private float xPos, yPos;
     private int stepsTaken;
 
+    private UserDataSource datasource;
 
     public Timeline(Context context) {
         super(context);
@@ -70,6 +71,8 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     private void init(Context context){
+        datasource = new UserDataSource(context);
+
         surfaceHolder = this.getHolder();
         bmpMoon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
@@ -173,7 +176,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.drawBitmap(bmpEarth, IMAGE_PADDING, getHeight()/2 - (bmpEarth.getHeight()/2), null);
 
         // Get number of steps from database!!
-        stepsTaken = 0;
+        datasource.open();
+        User user = datasource.getUser();
+        stepsTaken = user.getBoostedSteps();
+        datasource.close();
 
         float progress = stepsTaken / STEPS_TO_MOON;
         float progressBarWidth = (getWidth() - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
@@ -183,7 +189,6 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         //Check if user reached the moon
         if (stepsTaken >= STEPS_TO_MOON)
             userWon();
-
 
         xPos = progressBarValue + offset;
         yPos = (getHeight()/2) - (bmpUser.getHeight()/2);
