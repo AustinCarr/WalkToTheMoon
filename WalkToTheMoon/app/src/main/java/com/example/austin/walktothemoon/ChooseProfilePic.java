@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -18,12 +19,24 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringConfig;
+import com.facebook.rebound.SpringListener;
+import com.facebook.rebound.SpringSystem;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
-public class ChooseProfilePic extends Activity {
+public class ChooseProfilePic extends Activity implements View.OnTouchListener, SpringListener {
+
+    private static double TENSION = 800;
+    private static double DAMPER = 20; //friction
+
+    private ImageView mImageToAnimate;
+    private SpringSystem mSpringSystem;
+    private Spring mSpring;
 
     private final int REQUEST_CODE_FOR_CAMERA = 0;
     private final int REQUEST_CODE_FOR_CROP = 1;
@@ -69,6 +82,19 @@ public class ChooseProfilePic extends Activity {
         /* variables for changing profile picture */
         profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
         isTakenFromCamera = false;
+
+        // Creates Spring Animations
+
+        mImageToAnimate = (ImageView) findViewById(R.id.button_confirm);
+        mImageToAnimate.setOnTouchListener(this);
+
+        mSpringSystem = SpringSystem.create();
+
+        mSpring = mSpringSystem.createSpring();
+        mSpring.addListener(this);
+
+        SpringConfig config = new SpringConfig(TENSION, DAMPER);
+        mSpring.setSpringConfig(config);
     }
 
     public void onChangePicture(View v) {
@@ -226,6 +252,44 @@ public class ChooseProfilePic extends Activity {
 
                 break;
         }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mSpring.setEndValue(0.75f);
+                return true;
+            case MotionEvent.ACTION_UP:
+                mSpring.setEndValue(0f);
+                onBackPressed();
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onSpringUpdate(Spring spring) {
+        float value = (float) spring.getCurrentValue();
+        float scale = 1f - (value * 0.5f);
+        mImageToAnimate.setScaleX(scale);
+        mImageToAnimate.setScaleY(scale);
+    }
+
+    @Override
+    public void onSpringAtRest(Spring spring) {
+
+    }
+
+    @Override
+    public void onSpringActivate(Spring spring) {
+
+    }
+
+    @Override
+    public void onSpringEndStateChange(Spring spring) {
+
     }
 
     /* If we don't want to crop the chosen image, we will need this method

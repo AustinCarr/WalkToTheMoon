@@ -11,6 +11,8 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,9 +45,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private static double TENSION = 800;
     private static double DAMPER = 20; //friction
 
-    private ImageView mImageToAnimate;
+    private ImageView mImageToAnimate, mImageToAnimate2;
     private SpringSystem mSpringSystem;
-    private Spring mSpring;
+    private Spring mSpring, mSpring2;
 
     private boolean resumingActivity = false;
 
@@ -188,10 +191,42 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             SpringConfig config = new SpringConfig(TENSION, DAMPER);
             mSpring.setSpringConfig(config);
 
+            mImageToAnimate2 = (ImageView) findViewById(R.id.image_view_profile_pic_helmet);
+            mImageToAnimate2.setOnTouchListener(this);
+
+            mSpring2 = mSpringSystem.createSpring();
+            mSpring2.addListener(this);
+
+            mSpring2.setSpringConfig(config);
+
             licenseIdView = (TextView) findViewById(R.id.value_ID);
             String randomLicenseId = generateRandomLicenseId();
             licenseIdView.setText(randomLicenseId);
         }
+
+        EditText Field1 = (EditText)findViewById(R.id.edit_text_name);
+
+        Field1.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                Button launchButton = (Button) findViewById(R.id.button_launch);
+
+                if(s.length() != 0) {
+                    launchButton.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
     }
 
     public static String generateRandomLicenseId() {
@@ -312,6 +347,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     }
 
     public void onLaunchPressed(View v) {
+
         newUser(v);
         editor = prefs.edit();
         editor.putBoolean("created_user", true);
@@ -353,6 +389,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
                 return true;
             case MotionEvent.ACTION_UP:
                 mSpring.setEndValue(0f);
+                onNextClicked(findViewById(R.id.image_view_profile_pic));
                 return true;
         }
 
@@ -365,11 +402,13 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         float scale = 1f - (value * 0.5f);
         mImageToAnimate.setScaleX(scale);
         mImageToAnimate.setScaleY(scale);
+        mImageToAnimate2.setScaleX(scale);
+        mImageToAnimate2.setScaleY(scale);
     }
 
     @Override
     public void onSpringAtRest(Spring spring) {
-        onNextClicked(findViewById(R.id.image_view_profile_pic));
+
     }
 
     @Override

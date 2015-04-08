@@ -147,7 +147,7 @@
         <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
         <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
         <item>Double your steps on the weekends</item>
-        <item>Aliens will pick you up and drop you off somewhere else</item>
+        <item>You\'re not really sure what it\'s for...</item>
     </string-array>
     <string-array name="power_up_prices">
         <item>4000</item>
