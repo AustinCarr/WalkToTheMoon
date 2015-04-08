@@ -77,7 +77,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         bmpMoon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
         bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_icon);
-        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.user_icon);
+        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.user2);
         bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
                 R.drawable.spacebgtest));
         bgImage.setBounds(-5000, -5000, 4000, 4000);
