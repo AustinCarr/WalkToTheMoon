@@ -20,12 +20,15 @@ import java.util.Map;
 
 public class Shop extends Activity {
 
-    List<String> groupList;
-    List<String> childList;
-    Map<String, List<String>> powerUpCollection;
-    ExpandableListView expListView;
+    private List<String> groupList;
+    private List<String> childList;
+    private Map<String, List<String>> powerUpCollection;
+    private ExpandableListView expListView;
 
     private PowerupsDataSource datasource;
+    private UserDataSource datasource2;
+
+    private int stepsTaken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +70,24 @@ public class Shop extends Activity {
         //db stuff
         datasource = new PowerupsDataSource(this);
         datasource.open();
+
         String[] powerupNames = {"powerup1", "powerup2"};
         Powerups powerup;
         for (int i = 0; i < powerupNames.length; i++) {
             powerup = datasource.getPowerup(powerupNames[i]);
             //set fields accordingly for that powerup
         }
+
         datasource.close();
+
+        datasource2 = new UserDataSource(this);
+        datasource2.open();
+
+        User user = datasource2.getUser();
+        stepsTaken = user.getBoostedSteps();
+
+        datasource2.close();
+
 
         Typeface tobiBlack;
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
@@ -83,6 +97,7 @@ public class Shop extends Activity {
 
         TextView steps = (TextView) findViewById(R.id.text_view_steps_count);
         steps.setTypeface(tobiBlack);
+        steps.setText(String.valueOf(stepsTaken));
 
         TextView stepsText = (TextView) findViewById(R.id.text_view_steps_text);
         stepsText.setTypeface(tobiBlack);

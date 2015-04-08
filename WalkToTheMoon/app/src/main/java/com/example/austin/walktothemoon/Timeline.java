@@ -181,6 +181,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
+
         float progress = stepsTaken / STEPS_TO_MOON;
         float progressBarWidth = (getWidth() - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
         float progressBarValue = progressBarWidth * progress;

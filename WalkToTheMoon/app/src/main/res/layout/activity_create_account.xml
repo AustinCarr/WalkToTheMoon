@@ -64,7 +64,7 @@
                 android:layout_below="@+id/licensetitle"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="#c6cce0"/>
+                android:textColor="#A9AEBF"/>
 
             <TextView
                 android:id="@+id/value_ID"
@@ -85,7 +85,7 @@
                 android:layout_below="@+id/value_ID"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="#c6cce0"/>
+                android:textColor="#A9AEBF"/>
 
             <TextView
                 android:id="@+id/value_IssueDate"
@@ -107,7 +107,7 @@
                 android:layout_below="@+id/value_IssueDate"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="#c6cce0"/>
+                android:textColor="#A9AEBF"/>
 
             <TextView
                 android:id="@+id/value_Permissions"
@@ -128,7 +128,7 @@
                 android:layout_below="@+id/image_view_profile_pic"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="0dp"
-                android:textColor="#c6cce0"/>
+                android:textColor="#A9AEBF"/>
 
             <EditText
                 android:id="@+id/edit_text_name"
@@ -151,7 +151,7 @@
                 android:layout_below="@+id/edit_text_name"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="0dp"
-                android:textColor="#c6cce0"/>
+                android:textColor="#A9AEBF"/>
             
             <Spinner
                 android:id="@+id/spinner_location"
@@ -160,7 +160,8 @@
                 android:entries="@array/spinner_states"
                 android:layout_below="@+id/label_address"
                 android:background="#00000000"
-                android:layout_marginTop="5dp">
+                android:layout_marginTop="5dp"
+                android:popupBackground="#434343">
             </Spinner>
 
             <TextView
@@ -171,7 +172,7 @@
                 android:layout_below="@+id/spinner_location"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textColor="#c6cce0"
+                android:textColor="#A9AEBF"
                 android:layout_marginTop="15dp"/>
 
 
@@ -187,7 +188,8 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_month"
                     android:background="#00000000"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:popupBackground="#434343">
                 </Spinner>
                 <Spinner
                     android:id="@+id/spinner_day"
@@ -195,7 +197,8 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/spinner_day"
                     android:layout_marginLeft="10dp"
-                    android:background="#00000000">
+                    android:background="#00000000"
+                    android:popupBackground="#434343">
                 </Spinner>
             </LinearLayout>
 

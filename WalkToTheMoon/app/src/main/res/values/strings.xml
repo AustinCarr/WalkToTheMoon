@@ -155,7 +155,7 @@
         <item>2500</item>
         <item>3000</item>
         <item>6000</item>
-        <item>1 billion</item>
+        <item>1000000</item>
     </string-array>
 
     <array name="power_up_icons">
@@ -168,6 +168,5 @@
     </array>
 
     <string name="title_activity_winning">WinningActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>

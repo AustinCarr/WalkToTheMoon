@@ -32,6 +32,10 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
     private SpringSystem mSpringSystem;
     private Spring mSpring;
 
+    private int stepsTaken;
+
+    private UserDataSource datasource;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +50,17 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
 
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
 
+        // Get number of steps from database!!
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        stepsTaken = user.getBoostedSteps();
+        datasource.close();
+
         TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
         textview.setTypeface(tobiBlack);
+        textview.setText(String.valueOf(stepsTaken));
+
         textview = (TextView) findViewById(R.id.text_view_steps_text);
         textview.setTypeface(tobiBlack);
 
