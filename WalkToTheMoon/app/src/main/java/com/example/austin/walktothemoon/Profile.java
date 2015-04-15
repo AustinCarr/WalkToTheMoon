@@ -50,16 +50,20 @@ public class Profile extends Activity {
         {
             //profilePictureView.setImageResource(R.drawable.licensehelmet);
             //profilePictureView.setBackgroundColor(Color.TRANSPARENT);
-            int dpValue = 100; // margin in dips
-            float d = getResources().getDisplayMetrics().density;
-            int margin = (int)(dpValue * d); // margin in pixels
+
+            float density = getResources().getDisplayMetrics().density;
+            int xDpValue = 36; // margin in dips
+            int xPixelValue = (int)(xDpValue * density);
+
+            int yDpValue = 36; // margin in dips
+            int YPixelValue = (int)(yDpValue * density);
             //profilePictureHelmetView.getLayoutParams().height = margin;
 
             FileInputStream fis = openFileInput("ProfilePic");
             Bitmap bmap = BitmapFactory.decodeStream(fis);
             profilePictureView.setImageBitmap(bmap);
-            profilePictureView.setX(-108);
-            profilePictureView.setY(105);
+            profilePictureView.setX(xPixelValue * -1);
+            profilePictureView.setY(YPixelValue);
             fis.close();
         } catch (IOException e) {
             //profilePictureView.setImageResource(R.drawable.camera_icon);
