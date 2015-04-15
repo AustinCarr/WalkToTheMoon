@@ -46,7 +46,7 @@ public class LaunchAnimation extends Activity {
         animation.setInterpolator((new
                 AccelerateDecelerateInterpolator()));
         animation.setFillAfter(true);
-        animation.setDuration(4000);
+        animation.setDuration(1000);
         animation.setAnimationListener(new Animation.AnimationListener(){
             @Override
             public void onAnimationStart(Animation arg0) {
@@ -68,7 +68,7 @@ public class LaunchAnimation extends Activity {
 
                     }
 
-                }, 4000);
+                }, 1000);
             }
         });
         layout.startAnimation(animation);

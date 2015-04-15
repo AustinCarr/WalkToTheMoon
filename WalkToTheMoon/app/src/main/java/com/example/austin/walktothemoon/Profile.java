@@ -52,10 +52,10 @@ public class Profile extends Activity {
             //profilePictureView.setBackgroundColor(Color.TRANSPARENT);
 
             float density = getResources().getDisplayMetrics().density;
-            int xDpValue = 36; // margin in dips
+            int xDpValue = -15; // margin in dips
             int xPixelValue = (int)(xDpValue * density);
 
-            int yDpValue = 36; // margin in dips
+            int yDpValue = 25; // margin in dips
             int YPixelValue = (int)(yDpValue * density);
             //profilePictureHelmetView.getLayoutParams().height = margin;
 
