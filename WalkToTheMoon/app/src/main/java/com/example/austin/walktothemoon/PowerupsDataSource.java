@@ -28,7 +28,22 @@ public class PowerupsDataSource {
         values.put(MySQLiteHelper.COLUMN_IN_USE, powerup.getInUse());
         values.put(MySQLiteHelper.COLUMN_EXPIRATION, powerup.getExpirationDate());
 
-        db.insert(MySQLiteHelper.TABLE_POWERUPS, null, values);
+        if (getPowerup(powerup.getName()) != null) {
+            updatePowerup(powerup);
+        }
+        else {
+            db.insert(MySQLiteHelper.TABLE_POWERUPS, null, values);
+        }
+    }
+
+    public void updatePowerup(Powerups powerup) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLiteHelper.COLUMN_PNAME, powerup.getName());
+        values.put(MySQLiteHelper.COLUMN_IN_USE, powerup.getInUse());
+        values.put(MySQLiteHelper.COLUMN_EXPIRATION, powerup.getExpirationDate());
+
+        db.update(MySQLiteHelper.TABLE_POWERUPS, values, MySQLiteHelper.COLUMN_PNAME + "=?",
+                new String[]{String.valueOf(powerup.getName())});
     }
 
     public Powerups getPowerup(String name) {

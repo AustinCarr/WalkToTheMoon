@@ -69,7 +69,7 @@ public class Shop extends Activity {
 
         //db stuff
         datasource = new PowerupsDataSource(this);
-        datasource.open();
+        /*datasource.open();
 
         String[] powerupNames = {"powerup1", "powerup2"};
         Powerups powerup;
@@ -78,7 +78,7 @@ public class Shop extends Activity {
             //set fields accordingly for that powerup
         }
 
-        datasource.close();
+        datasource.close();*/
 
         datasource2 = new UserDataSource(this);
         datasource2.open();

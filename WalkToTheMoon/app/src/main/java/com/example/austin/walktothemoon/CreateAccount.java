@@ -61,6 +61,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private String stateValue;
 
     private UserDataSource datasource;
+    private PowerupsDataSource datasource2;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -71,6 +72,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         setContentView(R.layout.activity_create_account);
 
         datasource = new UserDataSource(this);
+        datasource2 = new PowerupsDataSource(this);
 
         prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile", 0);
         Boolean restoredText = prefs.getBoolean("created_user", false);
@@ -83,7 +85,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
         else {
             datasource.open();
-
+            datasource2.open();
 
             //Animation Code
 
@@ -315,6 +317,8 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
     @Override
     protected void onResume() {
+        datasource.open();
+        datasource2.open();
         super.onResume();
 
         if(resumingActivity) {
@@ -355,12 +359,20 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         }
     }
 
+    @Override
+    protected void onPause() {
+        datasource.close();
+        datasource2.close();
+        super.onPause();
+    }
+
     public void onLaunchPressed(View v) {
 
         newUser(v);
         editor = prefs.edit();
         editor.putBoolean("created_user", true);
         editor.commit();
+        populatePowerups(v);
         //populatePowerups(v);
 
         Intent intent = new Intent(this, LaunchAnimation.class);
@@ -378,6 +390,18 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
         datasource.addUser(user);
         datasource.close();
+    }
+
+    //populate powerup table in database
+    public void populatePowerups(View v) {
+        String[] powerupNames = getResources().getStringArray(R.array.power_up_names);
+
+        for(String name : powerupNames) {
+            Powerups powerup = new Powerups(name, 0, "");
+            datasource2.addPowerup(powerup);
+        }
+
+        datasource2.close();
     }
 
     /*public void populatePowerups(View v) {
