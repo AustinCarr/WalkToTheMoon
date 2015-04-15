@@ -5,6 +5,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Profile extends Activity {
 
@@ -38,8 +42,32 @@ public class Profile extends Activity {
         setContentView(R.layout.activity_profile);
 
         /* variables for changing profile picture */
-        profilePicture = (ImageView) findViewById(R.id.image_view_profile_pic);
-        isTakenFromCamera = false;
+
+        ImageView profilePictureView = (ImageView) findViewById(R.id.image_view_profile_pic);
+        //ImageView profilePictureHelmetView = (ImageView) findViewById(R.id.image_view_profile_pic_helmet);
+
+        try
+        {
+            //profilePictureView.setImageResource(R.drawable.licensehelmet);
+            //profilePictureView.setBackgroundColor(Color.TRANSPARENT);
+
+            float density = getResources().getDisplayMetrics().density;
+            int xDpValue = 36; // margin in dips
+            int xPixelValue = (int)(xDpValue * density);
+
+            int yDpValue = 36; // margin in dips
+            int YPixelValue = (int)(yDpValue * density);
+            //profilePictureHelmetView.getLayoutParams().height = margin;
+
+            FileInputStream fis = openFileInput("ProfilePic");
+            Bitmap bmap = BitmapFactory.decodeStream(fis);
+            profilePictureView.setImageBitmap(bmap);
+            profilePictureView.setX(xPixelValue * -1);
+            profilePictureView.setY(YPixelValue);
+            fis.close();
+        } catch (IOException e) {
+            //profilePictureView.setImageResource(R.drawable.camera_icon);
+        }
 
         //db stuff
         datasource = new UserDataSource(this);

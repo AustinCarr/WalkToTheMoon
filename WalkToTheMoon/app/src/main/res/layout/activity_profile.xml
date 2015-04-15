@@ -44,13 +44,21 @@
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:id="@+id/image_view_profile"
+        android:layout_width="89dp"
+        android:layout_height="89dp"
+        android:id="@+id/image_view_profile_pic"
         android:src="@drawable/user"
-        android:layout_above="@+id/text_view_steps_fact"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:rotation="-18"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:id="@+id/image_view_profile"
+        android:src="@drawable/astronaut_walking"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"
