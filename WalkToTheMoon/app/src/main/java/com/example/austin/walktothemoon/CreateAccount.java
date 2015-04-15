@@ -84,6 +84,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         else {
             datasource.open();
 
+
+            //Animation Code
+
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);
@@ -99,6 +102,8 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             animation.setFillAfter(true);
             animation.setDuration(600);
             layout.startAnimation(animation);
+
+            //Fonts changed
 
             Typeface tobiBlack;
 
@@ -199,10 +204,14 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
             mSpring2.setSpringConfig(config);
 
+            //Set randomly generate ID
+
             licenseIdView = (TextView) findViewById(R.id.value_ID);
             String randomLicenseId = generateRandomLicenseId();
             licenseIdView.setText(randomLicenseId);
         }
+
+        //User enters name so launch button is displayed
 
         EditText Field1 = (EditText)findViewById(R.id.edit_text_name);
 

@@ -2,6 +2,7 @@ package com.example.austin.walktothemoon;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
@@ -21,16 +22,17 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
+import com.facebook.rebound.SpringUtil;
 
 
-public class MainActivity extends Activity implements View.OnTouchListener, SpringListener {
+public class MainActivity extends Activity{
 
     private static double TENSION = 800;
     private static double DAMPER = 20; //friction
 
-    private ImageView mImageToAnimate;
-    private SpringSystem mSpringSystem;
-    private Spring mSpring;
+    private ImageView mImageToAnimate, mImageToAnimate2;
+    private SpringSystem mSpringSystem, mSpringSystem2;
+    private Spring mSpring, mSpring2;
 
     private int stepsTaken;
 
@@ -68,15 +70,120 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
         // Creates Spring Animations
 
         mImageToAnimate = (ImageView) findViewById(R.id.button_shop);
-        mImageToAnimate.setOnTouchListener(this);
+        //mImageToAnimate.setOnTouchListener(this);
+
+        mImageToAnimate2 = (ImageView) findViewById(R.id.button_profile);
+        //mImageToAnimate2.setOnTouchListener(this);
 
         mSpringSystem = SpringSystem.create();
+        mSpringSystem2 = SpringSystem.create();
 
         mSpring = mSpringSystem.createSpring();
-        mSpring.addListener(this);
+        mSpring.addListener(new SpringListener() {
+
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                // You can observe the updates in the spring
+                // state by asking its current value in onSpringUpdate.
+                float value = (float) spring.getCurrentValue();
+                float scale = 1f - (value * 0.5f);
+                mImageToAnimate.setScaleX(scale);
+                mImageToAnimate.setScaleY(scale);
+            }
+
+            @Override
+            public void onSpringAtRest(Spring spring) {
+
+            }
+
+            @Override
+            public void onSpringActivate(Spring spring) {
+
+            }
+
+            @Override
+            public void onSpringEndStateChange(Spring spring) {
+
+            }
+        });
+
+        mSpring2 = mSpringSystem2.createSpring();
+        mSpring2.addListener(new SpringListener() {
+
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                // You can observe the updates in the spring
+                // state by asking its current value in onSpringUpdate.
+                float value = (float) spring.getCurrentValue();
+                float scale = 1f - (value * 0.5f);
+                mImageToAnimate2.setScaleX(scale);
+                mImageToAnimate2.setScaleY(scale);
+            }
+
+            @Override
+            public void onSpringAtRest(Spring spring) {
+
+            }
+
+            @Override
+            public void onSpringActivate(Spring spring) {
+
+            }
+
+            @Override
+            public void onSpringEndStateChange(Spring spring) {
+
+            }
+        });
+
+        View.OnTouchListener profileListener =new View.OnTouchListener(){
+            public boolean onTouch(    View v,    MotionEvent event){
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        //mSpring.setEndValue(0.75f);
+                        mSpring2.setEndValue(0.75f);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        onProfilePressed(findViewById(R.id.button_profile));
+                        //mSpring.setEndValue(0f);
+                        mSpring2.setEndValue(0f);
+                        return true;
+                }
+
+                return false;
+            }
+        };
+
+        View.OnTouchListener shopListener =new View.OnTouchListener(){
+            public boolean onTouch(    View v,    MotionEvent event){
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mSpring.setEndValue(0.75f);
+                        //mSpring2.setEndValue(0.75f);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        onShopPressed(findViewById(R.id.button_shop));
+                        mSpring.setEndValue(0f);
+                        //mSpring2.setEndValue(0f);
+                        return true;
+                }
+
+                return false;
+            }
+        };
+
+        mImageToAnimate.setOnTouchListener(shopListener);
+        mImageToAnimate2.setOnTouchListener(profileListener);
+
 
         SpringConfig config = new SpringConfig(TENSION, DAMPER);
+        SpringConfig config2 = new SpringConfig(TENSION, DAMPER);
+        //SpringConfig config2 = new SpringConfig(TENSION, DAMPER);
         mSpring.setSpringConfig(config);
+        mSpring2.setSpringConfig(config2);
+
+        //mImageToAnimate = (ImageView) findViewById(R.id.button_shop);
+        //mImageToAnimate.setOnTouchListener(this);
     }
 
     public void onShopPressed(View v) {
@@ -87,48 +194,5 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
     public void onProfilePressed(View v) {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mSpring.setEndValue(0.75f);
-                return true;
-            case MotionEvent.ACTION_UP:
-                onShopPressed(findViewById(R.id.button_shop));
-                mSpring.setEndValue(0f);
-                return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public void onSpringUpdate(Spring spring) {
-        float value = (float) spring.getCurrentValue();
-        float scale = 1f - (value * 0.5f);
-        mImageToAnimate.setScaleX(scale);
-        mImageToAnimate.setScaleY(scale);
-    }
-
-    @Override
-    public void onSpringAtRest(Spring spring) {
-        //float value = (float) spring.getCurrentValue();
-        //float scale = 1f - (value * 0.5f);
-        //if(scale > 0.9f)
-        //    onShopPressed(findViewById(R.id.button_shop));
-    }
-
-    @Override
-    public void onSpringActivate(Spring spring) {
-
-    }
-
-    @Override
-    public void onSpringEndStateChange(Spring spring) {
-
-
-
     }
 }
