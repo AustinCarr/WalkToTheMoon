@@ -23,7 +23,6 @@
         android:fillViewport="true"/>
 
     <TextView
-        android:text="00000"
         android:id="@+id/text_view_steps_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

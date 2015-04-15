@@ -3,9 +3,8 @@
     package="com.example.austin.walktothemoon" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -48,6 +47,7 @@
             android:name=".WinningActivity"
             android:label="@string/title_activity_winning" >
         </activity>
+        <service android:name=".StepService"/>
     </application>
 
 </manifest>

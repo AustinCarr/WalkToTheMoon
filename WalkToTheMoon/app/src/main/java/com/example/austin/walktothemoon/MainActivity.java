@@ -1,9 +1,17 @@
 package com.example.austin.walktothemoon;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Typeface;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -25,6 +33,10 @@ import com.facebook.rebound.SpringSystem;
 
 public class MainActivity extends Activity implements View.OnTouchListener, SpringListener {
 
+    private static final String TAG = "PedometerLog";
+    private SharedPreferences mSettings;
+    private PedometerSettings mPedometerSettings;
+
     private static double TENSION = 800;
     private static double DAMPER = 20; //friction
 
@@ -32,7 +44,11 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
     private SpringSystem mSpringSystem;
     private Spring mSpring;
 
+    private TextView mStepValueView;
     private int stepsTaken;
+    private int mStepValue;
+    private boolean mQuitting = false;
+    private boolean mIsRunning = true;
 
     private UserDataSource datasource;
 
@@ -57,6 +73,9 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
+        //////////////
+        //mStepValue = stepsTaken;
+
         TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
         textview.setTypeface(tobiBlack);
         textview.setText(String.valueOf(stepsTaken));
@@ -77,6 +96,63 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
 
         SpringConfig config = new SpringConfig(TENSION, DAMPER);
         mSpring.setSpringConfig(config);
+    }
+    @Override
+    public void onResume()
+    {
+        Log.i(TAG, "[ACTIVITY] onResume");
+        super.onResume();
+
+        mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+        mPedometerSettings = new PedometerSettings(mSettings);
+
+        // Read from preferences if the service was running on the last onPause
+        mIsRunning = mPedometerSettings.isServiceRunning();
+
+        if (!mIsRunning && mPedometerSettings.isNewStart()) {
+            startStepService();
+            bindStepService();
+        }
+        else if (mIsRunning) {
+            bindStepService();
+        }
+
+        mPedometerSettings.clearServiceRunning();
+
+        mStepValueView     = (TextView) findViewById(R.id.text_view_steps_count);
+    }
+
+    @Override
+    protected void onPause() {
+        Log.i(TAG, "[ACTIVITY] onPause");
+
+        if(mIsRunning) {
+            unbindStepService();
+        }
+        if (mQuitting) {
+            mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
+        }
+        else {
+            mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i(TAG, "[ACTIVITY] onStop");
+        super.onStop();
+    }
+
+    protected void onDestroy() {
+        Log.i(TAG, "[ACTIVITY] onDestroy");
+        super.onDestroy();
+    }
+
+    protected void onRestart() {
+        Log.i(TAG, "[ACTIVITY] onRestart");
+        super.onDestroy();
     }
 
     public void onShopPressed(View v) {
@@ -131,4 +207,69 @@ public class MainActivity extends Activity implements View.OnTouchListener, Spri
 
 
     }
+
+    private StepService mService;
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            mService = ((StepService.StepBinder)service).getService();
+
+            mService.registerCallback(mCallback);
+            mService.reloadSettings();
+
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            mService = null;
+        }
+    };
+
+    private void startStepService() {
+        if (! mIsRunning) {
+            Log.i(TAG, "[SERVICE] Start");
+            mIsRunning = true;
+            startService(new Intent(MainActivity.this, StepService.class));
+        }
+    }
+
+    private void bindStepService() {
+        Log.i(TAG, "[SERVICE] Bind");
+        bindService(new Intent(MainActivity.this,
+                StepService.class), mConnection, Context.BIND_AUTO_CREATE + Context.BIND_DEBUG_UNBIND);
+    }
+
+    private void unbindStepService() {
+        Log.i(TAG, "[SERVICE] Unbind");
+        unbindService(mConnection);
+    }
+
+    private void stopStepService() {
+        Log.i(TAG, "[SERVICE] Stop");
+        if (mService != null) {
+            Log.i(TAG, "[SERVICE] stopService");
+            stopService(new Intent(MainActivity.this,
+                    StepService.class));
+        }
+        mIsRunning = false;
+    }
+
+    private StepService.ICallback mCallback = new StepService.ICallback() {
+        public void stepsChanged(int value) {
+            mHandler.sendMessage(mHandler.obtainMessage(STEPS_MSG, value, 0));
+        }
+    };
+
+    private static final int STEPS_MSG = 1;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case STEPS_MSG:
+                    mStepValue = (int) msg.arg1;
+                    mStepValueView.setText("" + mStepValue);
+                    break;
+            }
+        }
+    };
 }
