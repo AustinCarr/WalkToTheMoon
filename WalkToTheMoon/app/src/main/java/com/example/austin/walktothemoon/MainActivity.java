@@ -75,9 +75,6 @@ public class MainActivity extends Activity{
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
-        //////////////
-        //mStepValue = stepsTaken;
-
         TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
         textview.setTypeface(tobiBlack);
         textview.setText(String.valueOf(stepsTaken));
@@ -242,6 +239,13 @@ public class MainActivity extends Activity{
         else {
             mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
         }
+
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        user.setBoostedSteps(mStepValue);
+        datasource.updateUser(user);
+        datasource.close();
 
         super.onPause();
     }
