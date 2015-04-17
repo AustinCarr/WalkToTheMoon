@@ -240,6 +240,7 @@ public class MainActivity extends Activity{
             mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
         }
 
+        //Update database with current step count data
         datasource = new UserDataSource(this);
         datasource.open();
         User user = datasource.getUser();
@@ -258,6 +259,13 @@ public class MainActivity extends Activity{
 
     protected void onDestroy() {
         Log.i(TAG, "[ACTIVITY] onDestroy");
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        user.setBoostedSteps(mStepValue);
+        user.setRealSteps(mStepValue);
+        datasource.updateUser(user);
+        datasource.close();
         super.onDestroy();
     }
 

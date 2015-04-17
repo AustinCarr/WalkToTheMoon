@@ -95,6 +95,7 @@ public class Profile extends Activity {
 
         textview = (TextView) findViewById(R.id.text_view_steps_fact);
         textview.setTypeface(tobiBlack);
+        textview.setText(Integer.toString(478000000 - user.getBoostedSteps()) + " steps to the moon");
     }
 
     public void onChangePicture(View view) {

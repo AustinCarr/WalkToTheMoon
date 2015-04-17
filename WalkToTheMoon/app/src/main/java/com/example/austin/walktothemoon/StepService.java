@@ -110,6 +110,7 @@ public class StepService extends Service {
         datasource.open();
         User user = datasource.getUser();
         user.setBoostedSteps(mSteps);
+        user.setRealSteps(mSteps);
         datasource.updateUser(user);
         datasource.close();
 
