@@ -243,6 +243,7 @@ public class MainActivity extends Activity{
         datasource.open();
         User user = datasource.getUser();
         user.setBoostedSteps(mStepValue);
+        user.setRealSteps(mStepValue);
         datasource.updateUser(user);
         datasource.close();
 
