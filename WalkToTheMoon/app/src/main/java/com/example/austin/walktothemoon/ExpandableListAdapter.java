@@ -76,7 +76,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         Button buyButton = (Button) convertView.findViewById(R.id.button_buy);
         buyButton.setTypeface(tobiBlack);
 
-
         if (stepsTaken < Integer.parseInt(powerUpPrices[groupPosition])) {
             buyButton.setBackgroundColor(Color.argb(0, 0, 0, 0));
             buyButton.setTextColor(Color.rgb(84, 157, 136));
@@ -111,7 +110,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
 
-
         String[] powerUpPrices = context.getResources().getStringArray(R.array.power_up_prices);
         TypedArray icons = context.getResources().obtainTypedArray(R.array.power_up_icons);
 
@@ -121,8 +119,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.shop_item,
-                    null);
+            convertView = inflater.inflate(R.layout.shop_item, null);
         }
 
         Typeface tobiBlack;
@@ -131,7 +128,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView item = (TextView) convertView.findViewById(R.id.text_view_item_name);
         item.setTypeface(tobiBlack);
         item.setText(itemName);
-
 
         TextView price = (TextView) convertView.findViewById(R.id.text_view_item_price);
         price.setTypeface(tobiBlack);

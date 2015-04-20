@@ -50,6 +50,8 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
     private Spring mSpring, mSpring2;
 
     private boolean resumingActivity = false;
+    private boolean choseProfilePic = false;
+    private Boolean nameEntered = false;
 
     private Typeface tobiBlack;
     private String list[]={"Alabama","Arkansas‹"};
@@ -213,31 +215,30 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             licenseIdView.setText(randomLicenseId);
         }
 
-        //User enters name so launch button is displayed
+        //User enters name and chooses profile picture so launch button is displayed
+        EditText nameEditText = (EditText)findViewById(R.id.edit_text_name);
 
-        EditText Field1 = (EditText)findViewById(R.id.edit_text_name);
-
-        Field1.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {}
+        nameEditText.addTextChangedListener(new InputValidator(nameEditText) {
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
+            public void validate(TextView textView, String text) {
+                if(text.length() > 0)
+                    nameEntered = true;
+                else
+                    nameEntered = false;
 
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                Button launchButton = (Button) findViewById(R.id.button_launch);
-
-                if(s.length() != 0) {
-                    launchButton.setVisibility(View.VISIBLE);
-                }
+                validateInput();
             }
         });
+    }
 
+    public void validateInput() {
+        Button launchButton = (Button) findViewById(R.id.button_launch);
+
+        if (nameEntered && choseProfilePic)
+            launchButton.setVisibility(View.VISIBLE);
+        else
+            launchButton.setVisibility(View.INVISIBLE);
     }
 
     public static String generateRandomLicenseId() {
@@ -322,6 +323,10 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         super.onResume();
 
         if(resumingActivity) {
+
+            choseProfilePic = true;
+            validateInput();
+
             ImageView profilePictureView = (ImageView) findViewById(R.id.image_view_profile_pic);
             ImageView profilePictureHelmetView = (ImageView) findViewById(R.id.image_view_profile_pic_helmet);
 

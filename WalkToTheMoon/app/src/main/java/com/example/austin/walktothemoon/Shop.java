@@ -69,6 +69,7 @@ public class Shop extends Activity {
 
         //db stuff
         datasource = new PowerupsDataSource(this);
+        datasource.open();
         /*datasource.open();
 
         String[] powerupNames = {"powerup1", "powerup2"};
@@ -154,26 +155,34 @@ public class Shop extends Activity {
         return (int) (pixels * scale + 0.5f);
     }
 
-
     /**
      * Do something when one of the buttons in the dialog is clicked
      * @param item - the button clicked
      */
     public void onDialogItemSelected(int item) {
 
-        if (item == DialogFragment.ID_SHOP_PURCHASE)
+        if (item == DialogFragment.ID_SHOP_PURCHASE) {
             Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
+
+            String[] powerupNames = getResources().getStringArray(R.array.power_up_names);
+            Powerups purchasedPowerup = datasource.getPowerup(powerupNames[0]);
+            purchasedPowerup.setInUse(1);
+            //purchasedPowerup.setExpirationDate("");
+            datasource.updatePowerup(purchasedPowerup);
+            //System.out.printf("%s: %d\n", powerupNames[item], datasource.getPowerup(purchasedPowerup.getName()).getInUse());
+        }
         else if (item == DialogFragment.ID_SHOP_CANCEL_PURCHASE)
             Toast.makeText(getBaseContext(), "CANCELLED", Toast.LENGTH_LONG).show();
     }
-
 
     /**
      * When buy button is clicked, show the buy dialog
      */
     public void onBuyClicked(View view) {
+
         displayDialog(DialogFragment.DIALOG_FROM_SHOP);
     }
+
     public void displayDialog(int id) {
         android.app.DialogFragment fragment = DialogFragment.newInstance(id);
         fragment.show(getFragmentManager(),
