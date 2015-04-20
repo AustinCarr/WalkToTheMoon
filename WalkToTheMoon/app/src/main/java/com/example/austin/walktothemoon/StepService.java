@@ -48,7 +48,6 @@ public class StepService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "[SERVICE] onCreate");
         super.onCreate();
 
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
@@ -89,13 +88,11 @@ public class StepService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        Log.i(TAG, "[SERVICE] onStart");
         super.onStart(intent, startId);
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "[SERVICE] onDestroy");
 
         // Unregister our receiver.
         unregisterReceiver(mReceiver);
@@ -142,7 +139,6 @@ public class StepService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "[SERVICE] onBind");
         return mBinder;
     }
 

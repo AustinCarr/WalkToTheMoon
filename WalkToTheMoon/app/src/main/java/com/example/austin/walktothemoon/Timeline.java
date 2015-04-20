@@ -77,11 +77,12 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         bmpMoon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.ic_launcher);
         bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_icon);
-        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.user2);
-        bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
-                R.drawable.spacebgtest));
-        bgImage.setBounds(-5000, -5000, 4000, 4000);
-        bgImage.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.astronaut_walking_main);
+        bmpUser = Bitmap.createScaledBitmap(bmpUser, (bmpUser.getWidth() / 8), (bmpUser.getHeight() / 8), false);
+        //bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
+        //        R.drawable.spacebgtest));
+        //bgImage.setBounds(-5000, -5000, 4000, 4000);
+        //bgImage.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         surfaceHolder.addCallback(this);
 
         // for zooming (scaling) the view with two fingers
@@ -163,11 +164,6 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.save();
         canvas.concat(mMatrix);
 
-        //bgImage.draw(canvas);
-
-        //canvas.drawColor(Color.rgb(56,63,96));
-
-
         dashedLine.moveTo((IMAGE_PADDING * 2) + bmpEarth.getWidth(), getHeight()/2);
         dashedLine.lineTo(getWidth() - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
 
@@ -228,10 +224,19 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         mMatrix.postTranslate(-sizeX, -sizeY);
 
         // scale the view
+        //System.out.println(mScaleFactor +" ,"+ mScaleFactor);
         mMatrix.postScale(mScaleFactor, mScaleFactor);
 
         // re-move the view to it's desired location
+        if(mTouchX  >= 1650) {
+            mTouchX  = 1650;
+        }
+
+
+        System.out.println(mTouchX +" ,"+ mTouchY);
         mMatrix.postTranslate(mTouchX, mTouchY);
+
+
 
 
         if (invalidate)
@@ -279,7 +284,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
             // get current scale and fix its value
             float scale = detector.getScaleFactor();
             mScaleFactor *= scale;
-            mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+            mScaleFactor = Math.max(1f, Math.min(mScaleFactor, 2.0f));
 
             // get current focal point between both fingers (changes due to
             // movement)

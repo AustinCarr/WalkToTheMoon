@@ -264,11 +264,13 @@ public class MainActivity extends Activity{
 
     public void onShopPressed(View v) {
         Intent intent = new Intent(this, Shop.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
     public void onProfilePressed(View v) {
         Intent intent = new Intent(this, Profile.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
