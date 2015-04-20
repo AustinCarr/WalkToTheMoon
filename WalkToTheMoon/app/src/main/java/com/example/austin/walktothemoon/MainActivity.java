@@ -75,9 +75,6 @@ public class MainActivity extends Activity{
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
-        //////////////
-        //mStepValue = stepsTaken;
-
         TextView textview = (TextView) findViewById(R.id.text_view_steps_count);
         textview.setTypeface(tobiBlack);
         textview.setText(String.valueOf(stepsTaken));
@@ -207,7 +204,6 @@ public class MainActivity extends Activity{
     @Override
     public void onResume()
     {
-        Log.i(TAG, "[ACTIVITY] onResume");
         super.onResume();
 
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
@@ -230,9 +226,8 @@ public class MainActivity extends Activity{
     }
 
     @Override
-    protected void onPause() {
-        Log.i(TAG, "[ACTIVITY] onPause");
-
+    protected void onPause()
+    {
         if(mIsRunning) {
             unbindStepService();
         }
@@ -243,32 +238,49 @@ public class MainActivity extends Activity{
             mPedometerSettings.saveServiceRunningWithNullTimestamp(mIsRunning);
         }
 
+        //Update database with current step count data
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        user.setBoostedSteps(mStepValue);
+        datasource.updateUser(user);
+        datasource.close();
+
         super.onPause();
     }
 
     @Override
-    protected void onStop() {
-        Log.i(TAG, "[ACTIVITY] onStop");
+    protected void onStop()
+    {
         super.onStop();
     }
 
-    protected void onDestroy() {
-        Log.i(TAG, "[ACTIVITY] onDestroy");
+    protected void onDestroy()
+    {
+        datasource = new UserDataSource(this);
+        datasource.open();
+        User user = datasource.getUser();
+        user.setBoostedSteps(mStepValue);
+        user.setRealSteps(mStepValue);
+        datasource.updateUser(user);
+        datasource.close();
         super.onDestroy();
     }
 
-    protected void onRestart() {
-        Log.i(TAG, "[ACTIVITY] onRestart");
+    protected void onRestart()
+    {
         super.onDestroy();
     }
 
     public void onShopPressed(View v) {
         Intent intent = new Intent(this, Shop.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
     public void onProfilePressed(View v) {
         Intent intent = new Intent(this, Profile.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }
 
@@ -290,27 +302,22 @@ public class MainActivity extends Activity{
 
     private void startStepService() {
         if (! mIsRunning) {
-            Log.i(TAG, "[SERVICE] Start");
             mIsRunning = true;
             startService(new Intent(MainActivity.this, StepService.class));
         }
     }
 
     private void bindStepService() {
-        Log.i(TAG, "[SERVICE] Bind");
         bindService(new Intent(MainActivity.this,
                 StepService.class), mConnection, Context.BIND_AUTO_CREATE + Context.BIND_DEBUG_UNBIND);
     }
 
     private void unbindStepService() {
-        Log.i(TAG, "[SERVICE] Unbind");
         unbindService(mConnection);
     }
 
     private void stopStepService() {
-        Log.i(TAG, "[SERVICE] Stop");
         if (mService != null) {
-            Log.i(TAG, "[SERVICE] stopService");
             stopService(new Intent(MainActivity.this,
                     StepService.class));
         }

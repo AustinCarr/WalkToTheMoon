@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 public class Profile extends Activity {
 
@@ -52,7 +53,7 @@ public class Profile extends Activity {
             //profilePictureView.setBackgroundColor(Color.TRANSPARENT);
 
             float density = getResources().getDisplayMetrics().density;
-            int xDpValue = -15; // margin in dips
+            int xDpValue = 25; // margin in dips
             int xPixelValue = (int)(xDpValue * density);
 
             int yDpValue = 25; // margin in dips
@@ -95,6 +96,7 @@ public class Profile extends Activity {
 
         textview = (TextView) findViewById(R.id.text_view_steps_fact);
         textview.setTypeface(tobiBlack);
+        textview.setText(NumberFormat.getIntegerInstance().format(478000000 - user.getBoostedSteps()) + " steps to the moon");
     }
 
     public void onChangePicture(View view) {

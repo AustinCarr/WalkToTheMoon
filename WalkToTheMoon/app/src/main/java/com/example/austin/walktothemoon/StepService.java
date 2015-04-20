@@ -48,7 +48,6 @@ public class StepService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "[SERVICE] onCreate");
         super.onCreate();
 
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
@@ -90,12 +89,12 @@ public class StepService extends Service {
     @Override
     public void onStart(Intent intent, int startId) {
         Log.i(TAG, "[SERVICE] onStart");
-        super.onStart(intent, startId);
+        //super.onStart(intent, startId);
+        super.startService(intent);
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "[SERVICE] onDestroy");
 
         // Unregister our receiver.
         unregisterReceiver(mReceiver);
@@ -109,6 +108,7 @@ public class StepService extends Service {
         datasource.open();
         User user = datasource.getUser();
         user.setBoostedSteps(mSteps);
+        user.setRealSteps(mSteps);
         datasource.updateUser(user);
         datasource.close();
 
@@ -142,7 +142,6 @@ public class StepService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "[SERVICE] onBind");
         return mBinder;
     }
 
@@ -172,7 +171,7 @@ public class StepService extends Service {
             );
         }
 
-        if (mStepDisplayer    != null) mStepDisplayer.reloadSettings();
+        if (mStepDisplayer != null) mStepDisplayer.reloadSettings();
 
     }
 
