@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".CreateAccount"
-            android:label="@string/title_activity_create_account" >
+            android:label="@string/title_activity_create_account"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,28 +25,34 @@
         </activity>
         <activity
             android:name=".ChooseProfilePic"
-            android:label="@string/title_activity_choose_profile_pic" >
+            android:label="@string/title_activity_choose_profile_pic"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".LaunchAnimation"
             android:label="@string/title_activity_launch_animation"
-            android:noHistory="true" >
+            android:noHistory="true"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Shop"
-            android:label="@string/title_activity_shop" >
+            android:label="@string/title_activity_shop"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Profile"
-            android:label="@string/title_activity_profile" >
+            android:label="@string/title_activity_profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".WinningActivity"
-            android:label="@string/title_activity_winning" >
+            android:label="@string/title_activity_winning"
+            android:screenOrientation="portrait">
         </activity>
         <service android:name=".StepService"/>
     </application>

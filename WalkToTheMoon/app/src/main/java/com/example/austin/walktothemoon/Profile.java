@@ -96,7 +96,7 @@ public class Profile extends Activity {
 
         textview = (TextView) findViewById(R.id.text_view_steps_fact);
         textview.setTypeface(tobiBlack);
-        textview.setText(NumberFormat.getIntegerInstance().format(478000000 - user.getBoostedSteps()) + " steps to the moon");
+        textview.setText(NumberFormat.getIntegerInstance().format(478000000 - user.getBoostedSteps()) + " more steps to the moon");
     }
 
     public void onChangePicture(View view) {

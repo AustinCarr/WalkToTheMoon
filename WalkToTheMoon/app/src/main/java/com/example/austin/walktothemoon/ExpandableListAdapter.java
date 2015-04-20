@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private int stepsTaken;
 
     private UserDataSource datasource;
+    private PowerupsDataSource datasource2;
 
     public ExpandableListAdapter(Activity context, List<String> powerUp,
                                  Map<String, List<String>> powerUpCollections) {
@@ -74,18 +76,35 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         datasource.close();
 
         Button buyButton = (Button) convertView.findViewById(R.id.button_buy);
+        buyButton.setTag(groupPosition);
         buyButton.setTypeface(tobiBlack);
 
-        if (stepsTaken < Integer.parseInt(powerUpPrices[groupPosition])) {
+        datasource2 = new PowerupsDataSource(context);
+        datasource2.open();
+
+        String[] powerupNames = context.getResources().getStringArray(R.array.power_up_names);
+        Powerups purchasedPowerup = datasource2.getPowerup(powerupNames[groupPosition]);
+
+        if (purchasedPowerup.getInUse() == 1) { // If power up is in use
             buyButton.setBackgroundColor(Color.argb(0, 0, 0, 0));
             buyButton.setTextColor(Color.rgb(84, 157, 136));
             buyButton.setEnabled(false);
+            buyButton.setText("ACTIVE");
         }
-        else if (stepsTaken >= Integer.parseInt(powerUpPrices[groupPosition])) {
+        else if (stepsTaken < Integer.parseInt(powerUpPrices[groupPosition])) { // If power up is not in use and does not have enough steps
+            buyButton.setBackgroundColor(Color.argb(0, 0, 0, 0));
+            buyButton.setTextColor(Color.rgb(84, 157, 136));
+            buyButton.setEnabled(false);
+            buyButton.setText("BUY");
+        }
+        else { // If power up is not in use and has enough steps
             buyButton.setBackgroundResource(R.drawable.buy_button);
             buyButton.setTextColor(Color.WHITE);
             buyButton.setEnabled(true);
+            buyButton.setText("BUY");
         }
+
+        datasource2.close();
 
         item.setText(child);
         return convertView;

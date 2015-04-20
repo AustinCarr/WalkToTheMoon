@@ -103,7 +103,7 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         paint.setAlpha(175);
         paint.setStrokeWidth(20f);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setPathEffect(new DashPathEffect(new float[] { 50, 35 }, 9));
+        paint.setPathEffect(new DashPathEffect(new float[] { 50, 35 }, 20));
 
         dashedLine = new Path();
     }
@@ -165,10 +165,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.concat(mMatrix);
 
         dashedLine.moveTo((IMAGE_PADDING * 2) + bmpEarth.getWidth(), getHeight()/2);
-        dashedLine.lineTo(getWidth() - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
+        dashedLine.lineTo((getWidth() * 2) - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
 
         canvas.drawPath(dashedLine, paint);
-        canvas.drawBitmap(bmpMoon, getWidth() - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
+        canvas.drawBitmap(bmpMoon, (getWidth() * 2) - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
         canvas.drawBitmap(bmpEarth, IMAGE_PADDING, getHeight()/2 - (bmpEarth.getHeight()/2), null);
 
         // Get number of steps from database!!
@@ -177,11 +177,11 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
-
         float progress = stepsTaken / STEPS_TO_MOON;
-        float progressBarWidth = (getWidth() - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
+        float progressBarWidth = ((getWidth() * 2) - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
         float progressBarValue = progressBarWidth * progress;
         float offset = bmpEarth.getWidth();
+
 
         //Check if user reached the moon
         if (stepsTaken >= STEPS_TO_MOON)

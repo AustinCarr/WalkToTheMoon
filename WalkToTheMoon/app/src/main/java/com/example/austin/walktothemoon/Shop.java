@@ -5,9 +5,11 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class Shop extends Activity {
     private UserDataSource datasource2;
 
     private int stepsTaken;
+    private int itemSelectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,9 @@ public class Shop extends Activity {
         TextView stepsText = (TextView) findViewById(R.id.text_view_steps_text);
         stepsText.setTypeface(tobiBlack);
 
+        // Resetting button id
+        itemSelectedId = -1;
+
     }
 
     private void createGroupList() {
@@ -162,14 +168,21 @@ public class Shop extends Activity {
     public void onDialogItemSelected(int item) {
 
         if (item == DialogFragment.ID_SHOP_PURCHASE) {
-            Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
 
             String[] powerupNames = getResources().getStringArray(R.array.power_up_names);
-            Powerups purchasedPowerup = datasource.getPowerup(powerupNames[0]);
+            Powerups purchasedPowerup = datasource.getPowerup(powerupNames[itemSelectedId]);
             purchasedPowerup.setInUse(1);
             //purchasedPowerup.setExpirationDate("");
             datasource.updatePowerup(purchasedPowerup);
             //System.out.printf("%s: %d\n", powerupNames[item], datasource.getPowerup(purchasedPowerup.getName()).getInUse());
+
+            Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
+
+            // Collapse group after purchase
+            expListView.collapseGroup(itemSelectedId);
+
+            //Resetting button id
+            itemSelectedId = -1;
         }
         else if (item == DialogFragment.ID_SHOP_CANCEL_PURCHASE)
             Toast.makeText(getBaseContext(), "CANCELLED", Toast.LENGTH_LONG).show();
@@ -179,6 +192,9 @@ public class Shop extends Activity {
      * When buy button is clicked, show the buy dialog
      */
     public void onBuyClicked(View view) {
+
+        Button buyButton = (Button) findViewById(R.id.button_buy);
+        itemSelectedId = (int)view.getTag();
 
         displayDialog(DialogFragment.DIALOG_FROM_SHOP);
     }

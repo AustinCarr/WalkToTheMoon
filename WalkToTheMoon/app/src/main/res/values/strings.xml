@@ -138,23 +138,23 @@
         <item>Sneakers</item>
         <item>Rad Sneakers</item>
         <item>Ultra Rad Sneakers</item>
-        <item>Weekend Walker</item>
+        <item>Walking Warrior</item>
         <item>Walkie Talkie</item>
     </string-array>
     <string-array name="power_up_descriptions">
-        <item>Double your steps for 1 hour</item>
+        <item>Quadruple your steps for 1 day</item>
         <item>Get an extra bonus step every 5 steps</item>
         <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
         <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
-        <item>Double your steps on the weekends</item>
+        <item>Double your steps forever</item>
         <item>You\'re not really sure what it\'s for...</item>
     </string-array>
     <string-array name="power_up_prices">
-        <item>4000</item>
-        <item>1000</item>
-        <item>2500</item>
-        <item>3000</item>
-        <item>6000</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>60</item>
         <item>1000000</item>
     </string-array>
 
