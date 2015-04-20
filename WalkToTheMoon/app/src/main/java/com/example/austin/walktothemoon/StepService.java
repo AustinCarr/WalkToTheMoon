@@ -88,7 +88,9 @@ public class StepService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
+        Log.i(TAG, "[SERVICE] onStart");
+        //super.onStart(intent, startId);
+        super.startService(intent);
     }
 
     @Override
@@ -106,6 +108,7 @@ public class StepService extends Service {
         datasource.open();
         User user = datasource.getUser();
         user.setBoostedSteps(mSteps);
+        user.setRealSteps(mSteps);
         datasource.updateUser(user);
         datasource.close();
 
@@ -168,7 +171,7 @@ public class StepService extends Service {
             );
         }
 
-        if (mStepDisplayer    != null) mStepDisplayer.reloadSettings();
+        if (mStepDisplayer != null) mStepDisplayer.reloadSettings();
 
     }
 
