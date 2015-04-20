@@ -88,7 +88,6 @@ public class StepService extends Service {
 
     @Override
     public void onStart(Intent intent, int startId) {
-        Log.i(TAG, "[SERVICE] onStart");
         //super.onStart(intent, startId);
         super.startService(intent);
     }
