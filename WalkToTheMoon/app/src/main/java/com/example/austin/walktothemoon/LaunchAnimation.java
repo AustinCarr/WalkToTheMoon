@@ -12,8 +12,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,6 +32,7 @@ public class LaunchAnimation extends Activity {
     private UserDataSource datasource;
     private TextView stateView, messageView;
     private boolean resumingActivity = false;
+    private int width, height;
 
 
     @Override
@@ -37,16 +44,20 @@ public class LaunchAnimation extends Activity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        width = size.x;
+        height = size.y;
 
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativeLayout);
+        ImageView rocketImage = (ImageView) findViewById(R.id.image_view_rocket_takeoff);
+        final ImageView smoke = (ImageView) findViewById(R.id.image_view_smoke);
+        final ImageView rocketSideFuel = (ImageView) findViewById(R.id.image_view_rocket_side_fuel);
+        final ImageView rocketSide = (ImageView) findViewById(R.id.image_view_rocket_side);
 
-        TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (0 - height/3)) ;
+        TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (0 - height)) ;
         animation.setInterpolator((new
                 AccelerateDecelerateInterpolator()));
         animation.setFillAfter(true);
-        animation.setDuration(1000);
+        animation.setStartOffset(1000);
+        animation.setDuration(3000);
         animation.setAnimationListener(new Animation.AnimationListener(){
             @Override
             public void onAnimationStart(Animation arg0) {
@@ -68,15 +79,74 @@ public class LaunchAnimation extends Activity {
 
                     }
 
-                }, 1000);
+                }, 3000);
             }
         });
-        layout.startAnimation(animation);
+        rocketImage.startAnimation(animation);
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new AccelerateInterpolator()); // and this
+        fadeOut.setStartOffset(4000);
+        fadeOut.setDuration(1000);
+        animation.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                smoke.setVisibility(View.INVISIBLE);
+            }
+        });
+        smoke.startAnimation(fadeOut);
+
+        TranslateAnimation rocketTranslate = new TranslateAnimation((0 - width), (width / 2), 0, 0);
+        rocketTranslate.setInterpolator((new DecelerateInterpolator(5f)));
+        rocketTranslate.setFillAfter(true);
+        rocketTranslate.setStartOffset(6000);
+        rocketTranslate.setDuration(2000);
+        rocketTranslate.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+
+            }
+        });
+        rocketSide.startAnimation(rocketTranslate);
 
 
 
 
+        Animation fuelFadeOut = new AlphaAnimation(1, 0);
+        fuelFadeOut.setInterpolator(new AccelerateInterpolator());
+        fuelFadeOut.setStartOffset(6500);
+        fuelFadeOut.setDuration(1000);
+        fuelFadeOut.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                rocketSideFuel.setVisibility(View.INVISIBLE);
+            }
+        });
 
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(fuelFadeOut);
+        animationSet.addAnimation(rocketTranslate);
+
+        rocketSideFuel.startAnimation(animationSet);
 
         Typeface tobiBlack;
 
