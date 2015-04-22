@@ -14,7 +14,11 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,15 +176,35 @@ public class Shop extends Activity {
             String[] powerupNames = getResources().getStringArray(R.array.power_up_names);
             Powerups purchasedPowerup = datasource.getPowerup(powerupNames[itemSelectedId]);
             purchasedPowerup.setInUse(1);
-            //purchasedPowerup.setExpirationDate("");
+
+
+            // Get todays date
+            Calendar c = Calendar.getInstance();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+            //Log.e("DATE: ", dateFormat.format(c.getTime()));
+
+            String[] powerUpDates = getResources().getStringArray(R.array.power_up_durations);
+            int duration = Integer.parseInt(powerUpDates[itemSelectedId]);
+
+            c.add(Calendar.MINUTE, duration);
+
+            //Log.e("EXPIRATION DATE: ", dateFormat.format(c.getTime()));
+
+            purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
+
+
+
             datasource.updatePowerup(purchasedPowerup);
             //System.out.printf("%s: %d\n", powerupNames[item], datasource.getPowerup(purchasedPowerup.getName()).getInUse());
 
             Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
 
+
+
+
             // Collapse group after purchase
             expListView.collapseGroup(itemSelectedId);
-
             //Resetting button id
             itemSelectedId = -1;
         }

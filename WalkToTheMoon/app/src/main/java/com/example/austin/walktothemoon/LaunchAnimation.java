@@ -117,7 +117,10 @@ public class LaunchAnimation extends Activity {
             }
             @Override
             public void onAnimationEnd(Animation arg0) {
-
+                Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
         });
         rocketSide.startAnimation(rocketTranslate);
