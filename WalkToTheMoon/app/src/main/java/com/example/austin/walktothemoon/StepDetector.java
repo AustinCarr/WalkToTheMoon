@@ -4,6 +4,7 @@ package com.example.austin.walktothemoon;
  * Created by ericmusliner on 4/8/15.
  */
 
+import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;

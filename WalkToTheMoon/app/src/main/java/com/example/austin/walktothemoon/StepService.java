@@ -182,6 +182,7 @@ public class StepService extends Service {
     private StepDisplayer.Listener mStepListener = new StepDisplayer.Listener() {
         public void stepsChanged(int value) {
             mSteps = value;
+            //STEP MANIP
             passValue();
         }
         public void passValue() {
@@ -239,6 +240,5 @@ public class StepService extends Service {
         wakeLock = pm.newWakeLock(wakeFlags, TAG);
         wakeLock.acquire();
     }
-
 }
 

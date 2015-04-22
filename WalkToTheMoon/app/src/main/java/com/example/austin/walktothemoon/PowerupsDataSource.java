@@ -6,11 +6,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class PowerupsDataSource {
     private SQLiteDatabase db;
     private MySQLiteHelper dbHelper;
+    private Context context;
 
     public PowerupsDataSource(Context context) {
+        this.context = context;
         dbHelper = new MySQLiteHelper(context);
     }
 
@@ -47,7 +51,7 @@ public class PowerupsDataSource {
     }
 
     public Powerups getPowerup(String name) {
-        String query = "Select * FROM " + MySQLiteHelper.TABLE_POWERUPS + " WHERE "
+        String query = "SELECT * FROM " + MySQLiteHelper.TABLE_POWERUPS + " WHERE "
                 + MySQLiteHelper.COLUMN_PNAME + " =  \"" + name + "\"";
 
         Cursor cursor = db.rawQuery(query, null);
@@ -65,6 +69,26 @@ public class PowerupsDataSource {
             powerup = null;
         }
         return powerup;
+    }
+
+    public ArrayList<String> getActivePowerups() {
+        ArrayList<String> activePowerups = new ArrayList<>();
+
+        String query = "SELECT " + MySQLiteHelper.COLUMN_PNAME + " FROM "
+                + MySQLiteHelper.TABLE_POWERUPS + " WHERE " + MySQLiteHelper.COLUMN_IN_USE + " =  1";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            activePowerups.add(cursor.getString(0));
+            cursor.close();
+        }
+        else {
+            activePowerups = null;
+        }
+
+        return activePowerups;
     }
 
     public boolean deletePowerup(String name) {

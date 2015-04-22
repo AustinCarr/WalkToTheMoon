@@ -38,6 +38,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Calendar;
 import java.util.Random;
 
 public class CreateAccount extends Activity implements View.OnTouchListener, SpringListener {
@@ -107,6 +108,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             animation.setDuration(600);
             layout.startAnimation(animation);
 
+            //Get current date for Issue Date
+            Calendar c = Calendar.getInstance();
+            String curDate = c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.YEAR);
             //Fonts changed
 
             Typeface tobiBlack;
@@ -124,6 +128,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
             textview = (TextView) findViewById(R.id.value_IssueDate);
             textview.setTypeface(tobiBlack);
+            textview.setText(curDate);
 
             textview = (TextView) findViewById(R.id.label_Permissions);
             textview.setTypeface(tobiBlack);

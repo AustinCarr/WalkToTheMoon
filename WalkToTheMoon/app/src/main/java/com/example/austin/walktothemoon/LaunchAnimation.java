@@ -110,8 +110,7 @@ public class LaunchAnimation extends Activity {
             public void onAnimationEnd(Animation arg0) {
                 //smoke.setVisibility(View.VISIBLE);
                 rocketSideFuel.setVisibility(View.INVISIBLE);
-
-
+                
                 /*
                 Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
