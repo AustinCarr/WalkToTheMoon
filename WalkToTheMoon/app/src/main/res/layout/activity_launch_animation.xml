@@ -17,40 +17,9 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout"
-        android:visibility="gone">
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="30dp"
-        android:text="Launching from"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:id="@+id/text_view_user_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="27dp"
-        android:textAlignment="center"
-        android:layout_gravity="center_horizontal" />
+        android:background="@drawable/backgroundtile">
     </LinearLayout>
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#343642"
-        android:id="@+id/image_view_smoke"/>
-
-    <com.example.austin.walktothemoon.AspectRatioImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_view_rocket_takeoff"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/rocket_takeoff"/>
 
     <com.example.austin.walktothemoon.AspectRatioImageViewWidth
         android:layout_width="wrap_content"
@@ -65,6 +34,46 @@
         android:id="@+id/image_view_rocket_side_fuel"
         android:src="@drawable/rocket_side_fuel"
         android:layout_centerVertical="true"/>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#343642"
+        android:id="@+id/image_view_smoke"/>
+
+    <ImageView
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:id="@+id/image_view_launch_face"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"/>
+
+    <com.example.austin.walktothemoon.AspectRatioImageViewWidth
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_view_launch_face_helmet"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/launch_face"/>
+
+
+
+
+
+
+    <com.example.austin.walktothemoon.AspectRatioImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/image_view_rocket_takeoff"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/rocket_takeoff"/>
+
+
+
+
+
 
 
 
