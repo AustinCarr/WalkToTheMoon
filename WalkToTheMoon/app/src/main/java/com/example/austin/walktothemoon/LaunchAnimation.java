@@ -118,6 +118,7 @@ public class LaunchAnimation extends Activity {
             @Override
             public void onAnimationEnd(Animation arg0) {
 
+
             }
         });
         rocketSide.startAnimation(rocketTranslate);
