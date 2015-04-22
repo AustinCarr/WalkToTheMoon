@@ -240,6 +240,5 @@ public class StepService extends Service {
         wakeLock = pm.newWakeLock(wakeFlags, TAG);
         wakeLock.acquire();
     }
-
 }
 
