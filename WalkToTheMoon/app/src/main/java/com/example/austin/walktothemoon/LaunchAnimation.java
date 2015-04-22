@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -57,6 +58,10 @@ public class LaunchAnimation extends Activity {
         final ImageView rocketSide = (ImageView) findViewById(R.id.image_view_rocket_side);
         final ImageView astroHelmet = (ImageView) findViewById(R.id.image_view_launch_face_helmet);
         final ImageView astroFace = (ImageView) findViewById(R.id.image_view_launch_face);
+        final TextView dialogue1 = (TextView) findViewById(R.id.text_view_dialogue1);
+        final TextView dialogue2 = (TextView) findViewById(R.id.text_view_dialogue2);
+        final ImageView logo = (ImageView) findViewById(R.id.logo);
+
 
         //Change face to user-chosen face
         try
@@ -111,7 +116,7 @@ public class LaunchAnimation extends Activity {
 
                 //smoke.setVisibility(View.VISIBLE);
                 rocketSideFuel.setVisibility(View.INVISIBLE);
-                
+
                 /*
                  */
 
@@ -134,8 +139,6 @@ public class LaunchAnimation extends Activity {
         rocketSideFuel.startAnimation(loseGas);
 
 
-
-
         //Astronaut pops up from bottom
         TranslateAnimation astroPopUp = new TranslateAnimation(0, 0, height, 0) ;
         astroPopUp.setInterpolator((new AccelerateDecelerateInterpolator()));
@@ -152,22 +155,129 @@ public class LaunchAnimation extends Activity {
             @Override
             public void onAnimationEnd(Animation arg0) {
 
+                rocketSide.setX(width);
 
-                /*
-                Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish(); */
+                Animation fadeIn1 = new AlphaAnimation(0, 1);
+                fadeIn1.setInterpolator(new AccelerateInterpolator());
+                fadeIn1.setFillAfter(true);
+                fadeIn1.setStartOffset(2000);
+                fadeIn1.setDuration(500);
+                dialogue1.startAnimation(fadeIn1);
 
+                Animation fadeOut1 = new AlphaAnimation(1, 0);
+                fadeOut1.setInterpolator(new AccelerateInterpolator());
+                fadeOut1.setFillAfter(true);
+                fadeOut1.setStartOffset(4500);
+                fadeOut1.setDuration(500);
+                fadeOut1.setAnimationListener(new Animation.AnimationListener() {
+                      @Override
+                      public void onAnimationStart(Animation arg0) {
+                      }
 
+                      @Override
+                      public void onAnimationRepeat(Animation arg0) {
+                      }
+
+                      @Override
+                      public void onAnimationEnd(Animation arg0) {
+
+                          Animation fadeIn2 = new AlphaAnimation(0, 1);
+                          fadeIn2.setInterpolator(new AccelerateInterpolator());
+                          fadeIn2.setFillAfter(true);
+                          fadeIn2.setStartOffset(3000);
+                          fadeIn2.setDuration(1000);
+                          dialogue2.startAnimation(fadeIn2);
+
+                          Animation fadeOut2 = new AlphaAnimation(1, 0);
+                          fadeOut2.setInterpolator(new AccelerateInterpolator());
+                          fadeOut2.setFillAfter(true);
+                          fadeOut2.setStartOffset(4500);
+                          fadeOut2.setDuration(500);
+                          dialogue2.startAnimation(fadeOut2);
+
+                          TranslateAnimation astroPopDown = new TranslateAnimation(0, 0, 0, (height)) ;
+                          astroPopDown.setInterpolator((new AccelerateDecelerateInterpolator()));
+                          astroPopDown.setFillAfter(true);
+                          astroPopDown.setStartOffset(5000);
+                          astroPopDown.setDuration(1000);
+                          astroHelmet.startAnimation(astroPopDown);
+                          astroFace.startAnimation(astroPopDown);
+
+                          Animation fadeOut = new AlphaAnimation(1, 0);
+                          fadeOut.setInterpolator(new AccelerateInterpolator());
+                          fadeOut.setFillAfter(true);
+                          fadeOut.setStartOffset(6000);
+                          fadeOut.setDuration(1000);
+                          smoke.startAnimation(fadeOut);
+
+                      }
+                  });
+                dialogue1.startAnimation(fadeOut1);
             }
         });
         astroHelmet.startAnimation(astroPopUp);
         astroFace.startAnimation(astroPopUp);
 
+        //Fade in logo
+        Animation fadeInLogo = new AlphaAnimation(0, 1);
+        fadeInLogo.setInterpolator(new AccelerateInterpolator());
+        fadeInLogo.setFillAfter(true);
+        fadeInLogo.setStartOffset(21500);
+        fadeInLogo.setDuration(2000);
+        fadeInLogo.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation arg0) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                Animation fadeOutLogo = new AlphaAnimation(1, 0);
+                fadeOutLogo.setInterpolator(new AccelerateInterpolator());
+                fadeOutLogo.setFillAfter(true);
+                fadeOutLogo.setStartOffset(3000);
+                fadeOutLogo.setDuration(2000);
+                fadeOutLogo.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation arg0) {
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation arg0) {
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation arg0) {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                Intent intent = new Intent(LaunchAnimation.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 3000);
+
+                    }
+                });
+                logo.startAnimation(fadeOutLogo);
+            }
+        });
+        logo.startAnimation(fadeInLogo);
+
+
+
+
         Typeface tobiBlack;
 
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
+
+
+        dialogue1.setTypeface(tobiBlack);
+        dialogue2.setTypeface(tobiBlack);
 
 
         /*datasource = new UserDataSource(this);

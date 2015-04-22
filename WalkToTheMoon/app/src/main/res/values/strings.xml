@@ -14,6 +14,8 @@
     <string name="button_launch">Launch!</string>
     <string name="button_changePic">Change Pic</string>
     <string name="lookingGood">Lookin\' Good!</string>
+    <string name="dialogue1">Oh no, I ran out of gas!</string>
+    <string name="dialogue2">Looks like I\'ll have to...</string>
 
     <string-array name="spinner_states">
         <item>Alabama</item>
