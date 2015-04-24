@@ -148,6 +148,9 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
             textview = (TextView) findViewById(R.id.text_view_dob);
             textview.setTypeface(tobiBlack);
 
+            Button launchButton = (Button) findViewById(R.id.button_launch);
+            launchButton.setTypeface(tobiBlack);
+
             //Customized Spinner
 
             String[] states = getResources().getStringArray(R.array.spinner_states);
