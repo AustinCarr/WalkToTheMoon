@@ -98,7 +98,6 @@ public class Shop extends Activity {
 
         datasource2.close();
 
-
         Typeface tobiBlack;
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
 
@@ -205,6 +204,7 @@ public class Shop extends Activity {
                 
             datasource.updatePowerup(purchasedPowerup);
 
+            datasource.updatePowerup(purchasedPowerup);
 
             String[] powerupPrices = getResources().getStringArray(R.array.power_up_prices);
 

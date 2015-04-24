@@ -57,8 +57,9 @@ public class StepDisplayer implements StepListener {
 
             for (int i = 0; i < activePowerups.size(); i++)
             {
+                Log.e("Array Size", Integer.toString(activePowerups.size()));
                 Powerups activePowerup = datasource.getPowerup(activePowerups.get(i));
-                //Log.e("Active Powerups", activePowerup.getName());
+                Log.e("Active Powerups", activePowerup.getName());
                 try {
                     expireDate = df.parse(activePowerup.getExpirationDate());
 
@@ -77,7 +78,7 @@ public class StepDisplayer implements StepListener {
                         addedSteps++;
                         //Log.e("Modified value", Integer.toString(mCount));
                     }
-                    else if (activePowerup.getName().equals("Sneakers")){
+                    if (activePowerup.getName().equals("Sneakers")){
                         //Extra bonus step for every 5 steps
                         counter ++;
                         if (counter == 5) {
@@ -88,37 +89,39 @@ public class StepDisplayer implements StepListener {
                         addedSteps++;
 
                     }
-                    else if (activePowerup.getName().equals("Rad Sneakers")){
+                    if (activePowerup.getName().equals("Rad Sneakers")){
                         //Extra bonus step for every 4 steps
                         counter ++;
                         if (counter == 4) {
-                            addedSteps += 2;
+                            addedSteps ++;
                             counter = 0;
                         }
-                        else
-                            mCount++;
+
+                        addedSteps ++;
 
                     }
-                    else if (activePowerup.getName().equals("Ultra Rad Sneakers")){
+                    if (activePowerup.getName().equals("Ultra Rad Sneakers")){
                         //Extra bonus step for every 3 steps
                         counter ++;
                         if (counter == 3) {
-                            addedSteps += 2;
+                            addedSteps ++;
                             counter = 0;
                         }
-                        else
-                            mCount++;
+
+                        addedSteps ++;
 
                     }
-                    else if (activePowerup.getName().equals("Walking Warrior")){
+                    if (activePowerup.getName().equals("Walking Warrior")){
                         wwActive = true;
                         addedSteps++;
 
                     }
-                    else if (activePowerup.getName().equals("Walkie Talkie")){
+                    if (activePowerup.getName().equals("Walkie Talkie")){
                         //Make sure this only happens once!
                         addedSteps++;
-                        mCount += 10000000; //Add ten million to the final count so it's not affected by other powerups
+                        mCount += 100000000; //Add ten million to the final count so it's not affected by other powerups
+                        activePowerup.setInUse(-1); //Only do once
+                        datasource.updatePowerup(activePowerup);
                     }
                 }
             }
