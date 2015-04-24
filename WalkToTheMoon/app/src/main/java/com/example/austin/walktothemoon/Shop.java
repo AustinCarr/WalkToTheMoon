@@ -187,11 +187,14 @@ public class Shop extends Activity {
 
             if (duration > 0) {
                 c.add(Calendar.MINUTE, duration);
-                purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
             }
             else {
-                purchasedPowerup.setExpirationDate("forever");
+                // Setting expiration to 1 minute to activate it and keep it active forever
+                c.add(Calendar.MINUTE, 1);
+
             }
+
+            purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
                 
             datasource.updatePowerup(purchasedPowerup);
 
