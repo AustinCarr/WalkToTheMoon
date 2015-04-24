@@ -19,7 +19,8 @@ import java.util.Date;
  */
 public class StepDisplayer implements StepListener {
 
-    private int mCount = 0;
+    private int mCount = 0; //"Boosted" Step Count
+    private int mReal = 0; //"Real" Step Count
     private int counter = 0;
     private Context context;
     private PowerupsDataSource datasource;
@@ -112,7 +113,7 @@ public class StepDisplayer implements StepListener {
                     else if (activePowerup.getName().equals("Walkie Talkie")){
                         //Make sure this only happens once!
                         addedSteps++;
-                        mCount += 10000000;
+                        mCount += 10000000; //Add ten million to the final count so it's not affected by other powerups
                     }
                 }
             }
@@ -127,7 +128,8 @@ public class StepDisplayer implements StepListener {
         if (wwActive) //Walking warrior active
             addedSteps = addedSteps * 2;
 
-        mCount += addedSteps;
+        mCount += addedSteps; //Boost step
+        mReal ++; //Add a step to the real count
         notifyListener();
     }
     public void reloadSettings() {
@@ -140,7 +142,7 @@ public class StepDisplayer implements StepListener {
     // Listener
 
     public interface Listener {
-        public void stepsChanged(int value);
+        public void stepsChanged(int value, int value2);
         public void passValue();
     }
     private ArrayList<Listener> mListeners = new ArrayList<Listener>();
@@ -150,7 +152,7 @@ public class StepDisplayer implements StepListener {
     }
     public void notifyListener() {
         for (Listener listener : mListeners) {
-            listener.stepsChanged((int)mCount);
+            listener.stepsChanged((int)mCount, (int)mReal);
         }
     }
 

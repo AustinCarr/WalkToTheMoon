@@ -44,6 +44,7 @@ public class StepService extends Service {
     private PowerManager.WakeLock wakeLock;
 
     private int mSteps;
+    private int mReal;
     private UserDataSource datasource;
 
     public class StepBinder extends Binder {
@@ -113,7 +114,7 @@ public class StepService extends Service {
         datasource.open();
         User user = datasource.getUser();
         user.setBoostedSteps(mSteps);
-        user.setRealSteps(mSteps);
+        user.setRealSteps(mReal);
         datasource.updateUser(user);
         datasource.close();
 
@@ -156,7 +157,7 @@ public class StepService extends Service {
     private final IBinder mBinder = new StepBinder();
 
     public interface ICallback {
-        public void stepsChanged(int value);
+        public void stepsChanged(int valueB, int valueR);
     }
 
     private ICallback mCallback;
@@ -186,13 +187,14 @@ public class StepService extends Service {
     }
 
     private StepDisplayer.Listener mStepListener = new StepDisplayer.Listener() {
-        public void stepsChanged(int value) {
-            mSteps = value;
+        public void stepsChanged(int valueB, int valueR) {
+            mSteps = valueB;
+            mReal = valueR;
             passValue();
         }
         public void passValue() {
             if (mCallback != null) {
-                mCallback.stepsChanged(mSteps);
+                mCallback.stepsChanged(mSteps, mReal);
             }
         }
     };

@@ -47,7 +47,8 @@ public class MainActivity extends Activity{
 
     private TextView mStepValueView;
     private int stepsTaken;
-    private int mStepValue;
+    private int mStepBoost;
+    private int mStepReal;
     private boolean mQuitting = false;
     private boolean mIsRunning = true;
 
@@ -241,8 +242,8 @@ public class MainActivity extends Activity{
         datasource = new UserDataSource(this);
         datasource.open();
         User user = datasource.getUser();
-        user.setBoostedSteps(mStepValue);
-        user.setRealSteps(mStepValue);
+        user.setBoostedSteps(mStepBoost);
+        user.setRealSteps(mStepReal);
         datasource.updateUser(user);
         datasource.close();
 
@@ -265,8 +266,8 @@ public class MainActivity extends Activity{
         datasource = new UserDataSource(this);
         datasource.open();
         User user = datasource.getUser();
-        user.setBoostedSteps(mStepValue);
-        user.setRealSteps(mStepValue);
+        user.setBoostedSteps(mStepBoost);
+        user.setRealSteps(mStepReal);
         datasource.updateUser(user);
         datasource.close();
         super.onDestroy();
@@ -330,8 +331,8 @@ public class MainActivity extends Activity{
     }
 
     private StepService.ICallback mCallback = new StepService.ICallback() {
-        public void stepsChanged(int value) {
-            mHandler.sendMessage(mHandler.obtainMessage(STEPS_MSG, value, 0));
+        public void stepsChanged(int valueB, int valueR) {
+            mHandler.sendMessage(mHandler.obtainMessage(STEPS_MSG, valueB, valueR));
         }
     };
 
@@ -342,8 +343,9 @@ public class MainActivity extends Activity{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case STEPS_MSG:
-                    mStepValue = (int) msg.arg1;
-                    mStepValueView.setText("" + mStepValue);
+                    mStepBoost = (int) msg.arg1;
+                    mStepReal = (int) msg.arg2;
+                    mStepValueView.setText("" + mStepBoost);
                     break;
             }
         }
