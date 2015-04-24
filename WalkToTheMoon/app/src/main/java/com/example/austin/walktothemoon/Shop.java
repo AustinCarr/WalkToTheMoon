@@ -37,6 +37,8 @@ public class Shop extends Activity {
     private int stepsTaken;
     private int itemSelectedId;
 
+    private TextView steps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +104,7 @@ public class Shop extends Activity {
         TextView shop = (TextView) findViewById(R.id.text_view_shop);
         shop.setTypeface(tobiBlack);
 
-        TextView steps = (TextView) findViewById(R.id.text_view_steps_count);
+        steps = (TextView) findViewById(R.id.text_view_steps_count);
         steps.setTypeface(tobiBlack);
         steps.setText(String.valueOf(stepsTaken));
 
@@ -179,25 +181,40 @@ public class Shop extends Activity {
             // Get todays date
             Calendar c = Calendar.getInstance();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-            //Log.e("DATE: ", dateFormat.format(c.getTime()));
-
             String[] powerUpDates = getResources().getStringArray(R.array.power_up_durations);
             int duration = Integer.parseInt(powerUpDates[itemSelectedId]);
 
-            c.add(Calendar.MINUTE, duration);
+            if (duration > 0) {
+                c.add(Calendar.MINUTE, duration);
+            }
+            else {
+                // Setting expiration to 1 minute to activate it and keep it active forever
+                c.add(Calendar.MINUTE, 1);
 
-            //Log.e("EXPIRATION DATE: ", dateFormat.format(c.getTime()));
+            }
 
             purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
+                
+            datasource.updatePowerup(purchasedPowerup);
 
             datasource.updatePowerup(purchasedPowerup);
-            //System.out.printf("%s: %d\n", powerupNames[item], datasource.getPowerup(purchasedPowerup.getName()).getInUse());
+
+            String[] powerupPrices = getResources().getStringArray(R.array.power_up_prices);
+
+            datasource2.open();
+            User user = datasource2.getUser();
+
+            stepsTaken = user.getBoostedSteps();
+            stepsTaken -= Integer.parseInt(powerupPrices[itemSelectedId]);
+
+            user.setBoostedSteps(stepsTaken);
+
+            datasource2.updateUser(user);
+            datasource2.close();
+
+            steps.setText(String.valueOf(stepsTaken));
 
             Toast.makeText(getBaseContext(), "PURCHASED", Toast.LENGTH_LONG).show();
-
-
-
 
             // Collapse group after purchase
             expListView.collapseGroup(itemSelectedId);

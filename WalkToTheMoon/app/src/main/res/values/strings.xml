@@ -148,7 +148,7 @@
         <item>Get an extra bonus step every 5 steps</item>
         <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
         <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
-        <item>Double your steps forever</item>
+        <item>Double your steps 1 week</item>
         <item>You\'re not really sure what it\'s for...</item>
     </string-array>
     <string-array name="power_up_durations">
@@ -156,8 +156,8 @@
         <item>1</item>
         <item>1</item>
         <item>1</item>
+        <item>7</item>
         <item>-1</item>
-        <item>0</item>
     </string-array>
     <string-array name="power_up_prices">
         <item>10</item>
@@ -165,7 +165,7 @@
         <item>30</item>
         <item>40</item>
         <item>60</item>
-        <item>1000000</item>
+        <item>100</item>
     </string-array>
 
     <array name="power_up_icons">

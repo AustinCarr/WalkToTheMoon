@@ -83,6 +83,7 @@ public class StepService extends Service {
         datasource.open();
         User user = datasource.getUser();
         mStepDisplayer.setSteps(user.getBoostedSteps());
+        mStepDisplayer.setReal(user.getRealSteps());
         datasource.close();
         //////////
         mStepDisplayer.addListener(mStepListener);

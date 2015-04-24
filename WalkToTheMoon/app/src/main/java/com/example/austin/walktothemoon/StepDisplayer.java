@@ -37,6 +37,11 @@ public class StepDisplayer implements StepListener {
         mCount = steps;
         notifyListener();
     }
+
+    public void setReal (int realSteps){
+        mReal = realSteps;
+        notifyListener();
+    }
     public void onStep() {
         //Modify step count based on boost
         ArrayList<String> activePowerups = datasource.getActivePowerups();
@@ -66,7 +71,7 @@ public class StepDisplayer implements StepListener {
                     datasource.updatePowerup(activePowerup);
                 }
                 else if (curDate.before(expireDate) && expireDate != null){
-                    //Log.e("here", activePowerup.getName());
+                    Log.e("here", activePowerup.getName());
                     if (activePowerup.getName().equals("Energy Bar")){
                         ebActive = true;
                         addedSteps++;
@@ -76,11 +81,11 @@ public class StepDisplayer implements StepListener {
                         //Extra bonus step for every 5 steps
                         counter ++;
                         if (counter == 5) {
-                            addedSteps += 2;
+                            addedSteps ++;
                             counter = 0;
                         }
-                        else
-                            addedSteps++;
+
+                        addedSteps++;
 
                     }
                     else if (activePowerup.getName().equals("Rad Sneakers")){
