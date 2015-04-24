@@ -145,17 +145,21 @@
     </string-array>
     <string-array name="power_up_descriptions">
         <item>Quadruple your steps for 1 day</item>
-        <item>Get an extra bonus step every 5 steps</item>
-        <item>(Sneaker upgrade) Get an extra bonus step every 4 steps</item>
+        <item>Get an extra bonus step every 5 steps (expires when you buy Rad Sneakers)</item>
+        <item>(Sneaker upgrade) Get an extra bonus step every 4 steps (expires when you buy Ultra Rad Sneakers</item>
         <item>(Rad Sneaker upgrade) Get an extra bonus step every 3 steps</item>
         <item>Double your steps 1 week</item>
         <item>You\'re not really sure what it\'s for...</item>
     </string-array>
+
+    <!--
+        > 0 = how many days
+        < 0 = forever or one time use -->
     <string-array name="power_up_durations">
         <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
         <item>7</item>
         <item>-1</item>
     </string-array>

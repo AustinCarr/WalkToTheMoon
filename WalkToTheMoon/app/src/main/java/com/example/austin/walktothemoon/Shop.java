@@ -179,20 +179,27 @@ public class Shop extends Activity {
             Powerups purchasedPowerup = datasource.getPowerup(powerupNames[itemSelectedId]);
             purchasedPowerup.setInUse(1);
 
+            // For power ups with upgrades, set the previous power up to used
+            if (powerupNames[itemSelectedId].equals("Rad Sneakers") || powerupNames[itemSelectedId].equals("Ultra Rad Sneakers")) {
+                Powerups prevPowerup;
+
+                prevPowerup = datasource.getPowerup(powerupNames[itemSelectedId - 1]);
+                prevPowerup.setInUse(-2); // Indicating the previous power is set to used, not active
+
+                datasource.updatePowerup(prevPowerup);
+            }
+
             // Get todays date
             Calendar c = Calendar.getInstance();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             String[] powerUpDates = getResources().getStringArray(R.array.power_up_durations);
             int duration = Integer.parseInt(powerUpDates[itemSelectedId]);
 
-            if (duration > 0) {
+            if (duration > 0)
                 c.add(Calendar.MINUTE, duration);
-            }
-            else {
+            else
                 // Setting expiration to 1 minute to activate it and keep it active forever
                 c.add(Calendar.MINUTE, 1);
-
-            }
 
             purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
                 
