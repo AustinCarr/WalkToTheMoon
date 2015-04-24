@@ -81,8 +81,10 @@ public class PowerupsDataSource {
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            activePowerups.add(cursor.getString(0));
-            cursor.close();
+            while (!cursor.isAfterLast()) {
+                activePowerups.add(cursor.getString(0));
+                cursor.close();
+            }
         }
         else {
             activePowerups = null;
