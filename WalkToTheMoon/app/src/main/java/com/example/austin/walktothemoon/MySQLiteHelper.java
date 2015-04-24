@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLiteHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NAME = "walkToTheMoonDB.db";
 
     public static final String TABLE_USER = "user";
@@ -35,7 +35,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         String CREATE_POWERUPS_TABLE = "CREATE TABLE " +
                 TABLE_POWERUPS + "("
                 + COLUMN_PNAME + " TEXT PRIMARY KEY NOT NULL," + COLUMN_IN_USE
-                + " INTEGER NOT NULL CHECK (in_use IN (0,1))," + COLUMN_EXPIRATION + " TEXT" + ")";
+                + " INTEGER NOT NULL CHECK (in_use IN (-1,0,1))," + COLUMN_EXPIRATION + " TEXT" + ")";
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_POWERUPS_TABLE);
     }

@@ -79,13 +79,15 @@ public class PowerupsDataSource {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            activePowerups.add(cursor.getString(0));
-            cursor.moveToNext();
-        }
+        if(cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                activePowerups.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
 
-        cursor.close();
+            cursor.close();
+        }
 
         /*else {
             activePowerups = null;
