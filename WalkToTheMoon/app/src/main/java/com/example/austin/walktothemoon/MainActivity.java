@@ -250,6 +250,11 @@ public class MainActivity extends Activity{
     }
 
     @Override
+    public void onBackPressed() {
+        //Do nothing
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();

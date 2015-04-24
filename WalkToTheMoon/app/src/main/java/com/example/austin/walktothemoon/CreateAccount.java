@@ -77,7 +77,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         datasource = new UserDataSource(this);
         datasource2 = new PowerupsDataSource(this);
 
-        prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile", 0);
+        prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile2", 0);
         Boolean restoredText = prefs.getBoolean("created_user", false);
 
         //if (restoredText) {
