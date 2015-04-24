@@ -177,7 +177,6 @@ public class Shop extends Activity {
             Powerups purchasedPowerup = datasource.getPowerup(powerupNames[itemSelectedId]);
             purchasedPowerup.setInUse(1);
 
-
             // Get todays date
             Calendar c = Calendar.getInstance();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
