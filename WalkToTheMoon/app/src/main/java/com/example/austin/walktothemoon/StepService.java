@@ -19,6 +19,12 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by ericmusliner on 4/8/15.
  */
@@ -68,7 +74,7 @@ public class StepService extends Service {
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         registerReceiver(mReceiver, filter);
 
-        mStepDisplayer = new StepDisplayer(mPedometerSettings);
+        mStepDisplayer = new StepDisplayer(mPedometerSettings, this);
         //mStepDisplayer.setSteps(mSteps = mState.getInt("steps", 0));
         ///////
         // Get number of steps from database!!
@@ -157,7 +163,7 @@ public class StepService extends Service {
 
     public void registerCallback(ICallback cb) {
         mCallback = cb;
-        //mStepDisplayer.passValue();
+        mStepDisplayer.passValue();
         //mPaceListener.passValue();
     }
 
@@ -182,7 +188,6 @@ public class StepService extends Service {
     private StepDisplayer.Listener mStepListener = new StepDisplayer.Listener() {
         public void stepsChanged(int value) {
             mSteps = value;
-            //STEP MANIP
             passValue();
         }
         public void passValue() {

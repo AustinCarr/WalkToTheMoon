@@ -38,7 +38,6 @@ public class MainActivity extends Activity{
     private static final String TAG = "PedometerLog";
     private SharedPreferences mSettings;
     private PedometerSettings mPedometerSettings;
-
     private static double TENSION = 800;
     private static double DAMPER = 20; //friction
 
