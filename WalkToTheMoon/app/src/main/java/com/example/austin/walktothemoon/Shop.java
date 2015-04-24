@@ -96,7 +96,6 @@ public class Shop extends Activity {
 
         datasource2.close();
 
-
         Typeface tobiBlack;
         tobiBlack = Typeface.createFromAsset(getAssets(), "fonts/TobiBlack.otf");
 
@@ -177,7 +176,6 @@ public class Shop extends Activity {
             Powerups purchasedPowerup = datasource.getPowerup(powerupNames[itemSelectedId]);
             purchasedPowerup.setInUse(1);
 
-
             // Get todays date
             Calendar c = Calendar.getInstance();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -192,8 +190,6 @@ public class Shop extends Activity {
             //Log.e("EXPIRATION DATE: ", dateFormat.format(c.getTime()));
 
             purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
-
-
 
             datasource.updatePowerup(purchasedPowerup);
             //System.out.printf("%s: %d\n", powerupNames[item], datasource.getPowerup(purchasedPowerup.getName()).getInUse());
