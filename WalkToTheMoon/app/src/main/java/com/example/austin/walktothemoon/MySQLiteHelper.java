@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLiteHelper extends SQLiteOpenHelper{
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 13;
     private static final String DATABASE_NAME = "walkToTheMoonDB.db";
 
     public static final String TABLE_USER = "user";
