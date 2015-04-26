@@ -57,9 +57,8 @@ public class StepDisplayer implements StepListener {
 
             for (int i = 0; i < activePowerups.size(); i++)
             {
-                Log.e("Array Size", Integer.toString(activePowerups.size()));
                 Powerups activePowerup = datasource.getPowerup(activePowerups.get(i));
-                Log.e("Active Powerups", activePowerup.getName());
+                //Log.e("Active Powerups", activePowerup.getName());
                 try {
                     expireDate = df.parse(activePowerup.getExpirationDate());
 
@@ -72,11 +71,9 @@ public class StepDisplayer implements StepListener {
                     datasource.updatePowerup(activePowerup);
                 }
                 else if (curDate.before(expireDate) && expireDate != null){
-                    Log.e("here", activePowerup.getName());
                     if (activePowerup.getName().equals("Energy Bar")){
                         ebActive = true;
                         addedSteps++;
-                        //Log.e("Modified value", Integer.toString(mCount));
                     }
                     if (activePowerup.getName().equals("Sneakers")){
                         //Extra bonus step for every 5 steps
@@ -107,19 +104,16 @@ public class StepDisplayer implements StepListener {
                             addedSteps ++;
                             counter = 0;
                         }
-
                         addedSteps ++;
-
                     }
                     if (activePowerup.getName().equals("Walking Warrior")){
                         wwActive = true;
                         addedSteps++;
-
                     }
                     if (activePowerup.getName().equals("Walkie Talkie")){
                         //Make sure this only happens once!
                         addedSteps++;
-                        mCount += 100000000; //Add ten million to the final count so it's not affected by other powerups
+                        mCount += 100000000; //Add one hundred million to the final count 
                         activePowerup.setInUse(-1); //Only do once
                         datasource.updatePowerup(activePowerup);
                     }
