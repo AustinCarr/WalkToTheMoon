@@ -196,9 +196,12 @@ public class Shop extends Activity {
 
             if (duration > 0)
                 c.add(Calendar.MINUTE, duration);
-            else
+            else if (duration == -1)
                 // Setting expiration to 1 minute to activate it and keep it active forever
                 c.add(Calendar.MINUTE, 1);
+            else if (duration == -2)
+                // Setting expiration date to 10 years from now to keep it active until next sneakers are bought
+                c.add(Calendar.YEAR, 10);
 
             purchasedPowerup.setExpirationDate(dateFormat.format(c.getTime()));
                 

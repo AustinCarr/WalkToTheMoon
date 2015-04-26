@@ -75,8 +75,13 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
 
         surfaceHolder = this.getHolder();
         bmpMoon = BitmapFactory.decodeResource(getResources(),
-                R.drawable.ic_launcher);
-        bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_icon);
+                R.drawable.moon_big_alt);
+        bmpMoon = Bitmap.createScaledBitmap(bmpMoon, (bmpMoon.getWidth() / 3), (bmpMoon.getHeight() / 3 ), false);
+        //bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_icon);
+
+        bmpEarth = BitmapFactory.decodeResource(getResources(), R.drawable.earth_big);
+        bmpEarth = Bitmap.createScaledBitmap(bmpEarth, (bmpEarth.getWidth() / 2), (bmpEarth.getHeight() / 2 ), false);
+
         bmpUser = BitmapFactory.decodeResource(getResources(), R.drawable.astronaut_walking_main);
         bmpUser = Bitmap.createScaledBitmap(bmpUser, (bmpUser.getWidth() / 8), (bmpUser.getHeight() / 8), false);
         //bgImage = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(getResources(),
@@ -164,12 +169,12 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.save();
         canvas.concat(mMatrix);
 
-        dashedLine.moveTo((IMAGE_PADDING * 2) + bmpEarth.getWidth(), getHeight()/2);
-        dashedLine.lineTo((getWidth() * 2) - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
+        dashedLine.moveTo((IMAGE_PADDING * 2) + (bmpEarth.getWidth() / 2), getHeight()/2);
+        dashedLine.lineTo((getWidth() * 3) - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
 
         canvas.drawPath(dashedLine, paint);
-        canvas.drawBitmap(bmpMoon, (getWidth() * 2) - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
-        canvas.drawBitmap(bmpEarth, IMAGE_PADDING, getHeight()/2 - (bmpEarth.getHeight()/2), null);
+        canvas.drawBitmap(bmpMoon, (getWidth() * 3) - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
+        canvas.drawBitmap(bmpEarth, (bmpEarth.getWidth() / -2), getHeight()/2 - (bmpEarth.getHeight()/2), null);
 
         // Get number of steps from database!!
         datasource.open();

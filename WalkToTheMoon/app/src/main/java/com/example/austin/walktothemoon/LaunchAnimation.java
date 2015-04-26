@@ -61,6 +61,7 @@ public class LaunchAnimation extends Activity {
         final TextView dialogue1 = (TextView) findViewById(R.id.text_view_dialogue1);
         final TextView dialogue2 = (TextView) findViewById(R.id.text_view_dialogue2);
         final ImageView logo = (ImageView) findViewById(R.id.logo);
+        final Typewriter launchText = (Typewriter) findViewById(R.id.text_view_user_location);
 
 
         //Change face to user-chosen face
@@ -74,19 +75,27 @@ public class LaunchAnimation extends Activity {
         }
 
         //Rocket launches up off screen
-        TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (0 - height)) ;
-        animation.setInterpolator((new
+        TranslateAnimation launch = new TranslateAnimation(0, 0, 0, (0 - height)) ;
+        launch.setInterpolator((new
                 AccelerateDecelerateInterpolator()));
-        animation.setFillAfter(true);
-        animation.setStartOffset(1000);
-        animation.setDuration(3000);
-        rocketImage.startAnimation(animation);
+        launch.setFillAfter(true);
+        launch.setStartOffset(5000);
+        launch.setDuration(3000);
+        rocketImage.startAnimation(launch);
+
+        //Launch text fades out
+        Animation textFadeOut = new AlphaAnimation(1, 0);
+        textFadeOut.setInterpolator(new AccelerateInterpolator());
+        textFadeOut.setFillAfter(true);
+        textFadeOut.setStartOffset(4000);
+        textFadeOut.setDuration(1000);
+        launchText.startAnimation(textFadeOut);
 
         //Smoke fades out to reveal stars
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator());
         fadeOut.setFillAfter(true);
-        fadeOut.setStartOffset(4000);
+        fadeOut.setStartOffset(8000);
         fadeOut.setDuration(1000);
         smoke.startAnimation(fadeOut);
 
@@ -94,7 +103,7 @@ public class LaunchAnimation extends Activity {
         TranslateAnimation rocketTranslate = new TranslateAnimation((0 - width), (width / 2), 0, 0);
         rocketTranslate.setInterpolator((new DecelerateInterpolator(5f)));
         rocketTranslate.setFillAfter(true);
-        rocketTranslate.setStartOffset(6000);
+        rocketTranslate.setStartOffset(10000);
         rocketTranslate.setDuration(2000);
         rocketSide.startAnimation(rocketTranslate);
 
@@ -102,7 +111,7 @@ public class LaunchAnimation extends Activity {
         Animation fuelFadeOut = new AlphaAnimation(1, 0);
         fuelFadeOut.setInterpolator(new AccelerateInterpolator());
         fuelFadeOut.setFillAfter(true);
-        fuelFadeOut.setStartOffset(6500);
+        fuelFadeOut.setStartOffset(10500);
         fuelFadeOut.setDuration(1000);
         fuelFadeOut.setAnimationListener(new Animation.AnimationListener(){
             @Override
@@ -142,7 +151,7 @@ public class LaunchAnimation extends Activity {
         TranslateAnimation astroPopUp = new TranslateAnimation(0, 0, height, 0) ;
         astroPopUp.setInterpolator((new AccelerateDecelerateInterpolator()));
         astroPopUp.setFillAfter(true);
-        astroPopUp.setStartOffset(8500);
+        astroPopUp.setStartOffset(12500);
         astroPopUp.setDuration(1000);
         astroPopUp.setAnimationListener(new Animation.AnimationListener(){
             @Override
@@ -221,7 +230,7 @@ public class LaunchAnimation extends Activity {
         Animation fadeInLogo = new AlphaAnimation(0, 1);
         fadeInLogo.setInterpolator(new AccelerateInterpolator());
         fadeInLogo.setFillAfter(true);
-        fadeInLogo.setStartOffset(21500);
+        fadeInLogo.setStartOffset(25500);
         fadeInLogo.setDuration(2000);
         fadeInLogo.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -279,18 +288,21 @@ public class LaunchAnimation extends Activity {
         dialogue2.setTypeface(tobiBlack);
 
 
-        /*datasource = new UserDataSource(this);
+        datasource = new UserDataSource(this);
         datasource.open();
         User user = datasource.getUser();
 
+        launchText.setTypeface(tobiBlack);
+        launchText.setCharacterDelay(100);
+        launchText.animateText(String.valueOf(user.getAddressState()));
 
-        stateView = (TextView) findViewById(R.id.text_view_user_location);
+        /*stateView = (TextView) findViewById(R.id.text_view_user_location);
         stateView.setTypeface(tobiBlack);
         stateView.setText(String.valueOf(user.getAddressState()));
-        stateView.setVisibility(View.VISIBLE);
+        stateView.setVisibility(View.VISIBLE);*/
         datasource.close();
 
-        messageView = (TextView) findViewById(R.id.message);
+        /*messageView = (TextView) findViewById(R.id.message);
         messageView.setTypeface(tobiBlack);
         messageView.setVisibility(View.VISIBLE);*/
 
@@ -306,13 +318,13 @@ public class LaunchAnimation extends Activity {
 
     @Override
     protected void onResume() {
-        //datasource.open();
+        datasource.open();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        //datasource.close();
+        datasource.close();
         super.onPause();
     }
 }

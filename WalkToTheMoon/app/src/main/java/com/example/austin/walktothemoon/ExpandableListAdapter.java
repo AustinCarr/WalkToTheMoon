@@ -85,8 +85,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String[] powerupNames = context.getResources().getStringArray(R.array.power_up_names);
         Powerups purchasedPowerup = datasource2.getPowerup(powerupNames[groupPosition]);
 
-        Log.e(powerupNames[groupPosition] + " ==== ", "" + purchasedPowerup.getInUse());
-
         if (purchasedPowerup.getInUse() == -1 || purchasedPowerup.getInUse() == -2) { // If it is a one time power up
             buyButton.setBackgroundColor(Color.argb(0, 0, 0, 0));
             buyButton.setTextColor(Color.rgb(84, 157, 136));
