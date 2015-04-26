@@ -165,12 +165,12 @@
         <item>-1</item>
     </string-array>
     <string-array name="power_up_prices">
-        <item>10</item>
-        <item>20</item>
-        <item>30</item>
-        <item>40</item>
-        <item>60</item>
-        <item>100</item>
+        <item>10000</item>
+        <item>5000</item>
+        <item>15000</item>
+        <item>75000</item>
+        <item>50000</item>
+        <item>1000000</item>
     </string-array>
 
     <array name="power_up_icons">
