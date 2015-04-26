@@ -388,9 +388,7 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         populatePowerups(v);
         //populatePowerups(v);
 
-        // UNCOMMENT AFTER TESTING
-        //Intent intent = new Intent(this, LaunchAnimation.class);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LaunchAnimation.class);
         startActivity(intent);
     }
 
