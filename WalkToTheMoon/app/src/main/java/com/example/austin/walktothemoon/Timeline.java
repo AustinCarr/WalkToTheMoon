@@ -26,7 +26,7 @@ import android.widget.TextView;
  */
 public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
 
-    private final float STEPS_TO_MOON = 478000000f;
+    private final double STEPS_TO_MOON = 478000000.0;
     private final int IMAGE_PADDING = 15;
 
     private SurfaceHolder surfaceHolder;
@@ -170,10 +170,10 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         canvas.concat(mMatrix);
 
         dashedLine.moveTo((IMAGE_PADDING * 2) + (bmpEarth.getWidth() / 2), getHeight()/2);
-        dashedLine.lineTo((getWidth() * 3) - (IMAGE_PADDING * 2) - bmpMoon.getWidth(), getHeight()/2);
+        dashedLine.lineTo((getWidth() * 2) - (IMAGE_PADDING * 2), getHeight()/2);
 
         canvas.drawPath(dashedLine, paint);
-        canvas.drawBitmap(bmpMoon, (getWidth() * 3) - (bmpMoon.getWidth() + IMAGE_PADDING), getHeight()/2 - (bmpMoon.getHeight()/2), null);
+        canvas.drawBitmap(bmpMoon, (getWidth() * 2), getHeight()/2 - (bmpMoon.getHeight()/2), null);
         canvas.drawBitmap(bmpEarth, (bmpEarth.getWidth() / -2), getHeight()/2 - (bmpEarth.getHeight()/2), null);
 
         // Get number of steps from database!!
@@ -182,17 +182,17 @@ public class Timeline extends SurfaceView implements SurfaceHolder.Callback{
         stepsTaken = user.getBoostedSteps();
         datasource.close();
 
-        float progress = stepsTaken / STEPS_TO_MOON;
-        float progressBarWidth = ((getWidth() * 2) - bmpEarth.getWidth() - bmpMoon.getWidth() - (IMAGE_PADDING * 2));
-        float progressBarValue = progressBarWidth * progress;
-        float offset = bmpEarth.getWidth();
+        double progress = stepsTaken / STEPS_TO_MOON;
+        double progressBarWidth = (getWidth() * 2) - (bmpEarth.getWidth() / 2) - bmpMoon.getWidth();
+        double progressBarValue = progressBarWidth * progress;
+        double offset = bmpEarth.getWidth() / 2;
 
 
         //Check if user reached the moon
         if (stepsTaken >= STEPS_TO_MOON)
             userWon();
 
-        xPos = progressBarValue + offset;
+        xPos = (int)(progressBarValue + offset);
         yPos = (getHeight()/2) - (bmpUser.getHeight()/2);
 
         canvas.drawBitmap(bmpUser, xPos, yPos, null);
