@@ -77,11 +77,10 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         datasource = new UserDataSource(this);
         datasource2 = new PowerupsDataSource(this);
 
-        prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile2", 0);
+        prefs = getApplicationContext().getSharedPreferences("CheckForCreatedAccountPrefFile", 0);
         Boolean restoredText = prefs.getBoolean("created_user", false);
 
-        //if (restoredText) {
-        if (false) {
+        if (restoredText) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -386,7 +385,6 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
         editor.putBoolean("created_user", true);
         editor.commit();
         populatePowerups(v);
-        //populatePowerups(v);
 
         Intent intent = new Intent(this, LaunchAnimation.class);
         startActivity(intent);
@@ -416,16 +414,6 @@ public class CreateAccount extends Activity implements View.OnTouchListener, Spr
 
         datasource2.close();
     }
-
-    /*public void populatePowerups(View v) {
-        MySQLiteHelper dbHandler = new MySQLiteHelper(this, null, null, MySQLiteHelper.DATABASE_VERSION);
-
-        Powerups powerup1 = new Powerups();
-        ...
-
-        dbHandler.addPowerup(powerup1);
-        ...
-    }*/
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
